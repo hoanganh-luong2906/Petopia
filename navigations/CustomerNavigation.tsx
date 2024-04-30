@@ -1,19 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LandingScreen from '../screens/LandingScreen';
-import HelloScreen from '../screens/HelloScreen';
 
 const Tab = createBottomTabNavigator();
 
-const GuestNavigation = () => {
+const CustomerNavigation = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName='hello'
+			initialRouteName='customer-home'
 			screenOptions={{ headerShown: false, tabBarShowLabel: false }}
 		>
-			<Tab.Screen name='hello' component={HelloScreen} />
-			<Tab.Screen name='landing' component={LandingScreen} />
+			<Tab.Screen name='customer-home' component={LandingScreen} />
 		</Tab.Navigator>
 	);
 };
 
-export default GuestNavigation;
+export default CustomerNavigation;
