@@ -11,6 +11,7 @@ import AdminNavigation from './AdminNavigation';
 import CustomerNavigation from './CustomerNavigation';
 import GuestNavigation from './GuestNavigation';
 import PartnerNavigation from './PartnerNavigation';
+import WelcomeScreen from '../screens/WelcomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,16 +52,17 @@ const RootNavigation = () => {
 		<NavigationContainer>
 			{!isLoggedIn ? (
 				<Stack.Navigator
-					initialRouteName={`${user?.role?.toLowerCase()}-navigation`}
+					initialRouteName='welcome'
 					screenOptions={{ headerShown: false }}
 				>
 					<Stack.Screen name='guest-navigation' component={GuestNavigation} />
+					<Stack.Screen name='welcome' component={WelcomeScreen} />
 				</Stack.Navigator>
 			) : (
 				<>
 					{(user?.role?.toLowerCase() ?? '') === 'admin' && (
 						<Stack.Navigator
-							initialRouteName='guest-navigation'
+							initialRouteName='admin-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
@@ -71,7 +73,7 @@ const RootNavigation = () => {
 					)}
 					{(user?.role?.toLowerCase() ?? '') === 'partner' && (
 						<Stack.Navigator
-							initialRouteName='guest-navigation'
+							initialRouteName='partner-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
@@ -82,7 +84,7 @@ const RootNavigation = () => {
 					)}
 					{(user?.role?.toLowerCase() ?? '') === 'customer' && (
 						<Stack.Navigator
-							initialRouteName='guest-navigation'
+							initialRouteName='customer-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
