@@ -12,6 +12,8 @@ import CustomerNavigation from './CustomerNavigation';
 import GuestNavigation from './GuestNavigation';
 import PartnerNavigation from './PartnerNavigation';
 import WelcomeScreen from '../screens/WelcomeScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +59,8 @@ const RootNavigation = () => {
 				>
 					<Stack.Screen name='guest-navigation' component={GuestNavigation} />
 					<Stack.Screen name='welcome' component={WelcomeScreen} />
+					<Stack.Screen name='login' component={LoginScreen} />
+					<Stack.Screen name='register' component={RegisterScreen} />
 				</Stack.Navigator>
 			) : (
 				<>
