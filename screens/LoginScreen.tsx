@@ -43,6 +43,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 			});
 			if (user) {
 				await AsyncStorage.setItem('token', token);
+				await AsyncStorage.setItem('user', JSON.stringify(user));
 				dispatch(login(user));
 			} else {
 				setErrorMsg('Email hoặc mật khẩu không đúng!');

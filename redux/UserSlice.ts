@@ -13,6 +13,11 @@ const initialState: UserState = {
 		email: '',
 		name: '',
 		role: '',
+		imageLink: '',
+		backgroundImageLink: '',
+		phone: '',
+		address: '',
+		gender: '',
 	},
 	isLoggedIn: false,
 };

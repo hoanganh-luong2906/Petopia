@@ -6,14 +6,13 @@ import { useSelector } from 'react-redux';
 import { UserState, initData } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
 import { useRootDispatch } from '../redux/hooks';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import WelcomeScreen from '../screens/WelcomeScreen';
 import { IUser } from '../utils/Types';
 import AdminNavigation from './AdminNavigation';
 import CustomerNavigation from './CustomerNavigation';
-import GuestNavigation from './GuestNavigation';
 import PartnerNavigation from './PartnerNavigation';
-import WelcomeScreen from '../screens/WelcomeScreen';
-import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +23,11 @@ const loadState = async () => {
 			email: '',
 			name: '',
 			role: '',
+			imageLink: '',
+			backgroundImageLink: '',
+			phone: '',
+			address: '',
+			gender: '',
 		},
 		isLoggedIn: false,
 	};
@@ -57,7 +61,6 @@ const RootNavigation = () => {
 					initialRouteName='welcome'
 					screenOptions={{ headerShown: false }}
 				>
-					<Stack.Screen name='guest-navigation' component={GuestNavigation} />
 					<Stack.Screen name='welcome' component={WelcomeScreen} />
 					<Stack.Screen name='login' component={LoginScreen} />
 					<Stack.Screen name='register' component={RegisterScreen} />

@@ -4,119 +4,129 @@
 		"gender": "Male",
 		"address": "123 Main St",
 		"phone": "555-1234",
-		"imageLink": "",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
 		"username": "john.doe",
 		"role": "admin",
 		"token": "abc123def456ghi",
 		"password": "1",
-		"email": "admin@gmail.com"
+		"email": "admin@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Jane Smith",
 		"gender": "Female",
 		"address": "456 Elm St",
 		"phone": "555-5678",
-		"imageLink": "",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
 		"username": "janes.mith",
 		"role": "customer",
 		"token": "jkl789mno012pqr",
 		"password": "1",
-		"email": "customer@gmail.com"
+		"email": "customer@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Bob Johnson",
 		"gender": "Male",
 		"address": "789 Oak St",
 		"phone": "555-9012",
-		"imageLink": "",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
 		"username": "bob.johnson",
 		"role": "partner",
 		"token": "stu345vwx678yz",
 		"password": "1",
-		"email": "partner@gmail.com"
+		"email": "partner@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Alice Williams",
 		"gender": "Female",
 		"address": "987 Pine St",
 		"phone": "555-3456",
-		"imageLink": "",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
 		"username": "alice.williams",
 		"role": "admin",
 		"token": "def789ghi012jkl",
 		"password": "1",
-		"email": "admin2@gmail.com"
+		"email": "admin2@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Michael Brown",
 		"gender": "Male",
 		"address": "654 Cedar St",
 		"phone": "555-7890",
-		"imageLink": "",
-		"username": "michaelbrown",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "michael.brown",
 		"role": "partner",
 		"token": "mno345pqr678stu",
 		"password": "1",
-		"email": "partner1@gmail.com"
+		"email": "partner1@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Emily Davis",
 		"gender": "Female",
 		"address": "321 Maple St",
 		"phone": "555-2345",
-		"imageLink": "",
-		"username": "emilydavis",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "emily.davis",
 		"role": "partner",
 		"token": "vwx901yz012abc",
 		"password": "1",
-		"email": "partner2@gmail.com"
+		"email": "partner2@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "David Wilson",
 		"gender": "Male",
 		"address": "876 Birch St",
 		"phone": "555-6789",
-		"imageLink": "",
-		"username": "davidwilson",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "david.wilson",
 		"role": "customer",
 		"token": "ghi567jkl890mno",
 		"password": "1",
-		"email": "customer1@gmail.com"
+		"email": "customer1@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Sarah Thompson",
 		"gender": "Female",
 		"address": "543 Walnut St",
 		"phone": "555-0123",
-		"imageLink": "",
-		"username": "sarahthompson",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "saraht.hompson",
 		"role": "customer",
 		"token": "pqr123stu456vwx",
 		"password": "1",
-		"email": "customer2@gmail.com"
+		"email": "customer2@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Robert Lee",
 		"gender": "Male",
 		"address": "210 Pine St",
 		"phone": "555-4567",
-		"imageLink": "",
-		"username": "robertlee",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "robert.lee",
 		"role": "customer",
 		"token": "yz012abc345def",
 		"password": "1",
-		"email": "customer3@gmail.com"
+		"email": "customer3@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	},
 	{
 		"name": "Olivia Harris",
 		"gender": "Female",
 		"address": "987 Elm St",
 		"phone": "555-8901",
-		"imageLink": "",
-		"username": "oliviaharris",
+		"imageLink": "https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg",
+		"username": "olivia.harris",
 		"role": "customer",
 		"token": "jkl678mno901pqr",
 		"password": "1",
-		"email": "customer4@gmail.com"
+		"email": "customer4@gmail.com",
+		"backgroundImageLink": "https://www.mandatrends.com.br/wp-content/uploads/2021/11/capa-pets-1160x653.png"
 	}
 ]

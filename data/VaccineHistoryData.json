@@ -2,144 +2,227 @@
 	"status": 200,
 	"data": [
 		{
-			"id": 1,
-			"date": "2019-01-02 12:00:00",
-			"report": "Tiêm vắc-xin bạch cầu",
-			"status": "Đã hoàn thành",
-			"extra_content": "Sức khỏe yếu, cần khám lại",
-			"place:": "Tại nhà",
-			"doctor": {
-				"id": 1,
-				"name": "Nguyễn Văn A",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ khoa sản động vật"
-			}
+			"petId": 1,
+			"petName": "Mồn lèo",
+			"petGender": "Female",
+			"petAge": 69,
+			"petType": "Mèo Anh lông ngắn",
+			"petNecklaceId": "EXE101_NECK_01",
+			"petDescription": "Lông xám, chân ngắn và vô cùng dễ thương",
+			"imgLinkList": [],
+			"createdAt": "2021-01-01 00:00:00",
+			"updatedAt": "2021-01-01 00:00:00",
+			"appointments": [
+				{
+					"id": 1,
+					"date": "2019-01-02 12:00:00",
+					"report": "Tiêm vắc-xin bạch cầu",
+					"status": "Đã hoàn thành",
+					"extra_content": "Sức khỏe yếu, cần khám lại",
+					"place:": "Tại nhà",
+					"doctor": {
+						"id": 1,
+						"name": "Nguyễn Văn A",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 2,
+					"date": "2020-05-10 09:30:00",
+					"report": "Tiêm vắc-xin hạt nhân",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 2,
+						"name": "Trần Thị B",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 3,
+					"date": "2021-03-15 14:45:00",
+					"report": "Tiêm vắc-xin cúm",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 3,
+						"name": "Lê Thị C",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 4,
+					"date": "2021-06-20 10:15:00",
+					"report": "Tiêm vắc-xin dại",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 4,
+						"name": "Phạm Văn D",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 5,
+					"date": "2021-09-05 16:30:00",
+					"report": "Tiêm vắc-xin tụ huyết trùng",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 5,
+						"name": "Hoàng Thị E",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 6,
+					"date": "2021-12-10 11:45:00",
+					"report": "Tiêm vắc-xin viêm gan B",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 6,
+						"name": "Nguyễn Văn F",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 7,
+					"date": "2022-02-25 09:00:00",
+					"report": "Tiêm vắc-xin bệnh cảm cúm",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 7,
+						"name": "Trần Văn G",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 8,
+					"date": "2022-05-15 15:30:00",
+					"report": "Tiêm vắc-xin viêm gan C",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 8,
+						"name": "Lê Thị H",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 9,
+					"date": "2022-08-20 13:15:00",
+					"report": "Tiêm vắc-xin bạch hầu",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 9,
+						"name": "Phạm Thị I",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 10,
+					"date": "2022-11-30 16:45:00",
+					"report": "Tiêm vắc-xin viêm gan A",
+					"status": "Đã hoàn thành",
+					"extra_content": "Không có vấn đề đáng ngại",
+					"place": "Tại phòng khám",
+					"doctor": {
+						"id": 10,
+						"name": "Hoàng Văn J",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				}
+			]
 		},
 		{
-			"id": 2,
-			"date": "2020-05-10 09:30:00",
-			"report": "Tiêm vắc-xin hạt nhân",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 2,
-				"name": "Trần Thị B",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 3,
-			"date": "2021-03-15 14:45:00",
-			"report": "Tiêm vắc-xin cúm",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 3,
-				"name": "Lê Thị C",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 4,
-			"date": "2021-06-20 10:15:00",
-			"report": "Tiêm vắc-xin dại",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 4,
-				"name": "Phạm Văn D",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 5,
-			"date": "2021-09-05 16:30:00",
-			"report": "Tiêm vắc-xin tụ huyết trùng",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 5,
-				"name": "Hoàng Thị E",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 6,
-			"date": "2021-12-10 11:45:00",
-			"report": "Tiêm vắc-xin viêm gan B",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 6,
-				"name": "Nguyễn Văn F",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 7,
-			"date": "2022-02-25 09:00:00",
-			"report": "Tiêm vắc-xin bệnh cảm cúm",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 7,
-				"name": "Trần Văn G",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 8,
-			"date": "2022-05-15 15:30:00",
-			"report": "Tiêm vắc-xin viêm gan C",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 8,
-				"name": "Lê Thị H",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 9,
-			"date": "2022-08-20 13:15:00",
-			"report": "Tiêm vắc-xin bạch hầu",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 9,
-				"name": "Phạm Thị I",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
-		},
-		{
-			"id": 10,
-			"date": "2022-11-30 16:45:00",
-			"report": "Tiêm vắc-xin viêm gan A",
-			"status": "Đã hoàn thành",
-			"extra_content": "Không có vấn đề đáng ngại",
-			"place": "Tại phòng khám",
-			"doctor": {
-				"id": 10,
-				"name": "Hoàng Văn J",
-				"avatar": "https://via.placeholder.com/150",
-				"specialist": "Bác sĩ thú y"
-			}
+			"petId": 2,
+			"petName": "Bánh quy",
+			"petGender": "Male",
+			"petAge": 3,
+			"petType": "Mèo mướp",
+			"petNecklaceId": "EXE102_NECK_02",
+			"petDescription": "Mập mạp dễ thương và rất nghịch ngợm",
+			"imgLinkList": [],
+			"createdAt": "2024-01-01 00:00:00",
+			"updatedAt": "2024-01-01 00:00:00",
+			"appointments": [
+				{
+					"id": 1,
+					"date": "2022-01-05 10:00:00",
+					"report": "Vaccinated for rabies",
+					"status": "Completed",
+					"extra_content": "No issues",
+					"place": "At the vet clinic",
+					"doctor": {
+						"id": 11,
+						"name": "Smith Johnson",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 2,
+					"date": "2022-03-15 14:30:00",
+					"report": "Vaccinated for distemper",
+					"status": "Completed",
+					"extra_content": "No issues",
+					"place": "At the vet clinic",
+					"doctor": {
+						"id": 12,
+						"name": "Emma Wilson",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 3,
+					"date": "2022-06-20 09:45:00",
+					"report": "Vaccinated for parvovirus",
+					"status": "Completed",
+					"extra_content": "No issues",
+					"place": "At the vet clinic",
+					"doctor": {
+						"id": 13,
+						"name": "Liam Brown",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 4,
+					"date": "2022-09-10 16:15:00",
+					"report": "Vaccinated for leptospirosis",
+					"status": "Completed",
+					"extra_content": "No issues",
+					"place": "At the vet clinic",
+					"doctor": {
+						"id": 14,
+						"name": "Olivia Davis",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				},
+				{
+					"id": 5,
+					"date": "2022-12-15 11:30:00",
+					"report": "Vaccinated for hepatitis",
+					"status": "Completed",
+					"extra_content": "No issues",
+					"place": "At the vet clinic",
+					"doctor": {
+						"id": 15,
+						"name": "Noah Miller",
+						"avatarLink": "https://via.placeholder.com/150"
+					}
+				}
+			]
 		}
 	]
 }

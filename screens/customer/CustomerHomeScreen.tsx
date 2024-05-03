@@ -1,20 +1,25 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import CustomText from '../../components/CustomText';
-import { useRootDispatch } from '../../redux/hooks';
-import { RootDispatch } from '../../redux/configStore';
-import { setIsUpdateRequired } from '../../redux/ApplicationSlice';
 import { logout } from '../../redux/UserSlice';
+import { RootDispatch } from '../../redux/configStore';
+import { useRootDispatch } from '../../redux/hooks';
 import { FONT_BOLD } from '../../utils/Types';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LandingScreen = () => {
-	const { user, isLoggedIn } = useSelector((state: any) => state.user.user);
+const CustomerHomeScreen = () => {
+	const { isLoggedIn } = useSelector((state: any) => state.user);
 	const dispatch: RootDispatch = useRootDispatch();
 
 	return (
 		<View style={{ paddingTop: 50 }}>
-			<Pressable onPress={() => dispatch(logout())}>
+			<Pressable
+				onPress={() => {
+					dispatch(logout());
+					AsyncStorage.removeItem('token');
+					AsyncStorage.removeItem('user');
+				}}
+			>
 				<CustomText
 					message='Log out'
 					styles={styles.helloText}
@@ -23,7 +28,7 @@ const LandingScreen = () => {
 			</Pressable>
 			<CustomText
 				message={'heeloo'}
-				styles={isLoggedIn ? { Color: 'blue' } : { color: 'red' }}
+				styles={isLoggedIn ? { color: 'blue' } : { color: 'red' }}
 				variant={FONT_BOLD}
 			/>
 		</View>
@@ -37,4 +42,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default LandingScreen;
+export default CustomerHomeScreen;
