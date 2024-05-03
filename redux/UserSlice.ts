@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../utils/Types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface UserState {
 	user: IUser;

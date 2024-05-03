@@ -1,0 +1,122 @@
+[
+	{
+		"name": "John Doe",
+		"gender": "Male",
+		"address": "123 Main St",
+		"phone": "555-1234",
+		"imageLink": "",
+		"username": "john.doe",
+		"role": "admin",
+		"token": "abc123def456ghi",
+		"password": "1",
+		"email": "admin@gmail.com"
+	},
+	{
+		"name": "Jane Smith",
+		"gender": "Female",
+		"address": "456 Elm St",
+		"phone": "555-5678",
+		"imageLink": "",
+		"username": "janes.mith",
+		"role": "customer",
+		"token": "jkl789mno012pqr",
+		"password": "1",
+		"email": "customer@gmail.com"
+	},
+	{
+		"name": "Bob Johnson",
+		"gender": "Male",
+		"address": "789 Oak St",
+		"phone": "555-9012",
+		"imageLink": "",
+		"username": "bob.johnson",
+		"role": "partner",
+		"token": "stu345vwx678yz",
+		"password": "1",
+		"email": "partner@gmail.com"
+	},
+	{
+		"name": "Alice Williams",
+		"gender": "Female",
+		"address": "987 Pine St",
+		"phone": "555-3456",
+		"imageLink": "",
+		"username": "alice.williams",
+		"role": "admin",
+		"token": "def789ghi012jkl",
+		"password": "1",
+		"email": "admin2@gmail.com"
+	},
+	{
+		"name": "Michael Brown",
+		"gender": "Male",
+		"address": "654 Cedar St",
+		"phone": "555-7890",
+		"imageLink": "",
+		"username": "michaelbrown",
+		"role": "partner",
+		"token": "mno345pqr678stu",
+		"password": "1",
+		"email": "partner1@gmail.com"
+	},
+	{
+		"name": "Emily Davis",
+		"gender": "Female",
+		"address": "321 Maple St",
+		"phone": "555-2345",
+		"imageLink": "",
+		"username": "emilydavis",
+		"role": "partner",
+		"token": "vwx901yz012abc",
+		"password": "1",
+		"email": "partner2@gmail.com"
+	},
+	{
+		"name": "David Wilson",
+		"gender": "Male",
+		"address": "876 Birch St",
+		"phone": "555-6789",
+		"imageLink": "",
+		"username": "davidwilson",
+		"role": "customer",
+		"token": "ghi567jkl890mno",
+		"password": "1",
+		"email": "customer1@gmail.com"
+	},
+	{
+		"name": "Sarah Thompson",
+		"gender": "Female",
+		"address": "543 Walnut St",
+		"phone": "555-0123",
+		"imageLink": "",
+		"username": "sarahthompson",
+		"role": "customer",
+		"token": "pqr123stu456vwx",
+		"password": "1",
+		"email": "customer2@gmail.com"
+	},
+	{
+		"name": "Robert Lee",
+		"gender": "Male",
+		"address": "210 Pine St",
+		"phone": "555-4567",
+		"imageLink": "",
+		"username": "robertlee",
+		"role": "customer",
+		"token": "yz012abc345def",
+		"password": "1",
+		"email": "customer3@gmail.com"
+	},
+	{
+		"name": "Olivia Harris",
+		"gender": "Female",
+		"address": "987 Elm St",
+		"phone": "555-8901",
+		"imageLink": "",
+		"username": "oliviaharris",
+		"role": "customer",
+		"token": "jkl678mno901pqr",
+		"password": "1",
+		"email": "customer4@gmail.com"
+	}
+]
