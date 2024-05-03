@@ -23,6 +23,11 @@ const loadState = async () => {
 			email: '',
 			name: '',
 			role: '',
+			imageLink: '',
+			backgroundImageLink: '',
+			phone: '',
+			address: '',
+			gender: '',
 		},
 		isLoggedIn: false,
 	};

@@ -5,14 +5,21 @@ import { logout } from '../../redux/UserSlice';
 import { RootDispatch } from '../../redux/configStore';
 import { useRootDispatch } from '../../redux/hooks';
 import { FONT_BOLD } from '../../utils/Types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomerHomeScreen = () => {
-	const { user, isLoggedIn } = useSelector((state: any) => state.user);
+	const { isLoggedIn } = useSelector((state: any) => state.user);
 	const dispatch: RootDispatch = useRootDispatch();
 
 	return (
 		<View style={{ paddingTop: 50 }}>
-			<Pressable onPress={() => dispatch(logout())}>
+			<Pressable
+				onPress={() => {
+					dispatch(logout());
+					AsyncStorage.removeItem('token');
+					AsyncStorage.removeItem('user');
+				}}
+			>
 				<CustomText
 					message='Log out'
 					styles={styles.helloText}
