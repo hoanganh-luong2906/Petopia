@@ -14,7 +14,9 @@ type NavigationProps = {
 const RegisterScreen = ({ navigation }: NavigationProps) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
 	const [isRecentPushed, setIsRecentPushed] = useState(false);
 
 	return (
@@ -50,25 +52,25 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 						<TextInput
 							style={styles.textInput}
 							placeholder='Email'
-							value={username}
+							value={email}
 							onChangeText={(text) => setUsername(text)}
 						/>
 						<TextInput
 							style={styles.textInput}
 							placeholder='Số điện thoại'
-							value={username}
+							value={phone}
 							onChangeText={(text) => setUsername(text)}
 						/>
 						<TextInput
 							style={styles.textInput}
 							placeholder='Mật khẩu'
-							value={username}
+							value={password}
 							onChangeText={(text) => setUsername(text)}
 						/>
 						<TextInput
 							style={styles.textInput}
 							placeholder='Xác nhận mật khẩu'
-							value={username}
+							value={passwordConfirm}
 							onChangeText={(text) => setUsername(text)}
 						/>
 					</View>
@@ -103,7 +105,7 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 						/>
 						<Pressable
 							style={styles.loginButton}
-							onPress={() => navigation.push('login')}
+							onPress={() => navigation.goBack()}
 						>
 							<MaskedView
 								style={styles.loginDecorator}

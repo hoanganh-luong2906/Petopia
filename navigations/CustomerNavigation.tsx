@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LandingScreen from '../screens/customer/LandingScreen';
+import CustomerHomeScreen from '../screens/customer/CustomerHomeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -9,7 +9,7 @@ const CustomerNavigation = () => {
 			initialRouteName='customer-home'
 			screenOptions={{ headerShown: false, tabBarShowLabel: false }}
 		>
-			<Tab.Screen name='customer-home' component={LandingScreen} />
+			<Tab.Screen name='customer-home' component={CustomerHomeScreen} />
 		</Tab.Navigator>
 	);
 };
