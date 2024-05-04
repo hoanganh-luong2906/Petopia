@@ -45,7 +45,7 @@
 					"report": "Tiêm vắc-xin cúm",
 					"status": "Đã hoàn thành",
 					"extra_content": "Không có vấn đề đáng ngại",
-					"place": "Tại phòng khám",
+					"place": "Tại nhà",
 					"doctor": {
 						"id": 3,
 						"name": "Lê Thị C",
@@ -58,7 +58,7 @@
 					"report": "Tiêm vắc-xin dại",
 					"status": "Đã hoàn thành",
 					"extra_content": "Không có vấn đề đáng ngại",
-					"place": "Tại phòng khám",
+					"place": "Tại nhà",
 					"doctor": {
 						"id": 4,
 						"name": "Phạm Văn D",
@@ -84,7 +84,7 @@
 					"report": "Tiêm vắc-xin viêm gan B",
 					"status": "Đã hoàn thành",
 					"extra_content": "Không có vấn đề đáng ngại",
-					"place": "Tại phòng khám",
+					"place": "Tại nhà",
 					"doctor": {
 						"id": 6,
 						"name": "Nguyễn Văn F",

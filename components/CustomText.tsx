@@ -7,10 +7,12 @@ const CustomText = ({
 	styles,
 	message,
 	variant,
+	numberOfLines,
 }: {
 	styles: any;
 	message: string;
 	variant: (typeof VARIANT_WEIGHT)[number];
+	numberOfLines?: number;
 }) => {
 	const [loadedFont] = useFonts({
 		'Baloo 2 Regular': require('../assets/fonts/Baloo 2 Regular.ttf'),
@@ -22,7 +24,10 @@ const CustomText = ({
 	return (
 		<>
 			{loadedFont && (
-				<Text style={[styles, { fontFamily: `Baloo 2 ${variant ?? 'Regular'}` }]}>
+				<Text
+					numberOfLines={numberOfLines}
+					style={[styles, { fontFamily: `Baloo 2 ${variant ?? 'Regular'}` }]}
+				>
 					{message}
 				</Text>
 			)}
