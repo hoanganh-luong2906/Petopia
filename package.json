@@ -22,6 +22,7 @@
 		"lottie-react-native": "^6.7.2",
 		"react": "18.2.0",
 		"react-native": "0.73.6",
+		"react-native-dotenv": "^3.4.11",
 		"react-native-error-boundary": "^1.2.4",
 		"react-native-exception-handler": "^2.10.10",
 		"react-native-gesture-handler": "^2.14.0",

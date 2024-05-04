@@ -16,9 +16,10 @@ const CustomerProfileScreen = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
+			// Mock data
 			const petInformation: IPet[] = VacineData.data.sort(
 				(a, b) =>
-					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+					new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
 			);
 			const petNames = petInformation.map((pet) => pet.petName);
 			setHistyoryData(petInformation);
@@ -99,11 +100,7 @@ const CustomerProfileScreen = () => {
 				</Pressable>
 			</View>
 			{focusedTab === 0 && <UserProfile />}
-			{focusedTab === 1 && (
-				<View>
-					<PetProfile />
-				</View>
-			)}
+			{focusedTab === 1 && <PetProfile pet={selectedPet ?? ({} as IPet)} />}
 		</View>
 	);
 };
