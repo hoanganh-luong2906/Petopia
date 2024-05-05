@@ -1,17 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import PartnerHomeScreen from '../screens/partner/PartnerHomeScreen';
+import VetHomeScreen from '../screens/partner/VetHomeScreen';
 
 const Tab = createBottomTabNavigator();
 
-const PartnerNavigation = () => {
+const VetNavigation = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName='partner-home'
+			initialRouteName='vet-home'
 			screenOptions={{ headerShown: false, tabBarShowLabel: false }}
 		>
-			<Tab.Screen name='partner-home' component={PartnerHomeScreen} />
+			<Tab.Screen name='vet-home' component={VetHomeScreen} />
 		</Tab.Navigator>
 	);
 };
 
-export default PartnerNavigation;
+export default VetNavigation;

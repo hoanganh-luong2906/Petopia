@@ -9,15 +9,11 @@ export interface UserState {
 
 const initialState: UserState = {
 	user: {
-		username: '',
 		email: '',
 		name: '',
 		role: '',
-		imageLink: '',
-		backgroundImageLink: '',
-		phone: '',
-		address: '',
-		gender: '',
+		avatar: '',
+		status: '',
 	},
 	isLoggedIn: false,
 };

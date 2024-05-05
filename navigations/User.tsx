@@ -1,16 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CustomerHomeScreen from '../screens/customer/CustomerHomeScreen';
+import UserHomeScreen from '../screens/user/UserHomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import CustomerCategoryScreen from '../screens/customer/CustomerCategoryScreen';
-import CustomerNotificationScreen from '../screens/customer/CustomerNotificationScreen';
-import CustomerProfileScreen from '../screens/customer/CustomerProfileScreen';
+import UserCategoryScreen from '../screens/user/UserCategoryScreen';
+import UserNotificationScreen from '../screens/user/UserNotificationScreen';
+import UserProfileScreen from '../screens/user/UserProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-const CustomerNavigation = () => {
+const UserNavigation = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName='customer-home'
+			initialRouteName='user-home'
 			screenOptions={{
 				headerShown: false,
 				tabBarShowLabel: false,
@@ -18,8 +18,8 @@ const CustomerNavigation = () => {
 			}}
 		>
 			<Tab.Screen
-				name='customer-home'
-				component={CustomerHomeScreen}
+				name='user-home'
+				component={UserHomeScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='home' color={color} size={size} />
@@ -27,8 +27,8 @@ const CustomerNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='customer-category'
-				component={CustomerCategoryScreen}
+				name='user-category'
+				component={UserCategoryScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='grid' color={color} size={size} />
@@ -36,8 +36,8 @@ const CustomerNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='customer-notification'
-				component={CustomerNotificationScreen}
+				name='user-notification'
+				component={UserNotificationScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='notifications' color={color} size={size} />
@@ -45,8 +45,8 @@ const CustomerNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='customer-profile'
-				component={CustomerProfileScreen}
+				name='user-profile'
+				component={UserProfileScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='person' color={color} size={size} />
@@ -57,4 +57,4 @@ const CustomerNavigation = () => {
 	);
 };
 
-export default CustomerNavigation;
+export default UserNavigation;
