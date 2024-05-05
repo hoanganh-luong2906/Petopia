@@ -7,7 +7,7 @@ import { useRootDispatch } from '../../redux/hooks';
 import { FONT_BOLD } from '../../utils/Types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CustomerHomeScreen = () => {
+const UserHomeScreen = () => {
 	const { isLoggedIn } = useSelector((state: any) => state.user);
 	const dispatch: RootDispatch = useRootDispatch();
 
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CustomerHomeScreen;
+export default UserHomeScreen;

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
 
-const PartnerHomeScreen = () => {
+const VetHomeScreen = () => {
 	return (
 		<View>
 			<CustomText
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default PartnerHomeScreen;
+export default VetHomeScreen;

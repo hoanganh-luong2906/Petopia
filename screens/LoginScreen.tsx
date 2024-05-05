@@ -29,26 +29,60 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 		setIsRecentPushed(true);
 		setErrorMsg('');
 		try {
-			// Implement some login logics here :>
-			// Fake data goes here-----------
-			const users = UserData;
+			const api: string = process.env.SERVER_API_URL ?? '';
+			const loginBody: { email: string; password: string } = {
+				email: email.trim(),
+				password: password.trim(),
+			};
+
 			let token: string = '';
-			const user = users.find((user) => {
-				if (user.email === email && user.password === password) {
-					const existingUser: IUser = { ...user };
-					token = user.token;
-					return existingUser;
+			let user: IUser = {} as IUser;
+
+			if (api.length > 0) {
+				const response = await fetch(`${api}/auth/login`, {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(loginBody),
+				});
+				if (response.status === 200) {
+					const data = await response.json();
+					const validUser: IUser = { ...(data?.account ?? ({} as IUser)) };
+					if (validUser) {
+						token = data?.account?.accessToken ?? '';
+						user = validUser;
+					}
+				} else {
+					const errorData = await response.json();
+					console.log(
+						'Error: ' + JSON.stringify(errorData) ?? 'No response data'
+					);
+					setErrorMsg(errorData?.message ?? 'Email hoặc mật khẩu không đúng');
 				}
-				return null;
-			});
-			if (user) {
+			} else {
+				// Mock data
+				const users = UserData;
+				user =
+					users.find((user) => {
+						if (user.email === email && user.password === password) {
+							const existingUser: IUser = { ...user };
+							token = user.token;
+							return existingUser;
+						}
+						return null;
+					}) ?? ({} as IUser);
+			}
+			console.log('User: ' + JSON.stringify(user, null, 2));
+			console.log('Token: ' + token);
+
+			if (user && token) {
 				await AsyncStorage.setItem('token', token);
 				await AsyncStorage.setItem('user', JSON.stringify(user));
 				dispatch(login(user));
 			} else {
-				setErrorMsg('Email hoặc mật khẩu không đúng!');
+				setErrorMsg('Email hoặc mật khẩu không đúng');
 			}
-			// ------------------------------
 		} catch (error) {
 			alert('ERROR: ' + error);
 		}
@@ -111,6 +145,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 					</View>
 					{errorMsg && (
 						<CustomText
+							numberOfLines={1}
 							message={errorMsg}
 							styles={styles.errorMsg}
 							variant={FONT_SEMI_BOLD}

@@ -8,7 +8,7 @@ import UserProfile from '../../components/user/UserProfile';
 import PetProfile from '../../components/user/PetProfile';
 import VacineData from '../../data/VaccineHistoryData.json';
 
-const CustomerProfileScreen = () => {
+const UserProfileScreen = () => {
 	const [focusedTab, setFocusedTab] = useState<number>(0);
 	const [historyData, setHistyoryData] = useState<IPet[]>([]);
 	const [petNames, setPetNames] = useState<string[]>([]);
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CustomerProfileScreen;
+export default UserProfileScreen;

@@ -11,23 +11,19 @@ import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import { IUser } from '../utils/Types';
 import AdminNavigation from './AdminNavigation';
-import CustomerNavigation from './CustomerNavigation';
-import PartnerNavigation from './PartnerNavigation';
+import UserNavigation from './User';
+import VetNavigation from './VetNavigation';
 
 const Stack = createNativeStackNavigator();
 
 const loadState = async () => {
 	const state: UserState = {
 		user: {
-			username: '',
 			email: '',
 			name: '',
 			role: '',
-			imageLink: '',
-			backgroundImageLink: '',
-			phone: '',
-			address: '',
-			gender: '',
+			avatar: '',
+			status: '',
 		},
 		isLoggedIn: false,
 	};
@@ -43,6 +39,10 @@ const loadState = async () => {
 		return state;
 	}
 };
+
+const USER_FLOW = ['GROUP_ADMIN', 'GROUP_MANAGER', 'USER'];
+const MANAGER_FLOW = ['ADMIN', 'SHOP_OWNER'];
+const VET_FLOW = ['VET'];
 
 const RootNavigation = () => {
 	const { user, isLoggedIn } = useSelector((state: any) => state.user);
@@ -67,36 +67,36 @@ const RootNavigation = () => {
 				</Stack.Navigator>
 			) : (
 				<>
-					{(user?.role?.toLowerCase() ?? '') === 'admin' && (
+					{MANAGER_FLOW.includes(user?.role?.toUpperCase() ?? '') && (
 						<Stack.Navigator
-							initialRouteName='admin-navigation'
+							initialRouteName='manager-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
-								name='admin-navigation'
+								name='manager-navigation'
 								component={AdminNavigation}
 							/>
 						</Stack.Navigator>
 					)}
-					{(user?.role?.toLowerCase() ?? '') === 'partner' && (
+					{VET_FLOW.includes(user?.role?.toUpperCase() ?? '') && (
 						<Stack.Navigator
-							initialRouteName='partner-navigation'
+							initialRouteName='vet-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
-								name='partner-navigation'
-								component={PartnerNavigation}
+								name='vet-navigation'
+								component={VetNavigation}
 							/>
 						</Stack.Navigator>
 					)}
-					{(user?.role?.toLowerCase() ?? '') === 'customer' && (
+					{USER_FLOW.includes(user?.role?.toUpperCase() ?? '') && (
 						<Stack.Navigator
 							initialRouteName='customer-navigation'
 							screenOptions={{ headerShown: false }}
 						>
 							<Stack.Screen
 								name='customer-navigation'
-								component={CustomerNavigation}
+								component={UserNavigation}
 							/>
 						</Stack.Navigator>
 					)}

@@ -1,13 +1,9 @@
 export interface IUser {
-	username: string;
-	email: string;
+	status: string;
 	name: string;
+	email: string;
 	role: string;
-	imageLink: string;
-	backgroundImageLink: string;
-	phone: string;
-	gender: string;
-	address: string;
+	avatar: string;
 }
 
 export interface IPet {
