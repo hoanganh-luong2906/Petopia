@@ -162,7 +162,11 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 						disabled={isRecentPushed}
 					>
 						<LinearGradient
-							colors={['#F4A905', '#FBE437']}
+							colors={
+								isRecentPushed
+									? ['#cfd0d1', '#cfd0d1']
+									: ['#F4A905', '#FBE437']
+							}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
 							style={styles.gradientLoginDecorator}

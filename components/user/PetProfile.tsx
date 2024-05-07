@@ -1,17 +1,16 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaskedView from '@react-native-masked-view/masked-view';
 import { useFocusEffect } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useCallback, useState } from 'react';
-import { ImageBackgroundComponent, SectionList, StyleSheet, View } from 'react-native';
+import { SectionList, StyleSheet, View } from 'react-native';
 import {
 	FONT_BOLD,
-	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	IAppointment,
-	IPet,
+	IPetHealthHistory,
 } from '../../utils/Types';
 import CustomText from '../CustomText';
-import MaskedView from '@react-native-masked-view/masked-view';
-import { LinearGradient } from 'expo-linear-gradient';
-import Icon from 'react-native-vector-icons/Ionicons';
 import AppointmentContent from './AppointmentContent';
 
 interface IProcessPetData {
@@ -19,9 +18,56 @@ interface IProcessPetData {
 	data: IAppointment[];
 }
 
-export const PetProfile = ({ pet }: { pet: IPet }) => {
-	const [processedData, setProcessedData] = useState<IProcessPetData[]>([]);
+interface IRequestBody {
+	page: number;
+	sort: string;
+	petId: number;
+}
 
+export const PetProfile = ({ petId }: { petId: number }) => {
+	const [processedData, setProcessedData] = useState<IProcessPetData[]>([]);
+	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
+	const sortCriterion = 'date';
+
+	useFocusEffect(
+		useCallback(() => {
+			const fetchData = async () => {
+				const api: string = process.env.SERVER_API_URL ?? '';
+				const userToken: string = (await AsyncStorage.getItem('token')) ?? '';
+				const requestBody: IRequestBody = {
+					page: 0,
+					sort: sortCriterion,
+					petId: petId,
+				};
+
+				try {
+					const response = await fetch(`${api}/user/health-history`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${userToken}`,
+						},
+						body: JSON.stringify(requestBody),
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						const validPetData: IPetHealthHistory =
+							data ?? ({} as IPetHealthHistory);
+						console.log(
+							`PET_PROFILE ${petId}: `,
+							JSON.stringify(validPetData, null, 2)
+						);
+						setPet(validPetData);
+					}
+				} catch (error: any) {
+					console.log(error);
+					alert('Error: ' + error.message);
+				}
+			};
+			fetchData();
+		}, [petId])
+	);
 	useFocusEffect(
 		useCallback(() => {
 			const convertData = () => {
@@ -56,10 +102,12 @@ export const PetProfile = ({ pet }: { pet: IPet }) => {
 						}
 					);
 					setProcessedData(tmpProcessData);
-					console.log(JSON.stringify(tmpProcessData, null, 2));
+					// console.log(JSON.stringify(tmpProcessData, null, 2));
 				}
 			};
-			convertData();
+			if (pet?.appointments ?? false) {
+				convertData();
+			}
 		}, [pet])
 	);
 
@@ -109,17 +157,19 @@ export const PetProfile = ({ pet }: { pet: IPet }) => {
 						variant={FONT_SEMI_BOLD}
 					/>
 				</View>
-				<SectionList
-					showsVerticalScrollIndicator={false}
-					sections={processedData}
-					keyExtractor={(item, index) => `${item}` + index}
-					renderItem={({ item, index }) =>
-						renderAppointment({ appointment: item, index })
-					}
-					renderSectionHeader={({ section: { title } }) =>
-						renderYearHeader({ year: title })
-					}
-				/>
+				{(pet?.appointments ?? false) && (
+					<SectionList
+						showsVerticalScrollIndicator={false}
+						sections={processedData}
+						keyExtractor={(item, index) => `${item}` + index}
+						renderItem={({ item, index }) =>
+							renderAppointment({ appointment: item, index })
+						}
+						renderSectionHeader={({ section: { title } }) =>
+							renderYearHeader({ year: title })
+						}
+					/>
+				)}
 			</View>
 		</View>
 	);
