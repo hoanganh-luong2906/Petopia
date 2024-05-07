@@ -7,6 +7,17 @@ export interface IUser {
 }
 
 export interface IPet {
+	id: number;
+	name: string;
+	gender: string;
+	age: number;
+	type: string;
+	necklaceId: string;
+	description: string;
+	imgLinkList?: string[];
+}
+
+export interface IPetHealthHistory {
 	petId: number;
 	petName: string;
 	petGender: string;
@@ -40,3 +51,14 @@ export const FONT_REGULAR = 'Regular';
 export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
+
+export interface ICustomPet {
+	id: number;
+	name: string;
+	gender: string;
+	age: number;
+	type: string;
+	necklaceId: string;
+	description: string;
+	imgLinkList: string[];
+}
