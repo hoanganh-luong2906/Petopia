@@ -102,16 +102,29 @@ const AppointmentContent = ({
 							/>
 						</View>
 						<View style={styles.appointmentPlace}>
-							<Image
-								src={appointment.doctor.avatarLink}
-								resizeMode='contain'
-								style={[
-									styles.doctorAvt,
-									index === 0
-										? { borderColor: 'white' }
-										: { borderColor: 'lightgray' },
-								]}
-							/>
+							{appointment.doctor.avatarLink ? (
+								<Image
+									src={appointment.doctor.avatarLink}
+									resizeMode='contain'
+									style={[
+										styles.doctorAvt,
+										index === 0
+											? { borderColor: 'white' }
+											: { borderColor: 'lightgray' },
+									]}
+								/>
+							) : (
+								<Image
+									source={require('../../assets/images/default-avt.png')}
+									resizeMode='contain'
+									style={[
+										styles.doctorAvt,
+										index === 0
+											? { borderColor: 'white' }
+											: { borderColor: 'lightgray' },
+									]}
+								/>
+							)}
 							<CustomText
 								numberOfLines={1}
 								message={appointment.doctor.name ?? 'Không xác định'}

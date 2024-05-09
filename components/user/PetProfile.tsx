@@ -54,10 +54,10 @@ export const PetProfile = ({ petId }: { petId: number }) => {
 						const data = await response.json();
 						const validPetData: IPetHealthHistory =
 							data ?? ({} as IPetHealthHistory);
-						console.log(
-							`PET_PROFILE ${petId}: `,
-							JSON.stringify(validPetData, null, 2)
-						);
+						// console.log(
+						// 	`PET_PROFILE ${petId}: `,
+						// 	JSON.stringify(validPetData, null, 2)
+						// );
 						setPet(validPetData);
 					}
 				} catch (error: any) {

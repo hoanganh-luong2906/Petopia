@@ -9,6 +9,9 @@ import PetPickerModal from '../../components/user/PetPickerModal';
 import PetProfile from '../../components/user/PetProfile';
 import UserProfile from '../../components/user/UserProfile';
 import { FONT_BOLD, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
+import TabSelector from '../../components/TabSelector';
+
+const TAB_TITLE = ['Trang cá nhân', 'Hồ sơ thú cưng'];
 
 const UserProfileScreen = () => {
 	const [focusedTab, setFocusedTab] = useState<number>(0);
@@ -53,76 +56,20 @@ const UserProfileScreen = () => {
 		fetchData();
 	}, []);
 
-	console.log('PET_LIST: ', JSON.stringify(petData, null, 2));
+	// console.log('PET_LIST: ', JSON.stringify(petData, null, 2));
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabContainer}>
-				<Pressable
-					style={[
-						styles.tabTitleContainer,
-						focusedTab === 0 && { backgroundColor: '#FFFCE8' },
-					]}
-					onPress={() => setFocusedTab(0)}
-				>
-					{focusedTab === 0 ? (
-						<MaskedView
-							style={styles.tabTitleDecorator}
-							maskElement={
-								<CustomText
-									message='Trang cá nhân'
-									styles={styles.tabTitle}
-									variant={FONT_BOLD}
-								/>
-							}
-						>
-							<LinearGradient
-								colors={['#F4A905', '#FBE437']}
-								start={{ x: 0, y: 0 }}
-								end={{ x: 1, y: 0 }}
-								style={styles.titleLinearDecorator}
-							/>
-						</MaskedView>
-					) : (
-						<CustomText
-							message='Trang cá nhân'
-							styles={styles.tabTitle}
-							variant={FONT_BOLD}
-						/>
-					)}
-				</Pressable>
-				<Pressable
-					style={[
-						styles.tabTitleContainer,
-						focusedTab === 1 && { backgroundColor: '#FFFCE8' },
-					]}
-					onPress={() => setFocusedTab(1)}
-				>
-					{focusedTab === 1 ? (
-						<MaskedView
-							style={styles.tabTitleDecorator}
-							maskElement={
-								<CustomText
-									message='Hồ sơ thú cưng'
-									styles={styles.tabTitle}
-									variant={FONT_BOLD}
-								/>
-							}
-						>
-							<LinearGradient
-								colors={['#F4A905', '#FBE437']}
-								start={{ x: 0, y: 0 }}
-								end={{ x: 1, y: 0 }}
-								style={styles.titleLinearDecorator}
-							/>
-						</MaskedView>
-					) : (
-						<CustomText
-							message='Hồ sơ thú cưng'
-							styles={styles.tabTitle}
-							variant={FONT_BOLD}
-						/>
-					)}
-				</Pressable>
+				{TAB_TITLE.map((title, index) => (
+					<TabSelector
+						key={index}
+						totalTabs={TAB_TITLE.length}
+						title={title}
+						index={index}
+						focusedTab={focusedTab}
+						setFocusedTab={setFocusedTab}
+					/>
+				))}
 			</View>
 			{focusedTab === 0 && <UserProfile />}
 			{focusedTab === 1 && (
@@ -175,40 +122,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		marginBottom: '3%',
-	},
-	tabTitleContainer: {
-		width: '45%',
-		height: '100%',
-		paddingVertical: 5,
 		paddingHorizontal: 10,
-		marginHorizontal: '2.5%',
-		borderRadius: 5,
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	tabTitle: {
-		color: 'gray',
-		letterSpacing: 1,
-		textAlign: 'center',
-		fontSize: 20,
-	},
-	tabTitleDecorator: {
-		width: '100%',
-		height: '100%',
-		marginTop: '5%',
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	titleLinearDecorator: {
-		width: '100%',
-		height: '100%',
 	},
 	petPickerContainer: {
 		position: 'absolute',
-		top: 0,
+		top: 5,
 		right: 0,
 		width: '35%',
 		height: 38,

@@ -42,7 +42,7 @@ const loadState = async () => {
 
 const USER_FLOW = ['GROUP_ADMIN', 'GROUP_MANAGER', 'USER'];
 const MANAGER_FLOW = ['ADMIN', 'SHOP_OWNER'];
-const VET_FLOW = ['VET'];
+const VET_FLOW = ['SERVICE_PROVIDER', 'SERVICE_CENTER_MANAGERx'];
 
 const RootNavigation = () => {
 	const { user, isLoggedIn } = useSelector((state: any) => state.user);

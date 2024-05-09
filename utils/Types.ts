@@ -6,6 +6,17 @@ export interface IUser {
 	avatar: string;
 }
 
+export interface IUserProfile {
+	id: number;
+	name: string;
+	email: string;
+	avatarLink: string;
+	status: string;
+	appointmentList: IAppointment[];
+	shop: {};
+	role: string;
+}
+
 export interface IPet {
 	id: number;
 	name: string;
