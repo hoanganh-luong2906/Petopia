@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import UserCategoryScreen from '../screens/user/UserCategoryScreen';
 import UserNotificationScreen from '../screens/user/UserNotificationScreen';
 import UserProfileScreen from '../screens/user/UserProfileScreen';
+import SearchBarComponent from '../components/SearchBarComponent';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +13,8 @@ const UserNavigation = () => {
 		<Tab.Navigator
 			initialRouteName='user-home'
 			screenOptions={{
-				headerShown: false,
+				header: (props) => <SearchBarComponent />,
+				// headerShown: false,
 				tabBarShowLabel: false,
 				tabBarActiveTintColor: '#F4A905',
 			}}
@@ -39,6 +41,7 @@ const UserNavigation = () => {
 				name='user-notification'
 				component={UserNotificationScreen}
 				options={{
+					headerShown: false,
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='notifications' color={color} size={size} />
 					),
@@ -48,6 +51,7 @@ const UserNavigation = () => {
 				name='user-profile'
 				component={UserProfileScreen}
 				options={{
+					headerShown: false,
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='person' color={color} size={size} />
 					),

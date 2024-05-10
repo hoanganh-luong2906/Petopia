@@ -11,7 +11,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import { IUser } from '../utils/Types';
 import AdminNavigation from './AdminNavigation';
-import UserNavigation from './User';
+import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';
 
 const Stack = createNativeStackNavigator();
