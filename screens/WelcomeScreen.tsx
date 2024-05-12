@@ -4,6 +4,10 @@ import { Image, Pressable, StyleSheet, View } from 'react-native';
 import CustomText from '../components/CustomText';
 import { FONT_BOLD } from '../utils/Types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+	widthPercentageToDP as wp,
+	heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type NavigationProp = {
 	navigation: NativeStackNavigationProp<any, 'welcome'>;
@@ -28,7 +32,7 @@ const WelcomeScreen = ({ navigation }: NavigationProp) => {
 			<LottieView
 				source={require('../assets/animations/welcome-transition.json')}
 				autoPlay
-				loop={false}
+				loop={true}
 				style={styles.transition}
 			/>
 			{isVisible && (
@@ -100,11 +104,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	transition: {
+		flex: 2,
 		position: 'absolute',
 		top: 0,
-		left: -600,
+		left: 0,
+		transform: [{ translateX: -wp(145) }],
 		width: '400%',
-		height: '100%',
+		height: hp(106),
 		zIndex: 1,
 	},
 	mainComponent: {
@@ -116,31 +122,31 @@ const styles = StyleSheet.create({
 	background: {
 		position: 'absolute',
 		top: 0,
-		left: -180,
+		left: -wp(10),
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 		zIndex: -1,
 	},
 	componentContainer: {
-		width: 280,
-		height: 280,
+		width: hp(35),
+		height: wp(68),
 		display: 'flex',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'center',
 		alignItems: 'center',
-		gap: 10,
+		gap: hp(1.5),
 		transform: [{ rotate: '45deg' }],
-		marginBottom: 60,
+		marginBottom: hp(10),
 	},
 	components: {
-		width: 130,
-		height: 130,
-		paddingTop: 10,
-		paddingLeft: 10,
-		paddingBottom: 20,
-		paddingRight: 20,
+		width: wp(32),
+		height: wp(32),
+		paddingTop: wp(1.5),
+		paddingLeft: wp(1.5),
+		paddingBottom: wp(4),
+		paddingRight: wp(4),
 		backgroundColor: 'white',
 		borderRadius: 20,
 		display: 'flex',
@@ -163,8 +169,8 @@ const styles = StyleSheet.create({
 		width: '100%',
 		textAlign: 'center',
 		color: 'white',
-		fontSize: 23,
-		marginVertical: 30,
+		fontSize: hp(3),
+		marginVertical: hp(5),
 	},
 	button: {
 		backgroundColor: '#F4A905',
