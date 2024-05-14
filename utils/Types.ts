@@ -1,3 +1,8 @@
+export const FONT_REGULAR = 'Regular';
+export const FONT_MEDIUM = 'Medium';
+export const FONT_SEMI_BOLD = 'SemiBold';
+export const FONT_BOLD = 'Bold';
+
 export interface IUser {
 	status: string;
 	name: string;
@@ -26,6 +31,17 @@ export interface IPet {
 	necklaceId: string;
 	description: string;
 	imgLinkList?: string[];
+}
+
+export interface ICustomPet {
+	id: number;
+	name: string;
+	gender: string;
+	age: number;
+	type: string;
+	necklaceId: string;
+	description: string;
+	imgLinkList: string[];
 }
 
 export interface IPetHealthHistory {
@@ -58,18 +74,16 @@ export interface IDoctor {
 	avatarLink: string;
 }
 
-export const FONT_REGULAR = 'Regular';
-export const FONT_MEDIUM = 'Medium';
-export const FONT_SEMI_BOLD = 'SemiBold';
-export const FONT_BOLD = 'Bold';
+export interface IService {
+	id: number;
+	serviceName: string;
+	rating: number;
+	servicePrice: number;
+}
 
-export interface ICustomPet {
+export interface IServiceCenter {
 	id: number;
 	name: string;
-	gender: string;
-	age: number;
-	type: string;
-	necklaceId: string;
-	description: string;
-	imgLinkList: string[];
+	address: string;
+	rating: number;
 }

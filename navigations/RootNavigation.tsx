@@ -13,6 +13,8 @@ import { IUser } from '../utils/Types';
 import AdminNavigation from './AdminNavigation';
 import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';
+import CategoryDetailScreen from '../screens/user/CategoryDetailScreen';
+import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -97,6 +99,14 @@ const RootNavigation = () => {
 							<Stack.Screen
 								name='customer-navigation'
 								component={UserNavigation}
+							/>
+							<Stack.Screen
+								name='category-detail'
+								component={CategoryDetailScreen}
+							/>
+							<Stack.Screen
+								name='register-appointment'
+								component={RegisterAppointmentScreen}
 							/>
 						</Stack.Navigator>
 					)}
