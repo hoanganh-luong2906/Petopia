@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
 import {
 	FONT_BOLD,
@@ -29,45 +29,44 @@ export const PetProfile = ({ petId }: { petId: number }) => {
 	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
 	const sortCriterion = 'date';
 
-	useFocusEffect(
-		useCallback(() => {
-			const fetchData = async () => {
-				const api: string = process.env.SERVER_API_URL ?? '';
-				const userToken: string = (await AsyncStorage.getItem('token')) ?? '';
-				const requestBody: IRequestBody = {
-					page: 0,
-					sort: sortCriterion,
-					petId: petId,
-				};
-
-				try {
-					const response = await fetch(`${api}/user/health-history`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${userToken}`,
-						},
-						body: JSON.stringify(requestBody),
-					});
-
-					if (response.ok) {
-						const data = await response.json();
-						const validPetData: IPetHealthHistory =
-							data ?? ({} as IPetHealthHistory);
-						// console.log(
-						// 	`PET_PROFILE ${petId}: `,
-						// 	JSON.stringify(validPetData, null, 2)
-						// );
-						setPet(validPetData);
-					}
-				} catch (error: any) {
-					console.log(error);
-					alert('Error: ' + error.message);
-				}
+	useEffect(() => {
+		const fetchData = async () => {
+			const api: string = process.env.SERVER_API_URL ?? '';
+			const userToken: string = (await AsyncStorage.getItem('token')) ?? '';
+			const requestBody: IRequestBody = {
+				page: 0,
+				sort: sortCriterion,
+				petId: petId,
 			};
-			fetchData();
-		}, [petId])
-	);
+
+			try {
+				const response = await fetch(`${api}/user/health-history`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${userToken}`,
+					},
+					body: JSON.stringify(requestBody),
+				});
+
+				if (response.ok) {
+					const data = await response.json();
+					const validPetData: IPetHealthHistory =
+						data ?? ({} as IPetHealthHistory);
+					// console.log(
+					// 	`PET_PROFILE ${petId}: `,
+					// 	JSON.stringify(validPetData, null, 2)
+					// );
+					setPet(validPetData);
+				}
+			} catch (error: any) {
+				console.log(error);
+				alert('Error: ' + error.message);
+			}
+		};
+		fetchData();
+	}, [petId]);
+
 	useFocusEffect(
 		useCallback(() => {
 			const convertData = () => {

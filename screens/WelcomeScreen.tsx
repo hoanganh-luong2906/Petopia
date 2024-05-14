@@ -32,7 +32,7 @@ const WelcomeScreen = ({ navigation }: NavigationProp) => {
 			<LottieView
 				source={require('../assets/animations/welcome-transition.json')}
 				autoPlay
-				loop={true}
+				loop={false}
 				style={styles.transition}
 			/>
 			{isVisible && (
