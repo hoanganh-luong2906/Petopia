@@ -1,15 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
+import TabSelector from '../../components/TabSelector';
 import PetPickerModal from '../../components/user/PetPickerModal';
 import PetProfile from '../../components/user/PetProfile';
 import UserProfile from '../../components/user/UserProfile';
-import { FONT_BOLD, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
-import TabSelector from '../../components/TabSelector';
+import { API_URL, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
 
 const TAB_TITLE = ['Trang cá nhân', 'Hồ sơ thú cưng'];
 
@@ -21,7 +20,7 @@ const UserProfileScreen = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const api: string = process.env.SERVER_API_URL ?? '';
+			const api: string = process.env.SERVER_API_URL ?? API_URL;
 			const userToken: string = (await AsyncStorage.getItem('token')) ?? '';
 
 			try {

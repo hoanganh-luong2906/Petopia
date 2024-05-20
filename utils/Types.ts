@@ -2,6 +2,7 @@ export const FONT_REGULAR = 'Regular';
 export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
+export const API_URL = 'https://petopia-4mv2.onrender.com';
 
 export interface IUser {
 	status: string;
@@ -86,4 +87,20 @@ export interface IServiceCenter {
 	name: string;
 	address: string;
 	rating: number;
+}
+
+export interface ICenterDetail {
+	name: string;
+	address: string;
+	phone: string;
+	website: string;
+	description: string;
+	imgLink: string;
+}
+
+export interface ICenterServiceDetail {
+	id: number;
+	serviceName: string;
+	servicePrice: number;
+	serviceType: string;
 }

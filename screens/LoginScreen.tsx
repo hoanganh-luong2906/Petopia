@@ -11,7 +11,11 @@ import UserData from '../data/UserData.json';
 import { login } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
 import { useRootDispatch } from '../redux/hooks';
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD, IUser } from '../utils/Types';
+import { API_URL, FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD, IUser } from '../utils/Types';
+import {
+	widthPercentageToDP as wp,
+	heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type NavigationProp = {
 	navigation: NativeStackNavigationProp<any, 'login'>;
@@ -29,7 +33,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 		setIsRecentPushed(true);
 		setErrorMsg('');
 		try {
-			const api: string = process.env.SERVER_API_URL ?? '';
+			const api: string = process.env.SERVER_API_URL ?? API_URL;
 			const loginBody: { email: string; password: string } = {
 				email: email.trim(),
 				password: password.trim(),
@@ -234,29 +238,27 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 'auto',
 		backgroundColor: 'white',
-		paddingTop: 30,
+		paddingTop: hp(5),
 	},
 	animationContainer: {
-		flex: 0.35,
+		flex: 0.3,
 		width: '100%',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	animation: {
-		width: 260,
-		height: 260,
+		width: wp(60),
+		height: hp(30),
 		zIndex: 2,
 	},
 	linearContainer: {
-		flex: 0.65,
-		paddingLeft: 15,
-		paddingRight: 15,
+		flex: 0.7,
 		borderRadius: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 20,
-		paddingHorizontal: 15,
+		paddingVertical: hp(2),
+		paddingHorizontal: wp(2),
 		borderTopLeftRadius: 30,
 		borderTopRightRadius: 30,
 		zIndex: 10,
@@ -264,26 +266,26 @@ const styles = StyleSheet.create({
 	},
 	loginContainer: {
 		width: '100%',
-		paddingHorizontal: 15,
+		paddingHorizontal: wp(3),
 		height: 'auto',
 	},
 	title: {
-		fontSize: 35,
-		marginBottom: 40,
+		fontSize: hp(4),
+		marginBottom: hp(5),
 		width: '100%',
 		textAlign: 'center',
 	},
 	inputContainer: {
 		width: '100%',
-		height: 120,
+		height: hp(15),
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
 	textInput: {
-		paddingVertical: 10,
+		paddingVertical: 12,
 		paddingHorizontal: 20,
 		borderRadius: 50,
-		fontSize: 17,
+		fontSize: hp(2),
 		backgroundColor: 'white',
 	},
 	showPasswordBtn: {
@@ -292,10 +294,10 @@ const styles = StyleSheet.create({
 		top: 14,
 	},
 	errorMessage: {
-		marginTop: 15,
+		marginTop: hp(2.5),
 		textAlign: 'left',
-		paddingHorizontal: 10,
-		fontSize: 17,
+		paddingHorizontal: wp(5),
+		fontSize: hp(1.8),
 		color: 'red',
 		fontWeight: '600',
 	},
@@ -309,8 +311,8 @@ const styles = StyleSheet.create({
 	optionalText: {
 		width: '20%',
 		textAlign: 'center',
-		marginVertical: 30,
-		fontSize: 18,
+		marginVertical: hp(3.4),
+		fontSize: hp(2.3),
 		color: 'gray',
 		backgroundColor: 'white',
 		zIndex: 1,
@@ -318,14 +320,14 @@ const styles = StyleSheet.create({
 	},
 	divider: {
 		width: '70%',
-		top: 45,
 		position: 'absolute',
+		top: 45,
 		borderTopWidth: 1.5,
 		borderColor: 'gray',
 		zIndex: 0,
 	},
 	loginButton: {
-		height: 60,
+		height: hp(7.5),
 		display: 'flex',
 		alignItems: 'center',
 		borderRadius: 50,
@@ -364,7 +366,7 @@ const styles = StyleSheet.create({
 	},
 	registerContainer: {
 		width: '100%',
-		height: 50,
+		height: hp(8.5),
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'center',
@@ -380,7 +382,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		overflow: 'hidden',
-		transform: [{ translateX: -50 }, { translateY: -2 }],
+		transform: [{ translateX: -50 }, { translateY: 0 }],
 	},
 	registerText: {
 		color: 'black',

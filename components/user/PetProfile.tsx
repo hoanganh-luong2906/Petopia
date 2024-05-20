@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useCallback, useEffect, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
 import {
+	API_URL,
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	IAppointment,
@@ -31,7 +32,7 @@ export const PetProfile = ({ petId }: { petId: number }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const api: string = process.env.SERVER_API_URL ?? '';
+			const api: string = process.env.SERVER_API_URL ?? API_URL;
 			const userToken: string = (await AsyncStorage.getItem('token')) ?? '';
 			const requestBody: IRequestBody = {
 				page: 0,

@@ -6,7 +6,7 @@ import {
 	View,
 } from 'react-native';
 import CustomText from '../CustomText';
-import { FONT_BOLD, FONT_SEMI_BOLD } from '../../utils/Types';
+import { FONT_BOLD, FONT_SEMI_BOLD, IService, IServiceCenter } from '../../utils/Types';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -48,13 +48,28 @@ const renderCategoryHeader = ({ title }: { title: string }) => (
 );
 
 const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
-	const renderItem = ({ item, index }: { item: any; index: number }) => (
-		<View>
+	const renderItem = ({
+		item,
+		index,
+	}: {
+		item: IService | IServiceCenter;
+		index: number;
+	}) => (
+		<View key={index}>
 			<Pressable
-				onPress={() => navigation.navigate('category-detail', { data: item })}
+				onPress={() =>
+					navigation.navigate('category-detail', {
+						data: item,
+						isService: 'serviceName' in item,
+					})
+				}
 			>
 				<CustomText
-					message={item.name ?? item.serviceName ?? ''}
+					message={
+						'serviceName' in item
+							? (item as IService).serviceName
+							: (item as IServiceCenter).name
+					}
 					styles={{}}
 					variant={FONT_BOLD}
 				/>
@@ -72,7 +87,9 @@ const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
 				renderSectionHeader={({ section: { title } }) =>
 					renderCategoryHeader({ title })
 				}
-				renderItem={({ item, index }) => renderItem({ item, index })}
+				renderItem={({ item, index }: { item: any; index: number }) =>
+					renderItem({ item, index })
+				}
 			/>
 		</View>
 	);

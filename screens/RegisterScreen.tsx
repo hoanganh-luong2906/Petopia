@@ -6,6 +6,10 @@ import { useState } from 'react';
 import MaskedView from '@react-native-masked-view/masked-view';
 import LottieView from 'lottie-react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 type NavigationProps = {
 	navigation: NativeStackNavigationProp<any, 'register'>;
@@ -139,7 +143,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 'auto',
 		backgroundColor: 'white',
-		paddingTop: 30,
+		paddingTop: hp(3),
 	},
 	animationContainer: {
 		flex: 0.3,
@@ -150,18 +154,16 @@ const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	animation: {
-		width: 260,
-		height: 260,
+		width: wp(60),
+		height: hp(30),
 		zIndex: 2,
 	},
 	linearContainer: {
 		flex: 0.7,
-		paddingLeft: 15,
-		paddingRight: 15,
 		borderRadius: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingHorizontal: 15,
+		paddingHorizontal: wp(2),
 		borderTopLeftRadius: 30,
 		borderTopRightRadius: 30,
 		zIndex: 10,
