@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		textAlign: 'center',
 		color: 'white',
-		fontSize: hp(3),
+		fontSize: hp(2.8),
 		marginVertical: hp(5),
 	},
 	button: {

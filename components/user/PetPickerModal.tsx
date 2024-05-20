@@ -64,7 +64,7 @@ const PetPickerModal = ({
 			) : (
 				<CustomText
 					message={pet?.name}
-					styles={[styles.modalText, { fontSize: 20 }]}
+					styles={[styles.modalText, { fontSize: 20, color: 'gray' }]}
 					variant={FONT_SEMI_BOLD}
 				/>
 			)}

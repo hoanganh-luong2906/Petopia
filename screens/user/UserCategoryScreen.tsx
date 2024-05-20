@@ -8,6 +8,7 @@ import {
 import TabSelector from '../../components/TabSelector';
 import CategoryContent from '../../components/user/CategoryContent';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { API_URL } from '../../utils/Types';
 
 interface IProcessData {
 	title: string;
@@ -28,19 +29,22 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const apiUrl: string = process.env.SERVER_API_URL || '';
+				const apiUrl: string = process.env.SERVER_API_URL || API_URL;
 				const token: string = (await AsyncStorage.getItem('token')) || '';
 
-				const healthResponse = await fetch(`${apiUrl}/user/health-service-page`, {
-					method: 'POST',
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				const healthResponse = await fetch(
+					`${apiUrl}/user/health-center-and-service-page`,
+					{
+						method: 'POST',
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
 				const healthData = await healthResponse.json();
 
 				const serviceResponse = await fetch(
-					`${apiUrl}/user/service-service-page`,
+					`${apiUrl}/user/service-center-and-service-page`,
 					{
 						method: 'POST',
 						headers: {

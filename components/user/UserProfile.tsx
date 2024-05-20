@@ -1,9 +1,9 @@
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
-import CustomText from '../CustomText';
-import { FONT_BOLD, FONT_REGULAR, IUserProfile } from '../../utils/Types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { API_URL, FONT_BOLD, IUserProfile } from '../../utils/Types';
+import CustomText from '../CustomText';
 
 export const UserProfile = () => {
 	const [userData, setUserData] = useState<IUserProfile>({} as IUserProfile);
@@ -12,7 +12,7 @@ export const UserProfile = () => {
 		useCallback(() => {
 			const getUserData = async () => {
 				try {
-					const api: string = process.env.SERVER_API_URL ?? '';
+					const api: string = process.env.SERVER_API_URL ?? API_URL;
 					const token = (await AsyncStorage.getItem('token')) ?? '';
 
 					const response = await fetch(`${api}/user/userProfile`, {
