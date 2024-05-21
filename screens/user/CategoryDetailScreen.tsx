@@ -7,6 +7,7 @@ import {
 	PermissionsAndroid,
 	Pressable,
 	ScrollView,
+	SectionList,
 	StyleSheet,
 	View,
 } from 'react-native';
@@ -24,10 +25,16 @@ import {
 	ICenterDetail,
 	ICenterServiceDetail,
 } from '../../utils/Types';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface ICategoryDetailProps {
 	route: RouteProp<any, 'category-detail'>;
 	navigation: NativeStackNavigationProp<any, 'category-detail'>;
+}
+
+interface IServiceList {
+	title: string;
+	data: ICenterServiceDetail[];
 }
 
 function formatPhoneNumber(phoneNumber: string): string {
@@ -44,12 +51,48 @@ async function isValidImageUrl(url: string): Promise<boolean> {
 	return contentType?.startsWith('image/') ?? false;
 }
 
+const renderItem = (item: ICenterServiceDetail) => {
+	return (
+		<View style={styles.servicesContainer}>
+			<Icon
+				name='chevron-forward-circle'
+				size={hp(2)}
+				color={'gray'}
+				style={{ marginTop: 3 }}
+			/>
+			<CustomText
+				numberOfLines={2}
+				message={item.serviceName}
+				styles={[styles.servicesTxt]}
+				variant={FONT_REGULAR}
+			/>
+		</View>
+	);
+};
+
+const renderSectionHeader = (title: string) => {
+	return (
+		<View
+			style={[styles.descriptionCategoryContainer, { backgroundColor: '#fffdf0' }]}
+		>
+			<CustomText
+				message={title}
+				styles={styles.servicesHeader}
+				variant={FONT_BOLD}
+			/>
+		</View>
+	);
+};
+
 const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 	const data = route.params?.data ?? null;
 	const isService = route.params?.isService ?? null;
 	const [centerData, setCenterData] = useState<ICenterDetail>({} as ICenterDetail);
 	const [centerServiceList, setCenterServiceList] = useState<ICenterServiceDetail[]>(
-		[]
+		[] as ICenterServiceDetail[]
+	);
+	const [serviceProccessList, setCenterProcessList] = useState<IServiceList[]>(
+		[] as IServiceList[]
 	);
 	const [isImageError, setImageError] = useState<boolean>(false);
 
@@ -90,8 +133,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 					if (serviceResponse.ok) {
 						const serviceDataObj = await serviceResponse.json();
 						const validServiceData: ICenterServiceDetail[] =
-							{ ...serviceDataObj.serviceList } ??
-							([] as ICenterServiceDetail[]);
+							serviceDataObj.serviceList ?? ([] as ICenterServiceDetail[]);
 						setCenterServiceList(validServiceData);
 					}
 					try {
@@ -107,10 +149,35 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 				}
 			};
 			fetchData();
-			console.log('Center: ', JSON.stringify(centerData, null, 2));
-			console.log('Service: ', JSON.stringify(centerServiceList, null, 2));
 		}, [])
 	);
+
+	useFocusEffect(
+		useCallback(() => {
+			const processData = () => {
+				let categories: Set<string> = new Set<string>();
+				let serviceList: IServiceList[] = [];
+				centerServiceList.map((service: ICenterServiceDetail) => {
+					categories.add(service.serviceType);
+				});
+				categories.forEach((category: string) => {
+					let services: ICenterServiceDetail[] = centerServiceList.filter(
+						(service: ICenterServiceDetail) =>
+							service.serviceType === category
+					);
+					serviceList.push({ title: category, data: services });
+				});
+				setCenterProcessList(serviceList);
+				console.log('Service List: ', JSON.stringify(serviceList, null, 2));
+			};
+
+			if ((centerData?.name ?? false) && centerServiceList.length > 0) {
+				processData();
+			}
+		}, [centerData, centerServiceList])
+	);
+
+	console.log('Service List: ', JSON.stringify(serviceProccessList, null, 2));
 
 	return (
 		<View style={styles.container}>
@@ -252,6 +319,17 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 							styles={styles.headerText}
 							variant={FONT_SEMI_BOLD}
 						/>
+						<SectionList
+							scrollEnabled={false}
+							showsVerticalScrollIndicator={false}
+							sections={serviceProccessList}
+							renderItem={({ item }: { item: ICenterServiceDetail }) =>
+								renderItem(item)
+							}
+							renderSectionHeader={({ section: { title } }) =>
+								renderSectionHeader(title)
+							}
+						/>
 					</View>
 				</View>
 			</ScrollView>
@@ -276,6 +354,7 @@ const styles = StyleSheet.create({
 	headerText: {
 		fontSize: hp(2.5),
 		textAlign: 'center',
+		marginBottom: hp(1),
 	},
 	goBackBtn: {
 		position: 'absolute',
@@ -283,6 +362,7 @@ const styles = StyleSheet.create({
 		bottom: hp(1.5),
 	},
 	contentContainer: {
+		height: hp(100),
 		paddingHorizontal: wp(4),
 		paddingTop: hp(2),
 	},
@@ -326,6 +406,26 @@ const styles = StyleSheet.create({
 		paddingLeft: wp(3),
 		width: wp(65),
 		paddingVertical: hp(0.5),
+	},
+	servicesContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
+		alignItems: 'stretch',
+		paddingVertical: hp(0.5),
+		paddingHorizontal: wp(5),
+	},
+	servicesTxt: {
+		fontSize: hp(2.1),
+		lineHeight: hp(3),
+		textAlign: 'justify',
+		paddingLeft: wp(2),
+	},
+	servicesHeader: {
+		fontSize: hp(2.5),
+		lineHeight: hp(3.5),
+		textAlign: 'left',
+		color: 'gray',
 	},
 });
 

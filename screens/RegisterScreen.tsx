@@ -171,17 +171,18 @@ const styles = StyleSheet.create({
 	},
 	registerContainer: {
 		width: '100%',
-		paddingHorizontal: 15,
+		paddingHorizontal: wp(2),
 		height: 'auto',
+		overflow: 'scroll',
 	},
 	title: {
-		fontSize: 35,
+		fontSize: hp(4),
 		width: '100%',
 		textAlign: 'center',
 	},
 	inputContainer: {
 		width: '100%',
-		height: 350,
+		height: hp(40),
 		display: 'flex',
 		justifyContent: 'space-evenly',
 	},
