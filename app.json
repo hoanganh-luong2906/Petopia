@@ -1,10 +1,10 @@
 {
 	"expo": {
-		"name": "Petopia",
-		"slug": "Petopia",
+		"name": "Petopia_Mobile",
+		"slug": "Petopia_Mobile",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/logo.png",
+		"icon": "./assets/images/logo.png",
 		"userInterfaceStyle": "light",
 		"splash": {
 			"image": "./assets/splash.png",
