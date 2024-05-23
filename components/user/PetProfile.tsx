@@ -13,6 +13,10 @@ import {
 } from '../../utils/Types';
 import CustomText from '../CustomText';
 import AppointmentContent from './AppointmentContent';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 interface IProcessPetData {
 	title: number;
@@ -179,14 +183,14 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		position: 'relative',
-		paddingHorizontal: 15,
+		paddingHorizontal: wp(2),
 		paddingBottom: 60,
 	},
 	backgroundLine: {
 		position: 'absolute',
 		top: 0,
-		left: '25%',
-		width: 4,
+		left: wp(24),
+		width: wp(1),
 		height: 1000,
 		backgroundColor: '#F4A905',
 		zIndex: -1,
@@ -195,22 +199,22 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		marginVertical: 10,
+		marginVertical: hp(1.5),
 	},
 	timeLabel: {
-		width: '21%',
+		width: wp(22),
 		textAlign: 'right',
-		fontSize: 16,
+		fontSize: wp(4.3),
 		color: 'gray',
-		marginRight: 4,
-		paddingRight: '3%',
+		marginRight: wp(1),
+		paddingRight: wp(1),
 	},
 	contentLabel: {
-		width: '30%',
+		width: wp(30),
 		textAlign: 'left',
-		fontSize: 16,
+		fontSize: wp(4.3),
 		color: 'gray',
-		paddingLeft: '3%',
+		paddingLeft: wp(1),
 	},
 	headerContainer: {
 		width: '100%',
@@ -231,7 +235,7 @@ const styles = StyleSheet.create({
 	},
 	yearSectionHeader: {
 		width: '100%',
-		paddingLeft: '30%',
+		paddingLeft: wp(16),
 		fontSize: 25,
 		color: 'black',
 	},

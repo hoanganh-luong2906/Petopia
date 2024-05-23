@@ -4,6 +4,10 @@ import CustomText from './CustomText';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FONT_BOLD } from '../utils/Types';
 import { Dispatch, SetStateAction } from 'react';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 interface ITabSelector {
 	totalTabs: number;
@@ -29,59 +33,53 @@ const TabSelector = ({
 			]}
 			onPress={() => setFocusedTab(index)}
 		>
-			{focusedTab === index ? (
-				<MaskedView
-					style={styles.tabTitleDecorator}
-					maskElement={
-						<CustomText
-							numberOfLines={1}
-							message={title}
-							styles={styles.tabTitle}
-							variant={FONT_BOLD}
-						/>
-					}
-				>
-					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1, y: 0 }}
-						style={styles.titleLinearDecorator}
+			<MaskedView
+				style={styles.tabTitleDecorator}
+				maskElement={
+					<CustomText
+						numberOfLines={1}
+						message={title}
+						styles={styles.tabTitle}
+						variant={FONT_BOLD}
 					/>
-				</MaskedView>
-			) : (
-				<CustomText
-					numberOfLines={1}
-					message={title}
-					styles={styles.tabTitle}
-					variant={FONT_BOLD}
+				}
+			>
+				<LinearGradient
+					colors={
+						focusedTab === index ? ['#F4A905', '#FBE437'] : ['gray', 'gray']
+					}
+					start={{ x: 0, y: 0 }}
+					end={{ x: 1, y: 0 }}
+					style={styles.titleLinearDecorator}
 				/>
-			)}
+			</MaskedView>
 		</Pressable>
 	);
 };
 
 const styles = StyleSheet.create({
 	tabTitle: {
-		color: 'gray',
 		letterSpacing: 1,
 		textAlign: 'center',
-		fontSize: 20,
+		fontSize: hp(2.3),
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	tabTitleContainer: {
-		height: '100%',
-		paddingVertical: 5,
-		paddingHorizontal: 10,
+		height: hp(5.5),
 		borderRadius: 5,
 		display: 'flex',
-		flexDirection: 'row',
+		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	tabTitleDecorator: {
 		width: '100%',
-		height: '100%',
-		marginTop: '5%',
+		height: '60%',
 		display: 'flex',
+		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

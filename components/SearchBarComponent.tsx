@@ -8,6 +8,10 @@ import { useRootDispatch } from '../redux/hooks';
 import { logout } from '../redux/UserSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 	const dispatch: RootDispatch = useRootDispatch();
@@ -84,8 +88,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly',
 		alignItems: 'center',
 		backgroundColor: 'white',
-		paddingTop: '10%',
-		paddingHorizontal: 10,
+		paddingTop: hp(4),
+		paddingHorizontal: wp(2),
 	},
 	searchContent: {
 		position: 'relative',
@@ -94,11 +98,12 @@ const styles = StyleSheet.create({
 	searchInput: {
 		width: '100%',
 		backgroundColor: '#F3F5F7',
-		marginVertical: 15,
-		paddingVertical: 10,
-		paddingRight: 30,
-		paddingLeft: 50,
+		marginVertical: hp(1.5),
+		paddingVertical: hp(1),
+		paddingRight: wp(10),
+		paddingLeft: wp(12),
 		borderRadius: 30,
+		overflow: 'hidden',
 	},
 	searchDecorator: {
 		position: 'absolute',
@@ -112,20 +117,20 @@ const styles = StyleSheet.create({
 	},
 	clearSearchBtn: {
 		position: 'absolute',
-		bottom: '35%',
-		left: '60%',
+		bottom: '32%',
+		right: '5%',
 	},
 	btnContainer: {
 		backgroundColor: '#F3F5F7',
-		padding: 10,
+		padding: wp(2.5),
 		borderRadius: 30,
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	btnDecorator: {
-		width: 25,
-		height: 25,
+		width: hp(3),
+		height: hp(3),
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',

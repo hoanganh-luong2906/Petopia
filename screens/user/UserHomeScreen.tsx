@@ -4,7 +4,10 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
 import TabSelector from '../../components/TabSelector';
 import { FONT_SEMI_BOLD } from '../../utils/Types';
-import SearchBarComponent from '../../components/SearchBarComponent';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const TAB_TITLE = ['Phổ biến', 'Xu hướng', 'Theo dõi'];
 
@@ -37,7 +40,7 @@ const UserHomeScreen = () => {
 							source={require('../../assets/animations/no-order.json')}
 							loop
 							autoPlay
-							style={{ width: '100%', height: 300 }}
+							style={styles.notFoundAnimation}
 						/>
 						<CustomText
 							message='Không tìm thấy bài viết nào'
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
 	searchTabContainer: {
 		width: '100%',
 		backgroundColor: 'white',
-		paddingHorizontal: 10,
+		paddingHorizontal: wp(2),
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
@@ -66,16 +69,19 @@ const styles = StyleSheet.create({
 	},
 	tabContainer: {
 		width: '100%',
-		height: 50,
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: '4%',
+		marginBottom: '2%',
 	},
 	notFoundText: {
 		textAlign: 'center',
-		fontSize: 20,
+		fontSize: hp(2),
 		color: 'gray',
+	},
+	notFoundAnimation: {
+		width: wp(100),
+		height: hp(30),
 	},
 });
 

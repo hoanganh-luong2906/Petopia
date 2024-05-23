@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
 		overflow: 'scroll',
 	},
 	title: {
-		fontSize: hp(4),
+		fontSize: hp(3.8),
 		width: '100%',
 		textAlign: 'center',
 	},
