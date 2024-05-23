@@ -3,6 +3,10 @@ import { Image, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD, IAppointment } from '../../utils/Types';
 import CustomText from '../CustomText';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const extractDate = (dateString: string): string => {
 	const date = new Date(dateString);
@@ -145,34 +149,36 @@ const AppointmentContent = ({
 const styles = StyleSheet.create({
 	appointmentContainer: {
 		width: '100%',
-		height: 130,
+		height: hp(18),
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'stretch',
-		marginVertical: 10,
+		marginVertical: hp(1.5),
 	},
 	timeContainer: {
-		width: '18%',
+		width: wp(18.5),
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'flex-start',
 		alignItems: 'flex-end',
-		paddingRight: '2%',
+		paddingRight: wp(0.5),
+		transform: [{ translateY: -hp(0.5) }],
 	},
 	timeDate: {
-		fontSize: 22,
-		letterSpacing: 2,
+		fontSize: wp(6.8),
+		letterSpacing: wp(0.3),
 		color: 'black',
+		textAlignVertical: 'top',
 	},
 	timeHours: {
-		fontSize: 18,
+		fontSize: wp(5),
 		color: 'gray',
-		lineHeight: 22,
+		lineHeight: wp(6),
 	},
 	spotContainer: {
-		width: 28,
-		height: 28,
+		width: wp(8),
+		height: wp(8),
 		borderRadius: 15,
 	},
 	spot: {
@@ -187,10 +193,10 @@ const styles = StyleSheet.create({
 		width: '70%',
 		backgroundColor: 'white',
 		borderRadius: 8,
-		marginLeft: '2%',
+		marginLeft: wp(1),
 		overflow: 'hidden',
-		marginHorizontal: 5,
-		marginRight: 5,
+		marginHorizontal: wp(1),
+		marginRight: wp(1),
 		elevation: 2,
 	},
 	linearSummaryContent: {
@@ -208,7 +214,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	appointmentTitle: {
-		fontSize: 18,
+		fontSize: hp(2.3),
 		width: '100%',
 	},
 	appointmentPlace: {

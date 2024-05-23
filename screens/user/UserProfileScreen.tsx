@@ -9,6 +9,10 @@ import PetPickerModal from '../../components/user/PetPickerModal';
 import PetProfile from '../../components/user/PetProfile';
 import UserProfile from '../../components/user/UserProfile';
 import { API_URL, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const TAB_TITLE = ['Trang cá nhân', 'Hồ sơ thú cưng'];
 
@@ -112,26 +116,25 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
-		paddingTop: '15%',
+		paddingTop: hp(5),
 	},
 	tabContainer: {
 		width: '100%',
-		height: 50,
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		marginBottom: '3%',
-		paddingHorizontal: 10,
+		paddingHorizontal: wp(2),
 	},
 	petPickerContainer: {
 		position: 'absolute',
 		top: 5,
 		right: 0,
 		width: '35%',
-		height: 38,
+		height: hp(5),
 		backgroundColor: 'red',
 		zIndex: 100,
-		marginRight: 25,
+		marginRight: wp(6),
 		borderRadius: 30,
 		overflow: 'hidden',
 		shadowColor: '#000',
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
 	},
 	petPickerText: {
 		color: 'white',
-		fontSize: 18,
+		fontSize: hp(2.5),
 		letterSpacing: 1,
 		textAlign: 'center',
 		width: '70%',

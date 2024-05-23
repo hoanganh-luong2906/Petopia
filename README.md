@@ -3,8 +3,10 @@
 Petopia Mobile is a mobile application that allows users to find and adopt pets from local animal shelters. The app provides a user-friendly interface for browsing available pets, viewing their details, and submitting adoption applications.
 
 # Emulator Version
-- **Device**: Pixel 6
-- **Android version**: Android 14
+
+-   **Device**: Pixel 6
+-   **Android version**: Android 14
+-   **Expo SDK**: SDK 50
 
 ## Packages Used
 

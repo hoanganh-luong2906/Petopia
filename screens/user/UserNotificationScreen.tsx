@@ -3,6 +3,10 @@ import CustomText from '../../components/CustomText';
 import { FONT_BOLD } from '../../utils/Types';
 import { useState } from 'react';
 import TabSelector from '../../components/TabSelector';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const TAB_TITLE = ['Tất cả', 'Hoạt động', 'Lịch hẹn'];
 
@@ -38,14 +42,14 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
-		paddingTop: '13%',
+		paddingTop: hp(5),
 	},
 	titleContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingHorizontal: '2%',
+		paddingHorizontal: hp(1),
 	},
 	title: {
 		fontSize: 25,

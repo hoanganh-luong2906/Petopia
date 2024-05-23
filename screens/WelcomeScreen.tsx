@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 	background: {
 		position: 'absolute',
 		top: 0,
-		left: -wp(10),
+		left: -wp(15),
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		backgroundColor: '#F4A905',
-		paddingVertical: 10,
-		paddingHorizontal: 35,
+		paddingVertical: hp(1),
+		paddingHorizontal: wp(8),
 		borderRadius: 50,
 		display: 'flex',
 		justifyContent: 'center',
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
 		position: 'relative',
 		overflow: 'hidden',
 		elevation: 2,
-		marginTop: 30,
+		marginTop: hp(4),
 		zIndex: 2,
 	},
 	buttonText: {
@@ -195,8 +195,8 @@ const styles = StyleSheet.create({
 	buttonEffect: {
 		position: 'absolute',
 		top: -50,
-		left: -600,
-		width: '400%',
+		left: -wp(185),
+		width: '500%',
 		height: '500%',
 		transform: [{ rotate: '-90deg' }],
 	},

@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
 		height: 'auto',
 	},
 	title: {
-		fontSize: hp(4),
+		fontSize: hp(3.8),
 		marginBottom: hp(5),
 		width: '100%',
 		textAlign: 'center',
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
 	optionalText: {
 		width: '20%',
 		textAlign: 'center',
-		marginVertical: hp(3.4),
+		marginVertical: hp(3.5),
 		fontSize: hp(2.3),
 		color: 'gray',
 		backgroundColor: 'white',
