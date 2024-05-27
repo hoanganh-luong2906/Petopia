@@ -366,6 +366,7 @@ const styles = StyleSheet.create({
 		height: hp(100),
 		paddingHorizontal: wp(4),
 		paddingTop: hp(2),
+		marginBottom: hp(5),
 	},
 	bgImage: {
 		width: '100%',
@@ -415,7 +416,6 @@ const styles = StyleSheet.create({
 		alignItems: 'stretch',
 		paddingVertical: hp(0.5),
 		paddingHorizontal: wp(5),
-		marginBottom: hp(5),
 	},
 	servicesTxt: {
 		fontSize: hp(2.1),
