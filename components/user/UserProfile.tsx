@@ -5,8 +5,20 @@ import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { API_URL, FONT_BOLD, IUserProfile } from '../../utils/Types';
 import CustomText from '../CustomText';
 
+async function isValidImageUrl(url: string): Promise<boolean> {
+	if (!(url.length === 0)) return false;
+	const response = await fetch(url, { method: 'HEAD' });
+	if (!response.ok) {
+		return false;
+	}
+	const contentType = response.headers.get('Content-Type');
+	return contentType?.startsWith('image/') ?? false;
+}
+
 export const UserProfile = () => {
 	const [userData, setUserData] = useState<IUserProfile>({} as IUserProfile);
+	const [isImageError, setImageError] = useState<boolean>(false);
+	const [isBackgroundError, setBackgroundError] = useState<boolean>(false);
 
 	useFocusEffect(
 		useCallback(() => {
@@ -15,7 +27,7 @@ export const UserProfile = () => {
 					const api: string = process.env.SERVER_API_URL ?? API_URL;
 					const token = (await AsyncStorage.getItem('token')) ?? '';
 
-					const response = await fetch(`${api}/user/userProfile`, {
+					const response = await fetch(`${api}/user/user-profile`, {
 						method: 'GET',
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -24,11 +36,31 @@ export const UserProfile = () => {
 					console.log('>>> Response: ', JSON.stringify(response, null, 2));
 
 					if (response.ok) {
-						const data = await response.json();
-						const validUserData: IUserProfile = data.user ?? {};
-						console.log('PRO FILE: ', JSON.stringify(validUserData, null, 2));
+						const data = (await response.json()) ?? {};
+						const validUserData: IUserProfile =
+							{ ...data } ?? ({} as IUserProfile);
+						// console.log('PROFILE: ', JSON.stringify(validUserData, null, 2));
 						if (validUserData) {
 							setUserData({ ...validUserData });
+							try {
+								const isValidImage = await isValidImageUrl(
+									validUserData?.images ? validUserData.images[0] : ''
+								);
+								setImageError(isValidImage);
+							} catch (error: any) {
+								// console.log('Invalid URL: ' + error);
+								setImageError(true);
+							}
+
+							try {
+								const isValidImage = await isValidImageUrl(
+									validUserData?.images ? validUserData.images[1] : ''
+								);
+								setBackgroundError(isValidImage);
+							} catch (error: any) {
+								// console.log('Invalid URL: ' + error);
+								setBackgroundError(true);
+							}
 						}
 					}
 				} catch (error: any) {
@@ -43,41 +75,43 @@ export const UserProfile = () => {
 	return (
 		<View style={styles.container}>
 			<ScrollView showsVerticalScrollIndicator={false}>
-				<View style={styles.profileContainer}>
-					<View style={styles.imageContainer}>
-						{(userData.avatarLink ? [0] : false) ? (
-							<Image
-								src={userData.avatarLink[0]}
-								resizeMode='cover'
-								style={styles.imageBackground}
-							/>
-						) : (
-							<Image
-								source={require('../../assets/images/default-bg.png')}
-								resizeMode='cover'
-								style={styles.imageBackground}
-							/>
-						)}
-						{(userData.avatarLink ? [1] : false) ? (
-							<Image
-								src={userData.avatarLink[1]}
-								resizeMode='cover'
-								style={styles.imageAvt}
-							/>
-						) : (
-							<Image
-								source={require('../../assets/images/default-avt.png')}
-								resizeMode='cover'
-								style={styles.imageAvt}
-							/>
-						)}
+				{(userData?.name ?? false) && (
+					<View style={styles.profileContainer}>
+						<View style={styles.imageContainer}>
+							{!isBackgroundError ? (
+								<Image
+									src={userData?.images[0] ?? ''}
+									resizeMode='cover'
+									style={styles.imageBackground}
+								/>
+							) : (
+								<Image
+									source={require('../../assets/images/default-bg.png')}
+									resizeMode='cover'
+									style={styles.imageBackground}
+								/>
+							)}
+							{!isImageError ? (
+								<Image
+									src={userData?.images[1] ?? ''}
+									resizeMode='cover'
+									style={styles.imageAvt}
+								/>
+							) : (
+								<Image
+									source={require('../../assets/images/default-avt.png')}
+									resizeMode='cover'
+									style={styles.imageAvt}
+								/>
+							)}
+						</View>
+						<CustomText
+							message={userData?.name ?? 'Đang cập nhật'}
+							styles={styles.userName}
+							variant={FONT_BOLD}
+						/>
 					</View>
-					<CustomText
-						message={userData.name}
-						styles={styles.userName}
-						variant={FONT_BOLD}
-					/>
-				</View>
+				)}
 			</ScrollView>
 		</View>
 	);

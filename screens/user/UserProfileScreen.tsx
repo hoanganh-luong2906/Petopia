@@ -46,20 +46,10 @@ const UserProfileScreen = () => {
 				console.log('Error: ' + error);
 				alert('Error: ' + error.message);
 			}
-			// Mock data
-			// petInformation = VacineData.data.sort(
-			// 	(a, b) =>
-			// 		new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-			// );
-			// const petNames = petInformation.map((pet) => pet.petName);
-			// setHistyoryData(petInformation);
-			// setPetNames(petNames);
-			// setSelectedPet(petInformation[0]);
 		};
 		fetchData();
 	}, []);
 
-	// console.log('PET_LIST: ', JSON.stringify(petData, null, 2));
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabContainer}>
