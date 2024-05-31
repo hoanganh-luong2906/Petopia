@@ -14,6 +14,10 @@ import CustomText from '../CustomText';
 import { FONT_BOLD, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 interface IPetPickerProps {
 	isVisible: boolean;
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 	},
 	modalTitle: {
-		fontSize: 25,
+		fontSize: hp(2.5),
 		letterSpacing: 1,
 		color: 'gray',
 	},

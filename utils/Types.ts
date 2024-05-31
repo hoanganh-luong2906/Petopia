@@ -15,12 +15,12 @@ export interface IUser {
 export interface IUserProfile {
 	id: number;
 	name: string;
-	email: string;
-	avatarLink: string;
-	status: string;
-	appointmentList: IAppointment[];
-	shop: {};
+	gender: string;
+	address: string;
 	role: string;
+	phone: string;
+	images: string[];
+	groups: Object[];
 }
 
 export interface IPet {

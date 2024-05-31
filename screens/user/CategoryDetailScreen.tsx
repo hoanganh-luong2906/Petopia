@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import LottieView from 'lottie-react-native';
 import { useCallback, useState } from 'react';
 import {
 	Image,
-	PermissionsAndroid,
 	Pressable,
 	ScrollView,
 	SectionList,
@@ -15,7 +15,7 @@ import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import ICon from 'react-native-vector-icons/Ionicons';
+import { default as ICon, default as Icon } from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
 import {
 	API_URL,
@@ -25,7 +25,6 @@ import {
 	ICenterDetail,
 	ICenterServiceDetail,
 } from '../../utils/Types';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 interface ICategoryDetailProps {
 	route: RouteProp<any, 'category-detail'>;
@@ -135,6 +134,8 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 						const validServiceData: ICenterServiceDetail[] =
 							serviceDataObj.serviceList ?? ([] as ICenterServiceDetail[]);
 						setCenterServiceList(validServiceData);
+					} else {
+						console.log('Service Response Error: ' + serviceResponse.status);
 					}
 					try {
 						const isValidImage = await isValidImageUrl(centerData.imgLink);
@@ -181,9 +182,22 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 
 	return (
 		<View style={styles.container}>
+			<Pressable
+				style={styles.bookingContainer}
+				onPress={() =>
+					navigation.navigate('register-appointment', { data: centerData })
+				}
+			>
+				<LottieView
+					source={require('../../assets/animations/booking-service.json')}
+					autoPlay
+					loop
+					style={styles.bookingBtn}
+				/>
+			</Pressable>
 			<View style={styles.headerContainer}>
 				<Pressable onPress={() => navigation.goBack()} style={styles.goBackBtn}>
-					<ICon name='arrow-back' size={30} />
+					<ICon name='arrow-back' size={25} />
 				</Pressable>
 				<CustomText
 					message={`${isService ? 'Thông tin dịch vụ' : 'Thông tin trung tâm'}`}
@@ -340,14 +354,27 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingBottom: hp(5),
+	},
+	bookingContainer: {
+		position: 'absolute',
+		bottom: hp(3),
+		right: wp(2),
+		width: wp(25),
+		height: wp(25),
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		zIndex: 10,
+	},
+	bookingBtn: {
+		width: '100%',
+		height: '100%',
 	},
 	headerContainer: {
-		paddingTop: hp(6),
+		paddingTop: hp(5),
 		position: 'relative',
 		backgroundColor: 'white',
 		paddingHorizontal: wp(5),
-		paddingBottom: hp(1),
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'center',
@@ -355,7 +382,7 @@ const styles = StyleSheet.create({
 	headerText: {
 		fontSize: hp(2.5),
 		textAlign: 'center',
-		marginBottom: hp(1),
+		marginVertical: hp(1),
 	},
 	goBackBtn: {
 		position: 'absolute',
@@ -366,7 +393,7 @@ const styles = StyleSheet.create({
 		height: hp(100),
 		paddingHorizontal: wp(4),
 		paddingTop: hp(2),
-		marginBottom: hp(5),
+		marginBottom: hp(3),
 	},
 	bgImage: {
 		width: '100%',
