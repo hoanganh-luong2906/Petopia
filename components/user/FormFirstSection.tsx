@@ -66,7 +66,7 @@ const FormFirstSection = (props: IFormProps) => {
 			onChange: handleChangeDate,
 			mode: currentMode,
 			display: 'default',
-			is24Hour: true,
+			is24Hour: false,
 			minimumDate: new Date(),
 			timeZoneName: 'Asia/Ho_Chi_Minh',
 			timeZoneOffsetInMinutes: 0,
@@ -128,7 +128,7 @@ const FormFirstSection = (props: IFormProps) => {
 					/>
 					<TextInput
 						placeholder='Địa chỉ'
-						value={address}
+						value={JSON.stringify(selectedDate)}
 						onChangeText={(text) => setAddress(text)}
 						numberOfLines={1}
 						style={styles.informationInput}

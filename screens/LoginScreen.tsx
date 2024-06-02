@@ -34,6 +34,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 		setErrorMsg('');
 		try {
 			const api: string = process.env.SERVER_API_URL ?? API_URL;
+			console.log('API: ' + api);
 			const loginBody: { email: string; password: string } = {
 				email: email.trim(),
 				password: password.trim(),
