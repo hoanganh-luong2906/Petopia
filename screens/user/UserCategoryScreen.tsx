@@ -35,7 +35,7 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 				const healthResponse = await fetch(
 					`${apiUrl}/user/health-center-and-service-page`,
 					{
-						method: 'POST',
+						method: 'GET',
 						headers: {
 							Authorization: `Bearer ${token}`,
 						},
@@ -46,7 +46,7 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 				const serviceResponse = await fetch(
 					`${apiUrl}/user/service-center-and-service-page`,
 					{
-						method: 'POST',
+						method: 'GET',
 						headers: {
 							Authorization: `Bearer ${token}`,
 						},

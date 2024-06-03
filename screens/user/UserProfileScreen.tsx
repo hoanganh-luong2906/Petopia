@@ -29,7 +29,7 @@ const UserProfileScreen = () => {
 
 			try {
 				const response = await fetch(`${api}/user/pet-list`, {
-					method: 'POST',
+					method: 'GET',
 					headers: {
 						Authorization: `Bearer ${userToken}`,
 					},

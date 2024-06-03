@@ -1,3 +1,9 @@
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+export const TEXT_LARGE = hp(2.5);
+export const TEXT_PRIMARY = hp(2);
+export const TEXT_SECONDARY = hp(1.8);
+
 export const FONT_REGULAR = 'Regular';
 export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
