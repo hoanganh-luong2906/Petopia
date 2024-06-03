@@ -18,8 +18,6 @@ const WelcomeScreen = ({ navigation }: NavigationProp) => {
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => setIsVisible(true), 1000);
-
-		// Cleanup function to clear the timeout when the component unmounts
 		return () => clearTimeout(timeoutId);
 	}, []);
 

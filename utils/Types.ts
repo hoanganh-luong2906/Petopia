@@ -8,6 +8,7 @@ export const FONT_REGULAR = 'Regular';
 export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
+
 export const API_URL = 'https://petopia-4mv2.onrender.com';
 
 export interface IUser {
