@@ -18,9 +18,8 @@ interface IRegisterAppointmentProps {
 
 const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentProps) => {
 	const data = route.params?.data ?? null;
-	const [petData, setPetData] = useState<IPet[]>([]);
 	const [isVisible, setVisible] = useState<boolean>(false);
-	const [selectedPet, setSelectedPet] = useState<IPet>({} as IPet);
+	const [selectedPet, setSelectedPet] = useState<number>(0);
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	const [fullName, setFullName] = useState<string>('');
 	const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -47,7 +46,6 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 				isVisible={isVisible}
 				selectedDate={selectedDate}
 				selectedPet={selectedPet}
-				petData={petData}
 				setFullName={setFullName}
 				setPhoneNumber={setPhoneNumber}
 				setAddress={setAddress}
@@ -55,6 +53,7 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 				setVisible={setVisible}
 				setSelectedDate={setSelectedDate}
 				setSelectedPet={setSelectedPet}
+				center={data}
 			/>
 		</View>
 	);

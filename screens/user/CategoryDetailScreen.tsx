@@ -90,7 +90,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 	const [centerServiceList, setCenterServiceList] = useState<ICenterServiceDetail[]>(
 		[] as ICenterServiceDetail[]
 	);
-	const [serviceProccessList, setCenterProcessList] = useState<IServiceList[]>(
+	const [serviceProccessList, setServiceProcessList] = useState<IServiceList[]>(
 		[] as IServiceList[]
 	);
 	const [isImageError, setImageError] = useState<boolean>(false);
@@ -168,7 +168,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 					);
 					serviceList.push({ title: category, data: services });
 				});
-				setCenterProcessList(serviceList);
+				setServiceProcessList(serviceList);
 				console.log('Service List: ', JSON.stringify(serviceList, null, 2));
 			};
 
@@ -178,14 +178,16 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 		}, [centerData, centerServiceList])
 	);
 
-	console.log('Service List: ', JSON.stringify(serviceProccessList, null, 2));
+	// console.log('Service List: ', JSON.stringify(serviceProccessList, null, 2));
 
 	return (
 		<View style={styles.container}>
 			<Pressable
 				style={styles.bookingContainer}
 				onPress={() =>
-					navigation.navigate('register-appointment', { data: centerData })
+					navigation.navigate('register-appointment', {
+						data: { centerData, centerServiceList },
+					})
 				}
 			>
 				<LottieView

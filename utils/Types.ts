@@ -1,10 +1,15 @@
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+export const TEXT_LARGE = hp(2.5);
+export const TEXT_PRIMARY = hp(2);
+export const TEXT_SECONDARY = hp(1.8);
+
 export const FONT_REGULAR = 'Regular';
 export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
 
 export const API_URL = 'https://petopia-4mv2.onrender.com';
-// export const API_URL = 'https://petopia-m8kg.onrender.com';
 
 export interface IUser {
 	status: string;
