@@ -57,10 +57,6 @@ interface IDropdownOption {
 	value: number;
 }
 
-const MAXIMUM_PREBOOKING_DATE: Date = new Date(
-	new Date().getTime() + 7 * 24 * 60 * 60 * 1000
-);
-
 const formatVietnameseDate = (date: Date): string => {
 	const daysOfWeek = ['CN', 'T.2', 'T.3', 'T.4', 'T.5', 'T.6', 'T.7'];
 	const dayOfWeek = daysOfWeek[date.getDay()];
@@ -80,6 +76,11 @@ const formatTime = (date: Date): string => {
 	const formattedMinutes = minutes.toString().padStart(2, '0');
 	return `${formattedHours.toString().padStart(2, '0')}:${formattedMinutes} ${ampm}`;
 };
+
+const MAXIMUM_PREBOOKING_DATE: Date = new Date(
+	new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+);
+const SERVICE_PREFERENCES: string[] = ['Tại trung tâm', 'Tại nhà'];
 
 const FormFirstSection = (props: IFormProps) => {
 	const {
@@ -108,6 +109,8 @@ const FormFirstSection = (props: IFormProps) => {
 	const [serviceData, setServiceData] = useState<IDropdownOption[]>([]);
 	const [petData, setPetData] = useState<IPet[]>([]);
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
+	const [isDateEditted, setIsDateEditted] = useState<boolean>(false);
+	const [selectedServicePreference, setSelectedServicePreference] = useState<number>(0);
 
 	const handleChangeDate = (
 		event: DateTimePickerEvent,
@@ -115,6 +118,9 @@ const FormFirstSection = (props: IFormProps) => {
 	) => {
 		const currentDate = selectedDate;
 		setSelectedDate(currentDate ?? new Date());
+		if (!isDateEditted) {
+			setIsDateEditted(true);
+		}
 	};
 
 	const showDateMode = (currentMode: any) => {
@@ -287,6 +293,43 @@ const FormFirstSection = (props: IFormProps) => {
 						</View>
 						<View>
 							<CustomText
+								message='Loại dịch vụ sử dụng'
+								variant={FONT_BOLD}
+								styles={styles.informationLabel}
+							/>
+							<View style={styles.serviceReferenceContainer}>
+								{SERVICE_PREFERENCES.map((service, index) => (
+									<Pressable
+										key={index}
+										onPress={() =>
+											setSelectedServicePreference(index)
+										}
+										style={styles.serviceReferenceContent}
+									>
+										<Icon
+											name={
+												selectedServicePreference === index
+													? 'radio-button-on'
+													: 'radio-button-off'
+											}
+											size={TEXT_PRIMARY}
+											color={'black'}
+										/>
+										<CustomText
+											message={service}
+											variant={
+												selectedServicePreference === index
+													? FONT_SEMI_BOLD
+													: FONT_REGULAR
+											}
+											styles={styles.serviceReferenceTxt}
+										/>
+									</Pressable>
+								))}
+							</View>
+						</View>
+						<View>
+							<CustomText
 								message='Dịch vụ'
 								variant={FONT_BOLD}
 								styles={styles.informationLabel}
@@ -327,7 +370,7 @@ const FormFirstSection = (props: IFormProps) => {
 								)}
 							/>
 						</View>
-						<View style={styles.informationContainer}>
+						<View style={styles.dateContainer}>
 							<View>
 								<CustomText
 									message='Ngày hẹn'
@@ -339,8 +382,12 @@ const FormFirstSection = (props: IFormProps) => {
 									style={[styles.informationInput, styles.petPickerBtn]}
 								>
 									<CustomText
-										message={formatVietnameseDate(selectedDate)}
-										variant={FONT_BOLD}
+										message={
+											isDateEditted
+												? formatVietnameseDate(selectedDate)
+												: 'Chọn ngày'
+										}
+										variant={FONT_SEMI_BOLD}
 										styles={styles.petPickerTxt}
 									/>
 									<Icon
@@ -361,8 +408,12 @@ const FormFirstSection = (props: IFormProps) => {
 									style={[styles.informationInput, styles.petPickerBtn]}
 								>
 									<CustomText
-										message={formatTime(selectedDate)}
-										variant={FONT_BOLD}
+										message={
+											isDateEditted
+												? formatTime(selectedDate)
+												: 'Chọn giờ'
+										}
+										variant={FONT_SEMI_BOLD}
 										styles={styles.petPickerTxt}
 									/>
 									<Icon
@@ -432,7 +483,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		rowGap: hp(2),
 	},
-	informationContainer: {
+	dateContainer: {
 		width: '100%',
 		display: 'flex',
 		flexDirection: 'row',
@@ -447,12 +498,13 @@ const styles = StyleSheet.create({
 		letterSpacing: 0.5,
 		marginBottom: hp(0.5),
 		marginLeft: wp(4),
+		color: 'gray',
 	},
 	informationInput: {
 		width: '100%',
 		borderWidth: 1,
 		borderColor: 'gray',
-		borderRadius: 5,
+		borderRadius: 50,
 		paddingRight: wp(2),
 		fontFamily: 'Baloo 2 Regular',
 		paddingLeft: wp(5),
@@ -503,14 +555,15 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	selectedStyle: {
+		minWidth: '46%',
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 5,
+		borderRadius: 50,
 		backgroundColor: 'white',
 		shadowColor: '#000',
 		marginTop: 8,
-		marginRight: 12,
+		marginRight: wp(2),
 		paddingHorizontal: 12,
 		paddingVertical: 8,
 		shadowOffset: {
@@ -524,6 +577,25 @@ const styles = StyleSheet.create({
 	textSelectedStyle: {
 		marginRight: 5,
 		fontSize: 16,
+	},
+	serviceReferenceContainer: {
+		width: '100%',
+		paddingHorizontal: wp(4),
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	serviceReferenceContent: {
+		width: '50%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
+		alignItems: 'center',
+	},
+	serviceReferenceTxt: {
+		fontSize: TEXT_PRIMARY,
+		marginLeft: wp(2),
 	},
 });
 
