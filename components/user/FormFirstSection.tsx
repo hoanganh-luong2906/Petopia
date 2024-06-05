@@ -1,7 +1,10 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
 	DateTimePickerAndroid,
 	DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
 import {
 	Pressable,
 	ScrollView,
@@ -10,12 +13,13 @@ import {
 	TouchableOpacity,
 	View,
 } from 'react-native';
+import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
-import PetPickerModal from '../../components/user/PetPickerModal';
 import {
 	API_URL,
 	FONT_BOLD,
@@ -26,13 +30,7 @@ import {
 	IPet,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
-	TEXT_SECONDARY,
 } from '../../utils/Types';
-import { useCallback, useEffect, useState } from 'react';
-import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
-import Icon from 'react-native-vector-icons/Ionicons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from '@react-navigation/native';
 
 interface IFormProps {
 	selectedDate: Date;
@@ -128,7 +126,7 @@ const FormFirstSection = (props: IFormProps) => {
 			value: selectedDate,
 			onChange: handleChangeDate,
 			mode: currentMode,
-			display: 'default',
+			display: 'spinner',
 			is24Hour: false,
 			minimumDate: new Date(),
 			timeZoneName: 'Asia/Ho_Chi_Minh',
