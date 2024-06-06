@@ -6,7 +6,14 @@ import {
 	View,
 } from 'react-native';
 import CustomText from '../CustomText';
-import { FONT_BOLD, FONT_SEMI_BOLD, IService, IServiceCenter } from '../../utils/Types';
+import {
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	FONT_BOLD,
+	FONT_SEMI_BOLD,
+	IService,
+	IServiceCenter,
+} from '../../utils/Constants';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -33,7 +40,7 @@ const renderCategoryHeader = ({ title }: { title: string }) => (
 			}
 		>
 			<LinearGradient
-				colors={['#F4A905', '#FBE437']}
+				colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 				start={{ x: 0, y: 1 }}
 				end={{ x: 0, y: 0 }}
 				style={{ width: '100%', height: '100%' }}

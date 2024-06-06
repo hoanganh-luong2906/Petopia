@@ -2,7 +2,12 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { Pressable, StyleSheet, View } from 'react-native';
 import CustomText from './CustomText';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FONT_BOLD } from '../utils/Types';
+import {
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	COLOR_THIRDARY,
+	FONT_BOLD,
+} from '../utils/Constants';
 import { Dispatch, SetStateAction } from 'react';
 import {
 	heightPercentageToDP as hp,
@@ -28,7 +33,7 @@ const TabSelector = ({
 		<Pressable
 			style={[
 				styles.tabTitleContainer,
-				focusedTab === index && { backgroundColor: '#FFFCE8' },
+				focusedTab === index && { backgroundColor: COLOR_THIRDARY },
 				{ width: `${100 / totalTabs}%` },
 			]}
 			onPress={() => setFocusedTab(index)}
@@ -46,7 +51,9 @@ const TabSelector = ({
 			>
 				<LinearGradient
 					colors={
-						focusedTab === index ? ['#F4A905', '#FBE437'] : ['gray', 'gray']
+						focusedTab === index
+							? [COLOR_PRIMARY, COLOR_SECONDARY]
+							: ['gray', 'gray']
 					}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 0 }}

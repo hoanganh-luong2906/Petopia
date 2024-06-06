@@ -1,7 +1,14 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD, IAppointment } from '../../utils/Types';
+import {
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	FONT_BOLD,
+	FONT_REGULAR,
+	FONT_SEMI_BOLD,
+	IAppointment,
+} from '../../utils/Constants';
 import CustomText from '../CustomText';
 import {
 	heightPercentageToDP as hp,
@@ -51,7 +58,7 @@ const AppointmentContent = ({
 			>
 				<View style={styles.spot}>
 					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
+						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={styles.spot}
@@ -59,7 +66,7 @@ const AppointmentContent = ({
 						<View style={styles.spot}>
 							{index === 0 && (
 								<LinearGradient
-									colors={['#F4A905', '#FBE437']}
+									colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 									start={{ x: 0, y: 0 }}
 									end={{ x: 1, y: 0 }}
 									style={styles.spot}
@@ -72,7 +79,7 @@ const AppointmentContent = ({
 			<View style={styles.summaryContainer}>
 				{index === 0 && (
 					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
+						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 						start={{ x: 0, y: 1 }}
 						end={{ x: 0, y: 0 }}
 						style={styles.linearSummaryContent}

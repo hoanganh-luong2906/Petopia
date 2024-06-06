@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
-import { FONT_BOLD } from '../../utils/Types';
+import { FONT_BOLD } from '../../utils/Constants';
 import { useState } from 'react';
 import TabSelector from '../../components/TabSelector';
 import {

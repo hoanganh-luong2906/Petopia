@@ -12,6 +12,7 @@ import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import { COLOR_GRAY, COLOR_PRIMARY, COLOR_SECONDARY } from '../utils/Constants';
 
 const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 	const dispatch: RootDispatch = useRootDispatch();
@@ -38,7 +39,7 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					maskElement={<Icon name='search' size={25} color={'black'} />}
 				>
 					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
+						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={{ width: '100%', height: '100%' }}
@@ -64,7 +65,7 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					maskElement={<Icon name='qr-code' size={25} color={'black'} />}
 				>
 					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
+						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 0, y: 1 }}
 						style={{ width: '100%', height: '100%' }}
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
 	},
 	searchInput: {
 		width: '100%',
-		backgroundColor: '#F3F5F7',
+		backgroundColor: COLOR_GRAY,
 		marginVertical: hp(1.5),
 		paddingVertical: hp(1),
 		paddingRight: wp(10),
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
 		right: '5%',
 	},
 	btnContainer: {
-		backgroundColor: '#F3F5F7',
+		backgroundColor: COLOR_GRAY,
 		padding: wp(2.5),
 		borderRadius: 30,
 		display: 'flex',

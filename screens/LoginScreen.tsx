@@ -11,7 +11,15 @@ import UserData from '../data/UserData.json';
 import { login } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
 import { useRootDispatch } from '../redux/hooks';
-import { API_URL, FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD, IUser } from '../utils/Types';
+import {
+	API_URL,
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	FONT_BOLD,
+	FONT_REGULAR,
+	FONT_SEMI_BOLD,
+	IUser,
+} from '../utils/Constants';
 import {
 	widthPercentageToDP as wp,
 	heightPercentageToDP as hp,
@@ -170,7 +178,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 							colors={
 								isRecentPushed
 									? ['#cfd0d1', '#cfd0d1']
-									: ['#F4A905', '#FBE437']
+									: [COLOR_PRIMARY, COLOR_SECONDARY]
 							}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
@@ -220,7 +228,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 								}
 							>
 								<LinearGradient
-									colors={['#F4A905', '#FBE437']}
+									colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 									start={{ x: 0, y: 0 }}
 									end={{ x: 0, y: 1 }}
 									style={styles.gradientDecorator}

@@ -5,6 +5,7 @@ import UserCategoryScreen from '../screens/user/UserCategoryScreen';
 import UserNotificationScreen from '../screens/user/UserNotificationScreen';
 import UserProfileScreen from '../screens/user/UserProfileScreen';
 import SearchBarComponent from '../components/SearchBarComponent';
+import { COLOR_PRIMARY } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ const UserNavigation = () => {
 				header: (props) => <SearchBarComponent />,
 				// headerShown: false,
 				tabBarShowLabel: false,
-				tabBarActiveTintColor: '#F4A905',
+				tabBarActiveTintColor: COLOR_PRIMARY,
 			}}
 		>
 			<Tab.Screen

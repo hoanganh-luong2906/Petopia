@@ -6,11 +6,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
 import {
 	API_URL,
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	IAppointment,
 	IPetHealthHistory,
-} from '../../utils/Types';
+} from '../../utils/Constants';
 import CustomText from '../CustomText';
 import AppointmentContent from './AppointmentContent';
 import {
@@ -136,7 +138,7 @@ export const PetProfile = ({ petId }: { petId: number }) => {
 				style={styles.headerLinearDecorator}
 			>
 				<LinearGradient
-					colors={['#F4A905', '#FBE437']}
+					colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 0 }}
 					style={styles.headerDecoratorContainer}
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
 		left: wp(24),
 		width: wp(1),
 		height: 1000,
-		backgroundColor: '#F4A905',
+		backgroundColor: COLOR_PRIMARY,
 		zIndex: -1,
 	},
 	labelContainer: {

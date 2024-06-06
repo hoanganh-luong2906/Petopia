@@ -11,7 +11,14 @@ import {
 	View,
 } from 'react-native';
 import CustomText from '../CustomText';
-import { FONT_BOLD, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
+import {
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	COLOR_THIRDARY,
+	FONT_BOLD,
+	FONT_SEMI_BOLD,
+	IPet,
+} from '../../utils/Constants';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -40,7 +47,7 @@ const PetPickerModal = ({
 		<Pressable
 			style={[
 				styles.petPickerBtn,
-				selectedPet.id === pet.id && { backgroundColor: '#FFFCE8' },
+				selectedPet.id === pet.id && { backgroundColor: COLOR_THIRDARY },
 			]}
 			onPress={() => {
 				setSelectedPet(pet);
@@ -59,7 +66,7 @@ const PetPickerModal = ({
 					style={styles.decoratorContainer}
 				>
 					<LinearGradient
-						colors={['#F4A905', '#FBE437']}
+						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={{ width: '100%', height: '100%' }}

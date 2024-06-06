@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
 import TabSelector from '../../components/TabSelector';
-import { FONT_SEMI_BOLD } from '../../utils/Types';
+import { FONT_SEMI_BOLD } from '../../utils/Constants';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
