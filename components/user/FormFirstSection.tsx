@@ -4,7 +4,8 @@ import {
 	DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useEffect, useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
 	Pressable,
 	ScrollView,
@@ -22,6 +23,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
 import {
 	API_URL,
+	COLOR_GRAY,
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	COLOR_THIRDARY,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
@@ -30,7 +35,7 @@ import {
 	IPet,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
-} from '../../utils/Types';
+} from '../../utils/Constants';
 
 interface IFormProps {
 	selectedDate: Date;
@@ -48,6 +53,8 @@ interface IFormProps {
 	selectedPet: number;
 	setSelectedPet: React.Dispatch<React.SetStateAction<number>>;
 	center: { centerData: ICenterDetail; centerServiceList: ICenterServiceDetail[] };
+	handleSubmit: () => Promise<any>;
+	setServices: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 interface IDropdownOption {
@@ -97,6 +104,8 @@ const FormFirstSection = (props: IFormProps) => {
 		setSelectedDate,
 		setSelectedPet,
 		center,
+		handleSubmit,
+		setServices,
 	}: IFormProps = props;
 
 	const [selectedPetDropdown, setSelectedPetDropdown] = useState<IDropdownOption>(
@@ -109,6 +118,7 @@ const FormFirstSection = (props: IFormProps) => {
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
 	const [isDateEditted, setIsDateEditted] = useState<boolean>(false);
 	const [selectedServicePreference, setSelectedServicePreference] = useState<number>(0);
+	const [isRendered, setIsRendered] = useState<boolean>(false);
 
 	const handleChangeDate = (
 		event: DateTimePickerEvent,
@@ -116,10 +126,24 @@ const FormFirstSection = (props: IFormProps) => {
 	) => {
 		const currentDate = selectedDate;
 		setSelectedDate(currentDate ?? new Date());
-		if (!isDateEditted) {
-			setIsDateEditted(true);
-		}
 	};
+
+	useFocusEffect(
+		useCallback(() => {
+			if (!isDateEditted && isRendered) {
+				setIsDateEditted(true);
+			}
+			setIsRendered(true);
+		}, [selectedDate])
+	);
+
+	useFocusEffect(
+		useCallback(() => {
+			if (selectedServices.length > 0) {
+				setServices(selectedServices.map((service) => parseInt(service)));
+			}
+		}, [selectedServices])
+	);
 
 	const showDateMode = (currentMode: any) => {
 		DateTimePickerAndroid.open({
@@ -141,19 +165,6 @@ const FormFirstSection = (props: IFormProps) => {
 
 	const showTimepicker = () => {
 		showDateMode('time');
-	};
-
-	const renderItem = (item: IDropdownOption) => {
-		return (
-			<View style={styles.item}>
-				<CustomText
-					message={item.label}
-					styles={styles.selectedTextStyle}
-					variant={FONT_SEMI_BOLD}
-				/>
-				<Icon name='close-circle-outline' size={TEXT_PRIMARY} color='black' />
-			</View>
-		);
 	};
 
 	useEffect(() => {
@@ -204,11 +215,16 @@ const FormFirstSection = (props: IFormProps) => {
 	);
 
 	return (
-		<View style={styles.container}>
+		<LinearGradient
+			colors={[COLOR_SECONDARY, COLOR_THIRDARY]}
+			start={[0, 0]}
+			end={[0, 1]}
+			style={styles.container}
+		>
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={styles.formContainer}>
 					<CustomText
-						message={'Thông tin cá nhân'}
+						message={'Thông tin đăng ký'}
 						styles={styles.formHeaderText}
 						variant={FONT_BOLD}
 					/>
@@ -439,8 +455,38 @@ const FormFirstSection = (props: IFormProps) => {
 						</View>
 					</View>
 				</View>
+				<View style={styles.btnContainer}>
+					<Pressable style={styles.functionBtn}>
+						<LinearGradient
+							colors={[COLOR_GRAY, COLOR_GRAY]}
+							start={[0, 0]}
+							end={[1, 0]}
+							style={styles.btnDecorator}
+						>
+							<CustomText
+								message='Hủy bỏ'
+								styles={styles.btnText}
+								variant={FONT_BOLD}
+							/>
+						</LinearGradient>
+					</Pressable>
+					<Pressable style={styles.functionBtn} onPress={handleSubmit}>
+						<LinearGradient
+							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+							start={[0, 0]}
+							end={[1, 0]}
+							style={styles.btnDecorator}
+						>
+							<CustomText
+								message='Đăng ký'
+								styles={[styles.btnText, { color: 'white' }]}
+								variant={FONT_BOLD}
+							/>
+						</LinearGradient>
+					</Pressable>
+				</View>
 			</ScrollView>
-		</View>
+		</LinearGradient>
 	);
 };
 
@@ -454,22 +500,18 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 	},
-	scrollContainer: {
-		width: '100%',
-		height: '100%',
-	},
 	formContainer: {
 		flex: 1,
 		width: wp(95),
 		height: 'auto',
 		marginHorizontal: wp(3),
-		marginVertical: hp(5),
+		marginVertical: hp(2),
 		backgroundColor: 'white',
 		borderRadius: 10,
 		padding: wp(3.5),
 		paddingVertical: wp(4),
 		rowGap: hp(2),
-		elevation: 5,
+		elevation: 2,
 		overflow: 'hidden',
 	},
 	formHeaderText: {
@@ -528,8 +570,8 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: 'gray',
 		fontSize: TEXT_PRIMARY,
-		borderRadius: 5,
-		paddingHorizontal: wp(2),
+		borderRadius: 20,
+		paddingHorizontal: wp(4),
 		paddingVertical: 10,
 		textAlignVertical: 'top',
 	},
@@ -594,6 +636,33 @@ const styles = StyleSheet.create({
 	serviceReferenceTxt: {
 		fontSize: TEXT_PRIMARY,
 		marginLeft: wp(2),
+	},
+	btnContainer: {
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+		paddingHorizontal: wp(3),
+		marginBottom: hp(2),
+	},
+	functionBtn: {
+		width: wp(30),
+		height: hp(5),
+		overflow: 'hidden',
+		borderRadius: 50,
+		marginLeft: wp(2),
+	},
+	btnDecorator: {
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	btnText: {
+		fontSize: TEXT_PRIMARY,
 	},
 });
 

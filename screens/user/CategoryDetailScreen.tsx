@@ -24,7 +24,7 @@ import {
 	FONT_SEMI_BOLD,
 	ICenterDetail,
 	ICenterServiceDetail,
-} from '../../utils/Types';
+} from '../../utils/Constants';
 
 interface ICategoryDetailProps {
 	route: RouteProp<any, 'category-detail'>;
@@ -186,7 +186,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 				style={styles.bookingContainer}
 				onPress={() =>
 					navigation.navigate('register-appointment', {
-						data: { centerData, centerServiceList },
+						data: { centerData, centerServiceList, centerId: data?.id ?? 0 },
 					})
 				}
 			>

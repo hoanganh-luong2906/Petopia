@@ -9,7 +9,7 @@ import { useRootDispatch } from '../redux/hooks';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
-import { IUser } from '../utils/Types';
+import { IUser } from '../utils/Constants';
 import AdminNavigation from './AdminNavigation';
 import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';

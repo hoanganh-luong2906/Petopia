@@ -8,7 +8,7 @@ import {
 import TabSelector from '../../components/TabSelector';
 import CategoryContent from '../../components/user/CategoryContent';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { API_URL } from '../../utils/Types';
+import { API_URL } from '../../utils/Constants';
 
 interface IProcessData {
 	title: string;

@@ -8,16 +8,41 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
-import { FONT_BOLD, IPet } from '../../utils/Types';
+import {
+	API_URL,
+	FONT_BOLD,
+	ICenterDetail,
+	ICenterServiceDetail,
+	IPet,
+} from '../../utils/Constants';
 import FormFirstSection from '../../components/user/FormFirstSection';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IRegisterAppointmentProps {
 	route: RouteProp<any, 'register-appointment'>;
 	navigation: NativeStackNavigationProp<any, 'register-appointment'>;
 }
 
+interface IFormBody {
+	petId: number;
+	centerId: number;
+	substituteName?: string;
+	substitutePhone?: string;
+	extraInformation: string;
+	servicePlace: string;
+	phone: string;
+	dateTime: string;
+	serviceId: number[];
+}
+
+interface IFormParams {
+	centerData: ICenterDetail;
+	centerServiceList: ICenterServiceDetail[];
+	centerId: number;
+}
+
 const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentProps) => {
-	const data = route.params?.data ?? null;
+	const data: IFormParams = route.params?.data ?? null;
 	const [isVisible, setVisible] = useState<boolean>(false);
 	const [selectedPet, setSelectedPet] = useState<number>(0);
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -25,6 +50,24 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 	const [phoneNumber, setPhoneNumber] = useState<string>('');
 	const [address, setAddress] = useState<string>('');
 	const [note, setNote] = useState<string>('');
+	const [services, setServices] = useState<number[]>([]);
+
+	const handleSubmitForm = async () => {
+		const api: string = process.env.REACT_API_URL ?? API_URL;
+		const token: string = (await AsyncStorage.getItem('token')) ?? '';
+		const requestBody: IFormBody = {
+			petId: selectedPet,
+			centerId: data.centerId,
+			substituteName: fullName,
+			substitutePhone: phoneNumber,
+			extraInformation: note,
+			servicePlace: data.centerData.address,
+			phone: phoneNumber,
+			dateTime: selectedDate.toISOString(),
+			serviceId: services,
+		};
+		console.log(JSON.stringify(requestBody, null, 2));
+	};
 
 	return (
 		<View style={styles.container}>
@@ -54,6 +97,8 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 				setSelectedDate={setSelectedDate}
 				setSelectedPet={setSelectedPet}
 				center={data}
+				handleSubmit={handleSubmitForm}
+				setServices={setServices}
 			/>
 		</View>
 	);

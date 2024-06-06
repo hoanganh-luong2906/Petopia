@@ -1,7 +1,13 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import CustomText from '../components/CustomText';
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMI_BOLD } from '../utils/Types';
+import {
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	FONT_BOLD,
+	FONT_REGULAR,
+	FONT_SEMI_BOLD,
+} from '../utils/Constants';
 import { useState } from 'react';
 import MaskedView from '@react-native-masked-view/masked-view';
 import LottieView from 'lottie-react-native';
@@ -89,7 +95,7 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 						disabled={isRecentPushed}
 					>
 						<LinearGradient
-							colors={['#F4A905', '#FBE437']}
+							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
 							style={styles.gradientRegisterDecorator}
@@ -124,7 +130,7 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 								}
 							>
 								<LinearGradient
-									colors={['#F4A905', '#FBE437']}
+									colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 									start={{ x: 0, y: 0 }}
 									end={{ x: 0, y: 1 }}
 									style={styles.gradientDecorator}

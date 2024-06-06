@@ -8,7 +8,13 @@ import TabSelector from '../../components/TabSelector';
 import PetPickerModal from '../../components/user/PetPickerModal';
 import PetProfile from '../../components/user/PetProfile';
 import UserProfile from '../../components/user/UserProfile';
-import { API_URL, FONT_SEMI_BOLD, IPet } from '../../utils/Types';
+import {
+	API_URL,
+	COLOR_PRIMARY,
+	COLOR_SECONDARY,
+	FONT_SEMI_BOLD,
+	IPet,
+} from '../../utils/Constants';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
@@ -74,7 +80,7 @@ const UserProfileScreen = () => {
 						}}
 					>
 						<LinearGradient
-							colors={['#F4A905', '#FBE437']}
+							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
 							style={styles.petPickerDecorator}

@@ -9,6 +9,11 @@ export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
 
+export const COLOR_PRIMARY = '#F4A905';
+export const COLOR_SECONDARY = '#FBE437';
+export const COLOR_THIRDARY = '#FFFCE8';
+export const COLOR_GRAY = '#EDEDED';
+
 export const API_URL = 'https://petopia-4mv2.onrender.com';
 
 export interface IUser {
