@@ -22,6 +22,8 @@ export interface IUser {
 	email: string;
 	role: string;
 	avatar: string;
+	background: string;
+	address: string;
 }
 
 export interface IUserProfile {

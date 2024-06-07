@@ -73,18 +73,6 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 					);
 					setErrorMsg(errorData?.message ?? 'Email hoặc mật khẩu không đúng');
 				}
-			} else {
-				// Mock data
-				const users = UserData;
-				user =
-					users.find((user) => {
-						if (user.email === email && user.password === password) {
-							const existingUser: IUser = { ...user };
-							token = user.token;
-							return existingUser;
-						}
-						return null;
-					}) ?? ({} as IUser);
 			}
 			console.log('User: ' + JSON.stringify(user, null, 2));
 			console.log('Token: ' + token);

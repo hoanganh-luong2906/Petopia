@@ -33,6 +33,7 @@ import {
 	ICenterDetail,
 	ICenterServiceDetail,
 	IPet,
+	IUser,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
@@ -127,6 +128,17 @@ const FormFirstSection = (props: IFormProps) => {
 		const currentDate = selectedDate;
 		setSelectedDate(currentDate ?? new Date());
 	};
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const userData: unknown = await AsyncStorage.getItem('user');
+			const validUser: IUser = JSON.parse(userData as string) as IUser;
+			if (validUser) {
+				setFullName(validUser.name);
+			}
+		};
+		fetchData();
+	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
