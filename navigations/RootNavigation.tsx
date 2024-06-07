@@ -26,6 +26,8 @@ const loadState = async () => {
 			role: '',
 			avatar: '',
 			status: '',
+			background: '',
+			address: '',
 		},
 		isLoggedIn: false,
 	};
