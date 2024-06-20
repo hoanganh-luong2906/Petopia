@@ -114,7 +114,8 @@ export interface ICenterDetail {
 
 export interface ICenterServiceDetail {
 	id: number;
-	serviceName: string;
-	servicePrice: number;
-	serviceType: string;
+	name: string;
+	price: number;
+	type: string;
+	onSite: boolean;
 }
