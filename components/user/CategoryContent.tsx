@@ -1,11 +1,11 @@
+import MaskedView from '@react-native-masked-view/masked-view';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Image, Pressable, SectionList, StyleSheet, View } from 'react-native';
 import {
-	Pressable,
-	SectionList,
-	SectionListComponent,
-	StyleSheet,
-	View,
-} from 'react-native';
-import CustomText from '../CustomText';
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import {
 	COLOR_PRIMARY,
 	COLOR_SECONDARY,
@@ -14,13 +14,7 @@ import {
 	IService,
 	IServiceCenter,
 } from '../../utils/Constants';
-import MaskedView from '@react-native-masked-view/masked-view';
-import { LinearGradient } from 'expo-linear-gradient';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import CustomText from '../CustomText';
 
 interface ICategoryContentProperties {
 	data: { title: string; data: Object[] }[];
@@ -63,24 +57,38 @@ const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
 		index: number;
 	}) => (
 		<View key={index}>
-			<Pressable
-				onPress={() =>
-					navigation.navigate('category-detail', {
-						data: item,
-						isService: 'serviceName' in item,
-					})
-				}
-			>
-				<CustomText
-					message={
-						'serviceName' in item
-							? (item as IService).serviceName
-							: (item as IServiceCenter).name
+			{!('serviceName' in item) ? (
+				<Pressable
+					onPress={() =>
+						navigation.navigate('category-detail', {
+							data: item,
+							isService: 'serviceName' in item,
+						})
 					}
-					styles={{}}
-					variant={FONT_BOLD}
-				/>
-			</Pressable>
+				>
+					{/* <Image src={}/> */}
+					<CustomText
+						message={(item as IServiceCenter).name}
+						styles={{}}
+						variant={FONT_BOLD}
+					/>
+				</Pressable>
+			) : (
+				<Pressable
+					onPress={() =>
+						navigation.navigate('category-detail', {
+							data: item,
+							isService: 'serviceName' in item,
+						})
+					}
+				>
+					<CustomText
+						message={(item as IService).serviceName}
+						styles={{}}
+						variant={FONT_BOLD}
+					/>
+				</Pressable>
+			)}
 		</View>
 	);
 

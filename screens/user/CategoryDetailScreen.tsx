@@ -61,7 +61,7 @@ const renderItem = (item: ICenterServiceDetail) => {
 			/>
 			<CustomText
 				numberOfLines={2}
-				message={item.serviceName}
+				message={item.name}
 				styles={[styles.servicesTxt]}
 				variant={FONT_REGULAR}
 			/>
@@ -159,12 +159,11 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 				let categories: Set<string> = new Set<string>();
 				let serviceList: IServiceList[] = [];
 				centerServiceList.map((service: ICenterServiceDetail) => {
-					categories.add(service.serviceType);
+					categories.add(service.type);
 				});
 				categories.forEach((category: string) => {
 					let services: ICenterServiceDetail[] = centerServiceList.filter(
-						(service: ICenterServiceDetail) =>
-							service.serviceType === category
+						(service: ICenterServiceDetail) => service.type === category
 					);
 					serviceList.push({ title: category, data: services });
 				});

@@ -37,6 +37,7 @@ import {
 	TEXT_LARGE,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface IFormProps {
 	selectedDate: Date;
@@ -45,17 +46,18 @@ interface IFormProps {
 	setFullName: React.Dispatch<React.SetStateAction<string>>;
 	phoneNumber: string;
 	setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-	address: string;
-	setAddress: React.Dispatch<React.SetStateAction<string>>;
 	note: string;
 	setNote: React.Dispatch<React.SetStateAction<string>>;
-	isVisible: boolean;
-	setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 	selectedPet: number;
 	setSelectedPet: React.Dispatch<React.SetStateAction<number>>;
 	center: { centerData: ICenterDetail; centerServiceList: ICenterServiceDetail[] };
 	handleSubmit: () => Promise<any>;
 	setServices: React.Dispatch<React.SetStateAction<number[]>>;
+	onSite: boolean;
+	setOnsite: React.Dispatch<React.SetStateAction<boolean>>;
+	haveSubstitute: boolean;
+	setSubstitute: React.Dispatch<React.SetStateAction<boolean>>;
+	navigation: NativeStackNavigationProp<any, 'register-appointment'>;
 }
 
 interface IDropdownOption {
@@ -94,19 +96,20 @@ const FormFirstSection = (props: IFormProps) => {
 		setFullName,
 		phoneNumber,
 		setPhoneNumber,
-		address,
-		setAddress,
 		note,
 		selectedPet,
 		setNote,
-		isVisible,
-		setVisible,
 		selectedDate,
 		setSelectedDate,
 		setSelectedPet,
 		center,
 		handleSubmit,
 		setServices,
+		onSite,
+		setOnsite,
+		haveSubstitute,
+		setSubstitute,
+		navigation,
 	}: IFormProps = props;
 
 	const [selectedPetDropdown, setSelectedPetDropdown] = useState<IDropdownOption>(
@@ -117,8 +120,10 @@ const FormFirstSection = (props: IFormProps) => {
 	const [serviceData, setServiceData] = useState<IDropdownOption[]>([]);
 	const [petData, setPetData] = useState<IPet[]>([]);
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
-	const [isDateEditted, setIsDateEditted] = useState<boolean>(false);
-	const [selectedServicePreference, setSelectedServicePreference] = useState<number>(0);
+	const [isDateEdited, setIsDateEdited] = useState<boolean>(false);
+	const [selectedServicePreference, setSelectedServicePreference] = useState<number>(
+		onSite ? 0 : 1
+	);
 	const [isRendered, setIsRendered] = useState<boolean>(false);
 
 	const handleChangeDate = (
@@ -129,21 +134,10 @@ const FormFirstSection = (props: IFormProps) => {
 		setSelectedDate(currentDate ?? new Date());
 	};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const userData: unknown = await AsyncStorage.getItem('user');
-			const validUser: IUser = JSON.parse(userData as string) as IUser;
-			if (validUser) {
-				setFullName(validUser.name);
-			}
-		};
-		fetchData();
-	}, []);
-
 	useFocusEffect(
 		useCallback(() => {
-			if (!isDateEditted && isRendered) {
-				setIsDateEditted(true);
+			if (!isDateEdited && isRendered) {
+				setIsDateEdited(true);
 			}
 			setIsRendered(true);
 		}, [selectedDate])
@@ -216,19 +210,21 @@ const FormFirstSection = (props: IFormProps) => {
 				}));
 				setData(tempData);
 			}
-			if (center?.centerServiceList?.length > 0) {
-				const tempData = center.centerServiceList.map((service, index) => ({
-					label: service.serviceName,
-					value: service.id,
-				}));
+			if (center.centerServiceList.length > 0) {
+				const tempData = center.centerServiceList
+					.filter((service) => service.onSite === onSite)
+					.map((service, index) => ({
+						label: service.name,
+						value: service.id,
+					}));
 				setServiceData(tempData);
 			}
-		}, [petData, center])
+		}, [petData, center, selectedServicePreference])
 	);
 
 	return (
 		<LinearGradient
-			colors={[COLOR_SECONDARY, COLOR_THIRDARY]}
+			colors={[COLOR_THIRDARY, COLOR_THIRDARY]}
 			start={[0, 0]}
 			end={[0, 1]}
 			style={styles.container}
@@ -243,46 +239,82 @@ const FormFirstSection = (props: IFormProps) => {
 					<View style={styles.formContent}>
 						<View>
 							<CustomText
-								message='Họ và tên'
+								message='Lựa chọn'
 								variant={FONT_BOLD}
 								styles={styles.informationLabel}
 							/>
-							<TextInput
-								value={fullName}
-								onChangeText={(text) => setFullName(text)}
-								placeholder='VD: Lương Hoàng Anh'
-								numberOfLines={1}
-								style={styles.informationInput}
-							/>
+							<View style={styles.serviceReferenceContainer}>
+								<Pressable
+									onPress={() => {
+										setSubstitute(!haveSubstitute);
+									}}
+									style={styles.serviceReferenceContent}
+								>
+									<Icon
+										name={
+											haveSubstitute
+												? 'radio-button-on'
+												: 'radio-button-off'
+										}
+										size={TEXT_PRIMARY}
+										color={'black'}
+									/>
+									<CustomText
+										message={'Đặt hộ'}
+										variant={
+											haveSubstitute ? FONT_SEMI_BOLD : FONT_REGULAR
+										}
+										styles={styles.serviceReferenceTxt}
+									/>
+								</Pressable>
+							</View>
 						</View>
-						<View>
-							<CustomText
-								message='Số điện thoại'
-								variant={FONT_BOLD}
-								styles={styles.informationLabel}
-							/>
-							<TextInput
-								placeholder='VD: 0222.333.444'
-								value={phoneNumber}
-								onChangeText={(text) => setPhoneNumber(text)}
-								numberOfLines={1}
-								style={styles.informationInput}
-							/>
-						</View>
-						<View>
-							<CustomText
-								message='Địa chỉ'
-								variant={FONT_BOLD}
-								styles={styles.informationLabel}
-							/>
-							<TextInput
-								placeholder='Địa chỉ'
-								value={address}
-								onChangeText={(text) => setAddress(text)}
-								numberOfLines={1}
-								style={styles.informationInput}
-							/>
-						</View>
+						{haveSubstitute && (
+							<>
+								<View>
+									<CustomText
+										message='Họ và tên'
+										variant={FONT_BOLD}
+										styles={styles.informationLabel}
+									/>
+									<TextInput
+										value={fullName}
+										onChangeText={(text) => setFullName(text)}
+										placeholder='VD: Lương Hoàng Anh'
+										numberOfLines={1}
+										style={styles.informationInput}
+									/>
+								</View>
+								<View>
+									<CustomText
+										message='Số điện thoại'
+										variant={FONT_BOLD}
+										styles={styles.informationLabel}
+									/>
+									<TextInput
+										placeholder='VD: 0222.333.444'
+										value={phoneNumber}
+										onChangeText={(text) => setPhoneNumber(text)}
+										numberOfLines={1}
+										style={styles.informationInput}
+									/>
+								</View>
+								{/* <View>
+									<CustomText
+										message='Địa chỉ'
+										variant={FONT_BOLD}
+										styles={styles.informationLabel}
+									/>
+									<TextInput
+										placeholder='Địa chỉ'
+										value={address}
+										onChangeText={(text) => setAddress(text)}
+										numberOfLines={1}
+										style={styles.informationInput}
+									/>
+								</View> */}
+							</>
+						)}
 						<View>
 							<CustomText
 								message='Thú cưng'
@@ -319,7 +351,7 @@ const FormFirstSection = (props: IFormProps) => {
 						</View>
 						<View>
 							<CustomText
-								message='Loại dịch vụ sử dụng'
+								message='Loại dịch vụ'
 								variant={FONT_BOLD}
 								styles={styles.informationLabel}
 							/>
@@ -327,9 +359,10 @@ const FormFirstSection = (props: IFormProps) => {
 								{SERVICE_PREFERENCES.map((service, index) => (
 									<Pressable
 										key={index}
-										onPress={() =>
-											setSelectedServicePreference(index)
-										}
+										onPress={() => {
+											setSelectedServicePreference(index);
+											setOnsite(index === 0);
+										}}
 										style={styles.serviceReferenceContent}
 									>
 										<Icon
@@ -409,7 +442,7 @@ const FormFirstSection = (props: IFormProps) => {
 								>
 									<CustomText
 										message={
-											isDateEditted
+											isDateEdited
 												? formatVietnameseDate(selectedDate)
 												: 'Chọn ngày'
 										}
@@ -435,7 +468,7 @@ const FormFirstSection = (props: IFormProps) => {
 								>
 									<CustomText
 										message={
-											isDateEditted
+											isDateEdited
 												? formatTime(selectedDate)
 												: 'Chọn giờ'
 										}
@@ -468,7 +501,10 @@ const FormFirstSection = (props: IFormProps) => {
 					</View>
 				</View>
 				<View style={styles.btnContainer}>
-					<Pressable style={styles.functionBtn}>
+					<Pressable
+						style={styles.functionBtn}
+						onPress={() => navigation.goBack()}
+					>
 						<LinearGradient
 							colors={[COLOR_GRAY, COLOR_GRAY]}
 							start={[0, 0]}
