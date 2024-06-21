@@ -173,10 +173,11 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					navigation={navigation}
 				/>
 			)}
-			{visibleIndex === 1 && (
+			{visibleIndex === 1 && registerResponse && (
 				<FormSecondSection
 					setVisibleIndex={setVisibleIndex}
-					registeredData={registerResponse ?? ({} as IBookingResponse)}
+					registeredData={registerResponse ?? undefined}
+					onSite={onSite}
 				/>
 			)}
 		</View>

@@ -160,7 +160,6 @@ const FormFirstSection = (props: IFormProps) => {
 			is24Hour: false,
 			minimumDate: new Date(),
 			timeZoneName: 'Asia/Ho_Chi_Minh',
-			timeZoneOffsetInMinutes: 0,
 			maximumDate: MAXIMUM_PREBOOKING_DATE,
 		});
 	};
@@ -552,7 +551,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: wp(95),
 		height: 'auto',
-		marginHorizontal: wp(3),
+		marginHorizontal: wp(2.5),
 		marginVertical: hp(2),
 		backgroundColor: 'white',
 		borderRadius: 10,
