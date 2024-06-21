@@ -1,28 +1,15 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-	DateTimePickerAndroid,
-	DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
-import { useFocusEffect } from '@react-navigation/native';
+import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useCallback, useEffect, useState } from 'react';
-import {
-	Pressable,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from 'react-native';
-import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
+import React, { useEffect } from 'react';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
+import { IBookingResponse } from '../../screens/user/RegisterAppointmentScreen';
 import {
-	API_URL,
 	COLOR_GRAY,
 	COLOR_PRIMARY,
 	COLOR_SECONDARY,
@@ -30,18 +17,15 @@ import {
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
-	ICenterDetail,
-	ICenterServiceDetail,
-	IPet,
-	IUser,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
+	TEXT_SECONDARY,
 } from '../../utils/Constants';
-import { IBookingResponse } from '../../screens/user/RegisterAppointmentScreen';
 
 interface IFormProps {
 	setVisibleIndex: React.Dispatch<React.SetStateAction<number>>;
-	registeredData: IBookingResponse;
+	registeredData: IBookingResponse | undefined;
+	onSite: boolean;
 }
 
 const formatVietnameseDate = (date: Date): string => {
@@ -64,8 +48,24 @@ const formatTime = (date: Date): string => {
 	return `${formattedHours.toString().padStart(2, '0')}:${formattedMinutes} ${ampm}`;
 };
 
+const formatPhoneNumber = (phoneNumber: string): string => {
+	const formattedPhoneNumber = phoneNumber.replace(/(\d{4})(\d{3})(\d{3})/, '$1.$2.$3');
+	return formattedPhoneNumber;
+};
+
+const formatCurrency = (number: number): string => {
+	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
 const FormSecondSection = (props: IFormProps) => {
-	const { setVisibleIndex, registeredData } = props;
+	const { setVisibleIndex, registeredData, onSite } = props;
+
+	useEffect(() => {
+		if (!registeredData) {
+			setVisibleIndex((prev) => prev - 1);
+			alert('Đã có lỗi xảy ra!');
+		}
+	}, []);
 
 	return (
 		<LinearGradient
@@ -81,7 +81,197 @@ const FormSecondSection = (props: IFormProps) => {
 						styles={styles.formHeaderText}
 						variant={FONT_BOLD}
 					/>
-					<View style={styles.formContent}></View>
+					<View style={styles.formContent}>
+						<View style={styles.textContainer}>
+							<CustomText
+								message='Họ và tên : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={
+									registeredData?.substitute[0].name ?? 'Đang cập nhật'
+								}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View style={styles.textContainer}>
+							<CustomText
+								message='Số điện thoại : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={
+									registeredData?.substitute[0].phone
+										? formatPhoneNumber(
+												registeredData?.substitute[0].phone
+										  )
+										: 'Đang cập nhật'
+								}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View>
+							<CustomText
+								message={`Địa chỉ ${
+									onSite ? '(Trung tâm)' : '(Tại nhà)'
+								} : `}
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={registeredData?.location ?? 'Đang cập nhật'}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View style={styles.textContainer}>
+							<CustomText
+								message='Thú cưng : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={registeredData?.petName ?? 'Đang cập nhật'}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View style={styles.textContainer}>
+							<CustomText
+								message='Ngày hẹn : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={`${formatVietnameseDate(
+									new Date(registeredData?.date ?? new Date())
+								)} - ${formatTime(
+									new Date(registeredData?.date ?? new Date())
+								)}`}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View style={styles.textContainer}>
+							<CustomText
+								message='Danh mục : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={registeredData?.type ?? 'Đang cập nhật'}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View>
+							<CustomText
+								message='Dịch vụ sử dụng : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							{registeredData?.services.map((service, index) => (
+								<View
+									key={index}
+									style={{
+										display: 'flex',
+										flexDirection: 'row',
+										alignItems: 'center',
+										justifyContent: 'flex-start',
+										columnGap: wp(2),
+										paddingLeft: wp(2),
+									}}
+								>
+									<Icon name='ellipse' size={TEXT_SECONDARY - 5} />
+									<CustomText
+										key={index}
+										message={service.name}
+										styles={styles.textContent}
+										variant={FONT_SEMI_BOLD}
+									/>
+								</View>
+							))}
+						</View>
+						<View>
+							<CustomText
+								message='Ghi chú thêm : '
+								styles={styles.textLabel}
+								variant={FONT_REGULAR}
+							/>
+							<CustomText
+								message={
+									registeredData?.extraInformation ?? 'Đang cập nhật'
+								}
+								styles={styles.textContent}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						<View style={styles.divider} />
+						<View>
+							<View style={styles.priceContainer}>
+								<CustomText
+									message='Phí dịch vụ : '
+									styles={styles.priceLabel}
+									variant={FONT_REGULAR}
+								/>
+								<CustomText
+									message={`${formatCurrency(
+										registeredData?.fee ?? 0
+									)} VNĐ`}
+									styles={styles.priceValue}
+									variant={FONT_SEMI_BOLD}
+								/>
+							</View>
+							<View style={styles.priceContainer}>
+								<CustomText
+									message='Phí nền tảng : '
+									styles={styles.priceLabel}
+									variant={FONT_REGULAR}
+								/>
+								<CustomText
+									message={`${formatCurrency(
+										((registeredData?.fee ?? 0) * 10) / 100
+									)} VNĐ`}
+									styles={styles.priceValue}
+									variant={FONT_SEMI_BOLD}
+								/>
+							</View>
+							<View style={styles.priceContainer}>
+								<CustomText
+									message='Thành tiền : '
+									styles={styles.priceLabel}
+									variant={FONT_REGULAR}
+								/>
+								<MaskedView
+									style={styles.priceDecorator}
+									maskElement={
+										<CustomText
+											message={`${formatCurrency(
+												((registeredData?.fee ?? 0) * 10) / 100 +
+													(registeredData?.fee ?? 0)
+											)} VNĐ`}
+											styles={[
+												styles.priceValue,
+												{ fontSize: TEXT_PRIMARY + 10 },
+											]}
+											variant={FONT_BOLD}
+										/>
+									}
+								>
+									<LinearGradient
+										colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+										start={[0, 1]}
+										end={[0, 0]}
+										style={{ width: '100%', height: '100%' }}
+									/>
+								</MaskedView>
+							</View>
+						</View>
+					</View>
 				</View>
 				<View style={styles.btnContainer}>
 					<Pressable
@@ -135,7 +325,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: wp(95),
 		height: 'auto',
-		marginHorizontal: wp(3),
+		marginHorizontal: wp(2.5),
 		marginVertical: hp(2),
 		backgroundColor: 'white',
 		borderRadius: 10,
@@ -154,119 +344,50 @@ const styles = StyleSheet.create({
 		width: '100%',
 		rowGap: hp(2),
 	},
-	dateContainer: {
-		width: '100%',
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	informationContent: {
-		width: '48%',
-	},
-	informationLabel: {
-		fontSize: TEXT_PRIMARY,
-		letterSpacing: 0.5,
-		marginBottom: hp(0.5),
-		marginLeft: wp(4),
-		color: 'gray',
-	},
-	informationInput: {
-		width: '100%',
-		borderWidth: 1,
-		borderColor: 'gray',
-		borderRadius: 50,
-		paddingRight: wp(2),
-		fontFamily: 'Baloo 2 Regular',
-		paddingLeft: wp(5),
-		paddingVertical: hp(1.3),
-		fontSize: TEXT_PRIMARY,
-		alignContent: 'center',
-	},
-	petPickerBtn: {
-		width: wp(42),
-		paddingLeft: wp(3),
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	petPickerTxt: {
-		fontSize: TEXT_PRIMARY,
-		letterSpacing: 1,
-	},
-	noteInput: {
-		height: hp(15),
-		width: '100%',
-		borderWidth: 1,
-		borderColor: 'gray',
-		fontSize: TEXT_PRIMARY,
-		borderRadius: 20,
-		paddingHorizontal: wp(4),
-		paddingVertical: 10,
-		textAlignVertical: 'top',
-	},
-	selectedTextStyle: {
-		fontSize: TEXT_PRIMARY,
-		fontFamily: 'Baloo 2 Regular',
-	},
-	inputSearchStyle: {
-		height: hp(5),
-		fontSize: TEXT_PRIMARY,
-		fontFamily: 'Baloo 2 Regular',
-	},
-	regularTxt: {
-		fontFamily: 'Baloo 2 Regular',
-		fontSize: TEXT_PRIMARY,
-	},
-	item: {
-		padding: 17,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	selectedStyle: {
-		minWidth: '46%',
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: 50,
-		backgroundColor: 'white',
-		shadowColor: '#000',
-		marginTop: 8,
-		marginRight: wp(2),
-		paddingHorizontal: 12,
-		paddingVertical: 8,
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 1.41,
-		elevation: 2,
-	},
-	textSelectedStyle: {
-		marginRight: 5,
-		fontSize: 16,
-	},
-	serviceReferenceContainer: {
-		width: '100%',
-		paddingHorizontal: wp(4),
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	serviceReferenceContent: {
-		width: '50%',
+	textContainer: {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		alignItems: 'center',
 	},
-	serviceReferenceTxt: {
+	textLabel: {
 		fontSize: TEXT_PRIMARY,
-		marginLeft: wp(2),
+		color: 'gray',
+	},
+	textContent: {
+		fontSize: TEXT_PRIMARY,
+		letterSpacing: 0.5,
+	},
+	divider: {
+		width: '100%',
+		height: 2,
+		borderTopColor: 'gray',
+		borderTopWidth: 1,
+		marginVertical: hp(1),
+		borderStyle: 'dashed',
+	},
+	priceContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'baseline',
+	},
+	priceLabel: {
+		fontSize: TEXT_PRIMARY,
+		color: 'black',
+	},
+	priceValue: {
+		fontSize: TEXT_PRIMARY + 5,
+		color: 'black',
+		letterSpacing: 1,
+	},
+	priceDecorator: {
+		width: wp(43),
+		height: hp(3.5),
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+		transform: [{ translateX: wp(2.5) }],
 	},
 	btnContainer: {
 		width: '100%',
