@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AdminWaitingListScreen from '../screens/admin/AdminWaitingListScreen';
 import AdminNotificationScreen from '../screens/admin/AdminNotificationScreen';
 import AdminProfileScreen from '../screens/admin/AdminProfileScreen';
+import { COLOR_PRIMARY } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,7 +12,11 @@ const AdminNavigation = () => {
 	return (
 		<Tab.Navigator
 			initialRouteName='admin-dashboard'
-			screenOptions={{ headerShown: false, tabBarShowLabel: false }}
+			screenOptions={{
+				headerShown: false,
+				tabBarShowLabel: false,
+				tabBarActiveTintColor: COLOR_PRIMARY,
+			}}
 		>
 			<Tab.Screen
 				name='admin-dashboard'

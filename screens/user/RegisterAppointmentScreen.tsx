@@ -32,6 +32,7 @@ interface IFormBody {
 	substitutePhone?: string;
 	extraInformation: string;
 	onSite: boolean;
+	slotId: number;
 	phone: string;
 	dateTime: string;
 	serviceId: number[];
@@ -114,10 +115,12 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 			substitutePhone: phoneNumber,
 			extraInformation: note,
 			onSite: onSite,
+			slotId: 1,
 			phone: phoneNumber,
 			dateTime: selectedDate.toISOString(),
 			serviceId: services,
 		};
+		console.log(JSON.stringify(requestBody, null, 2));
 
 		const response = await fetch(`${api}/user/service-appointment-creation`, {
 			method: 'POST',
