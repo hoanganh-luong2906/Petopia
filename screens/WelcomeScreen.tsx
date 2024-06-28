@@ -2,7 +2,7 @@ import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 import CustomText from '../components/CustomText';
-import { COLOR_PRIMARY, FONT_BOLD } from '../utils/Constants';
+import { COLOR_PRIMARY, FONT_BOLD, TEXT_LARGE } from '../utils/Constants';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
 	widthPercentageToDP as wp,
@@ -167,12 +167,12 @@ const styles = StyleSheet.create({
 		width: '100%',
 		textAlign: 'center',
 		color: 'white',
-		fontSize: hp(2.8),
-		marginVertical: hp(5),
+		fontSize: TEXT_LARGE,
+		marginVertical: hp(2),
 	},
 	button: {
 		backgroundColor: COLOR_PRIMARY,
-		paddingVertical: hp(1),
+		paddingVertical: hp(1.5),
 		paddingHorizontal: wp(8),
 		borderRadius: 50,
 		display: 'flex',
@@ -181,11 +181,11 @@ const styles = StyleSheet.create({
 		position: 'relative',
 		overflow: 'hidden',
 		elevation: 2,
-		marginTop: hp(4),
+		marginVertical: hp(4),
 		zIndex: 2,
 	},
 	buttonText: {
-		fontSize: 25,
+		fontSize: TEXT_LARGE,
 		color: 'white',
 		transform: [{ translateY: 2 }],
 		letterSpacing: 1,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
 	buttonEffect: {
 		position: 'absolute',
 		top: -50,
-		left: -wp(185),
+		left: -wp(190),
 		width: '500%',
 		height: '500%',
 		transform: [{ rotate: '-90deg' }],

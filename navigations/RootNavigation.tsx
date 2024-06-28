@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { UserState, initData } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
@@ -19,7 +19,7 @@ import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen
 const Stack = createNativeStackNavigator();
 
 const loadState = async () => {
-	const state: UserState = {
+	var state: UserState = {
 		user: {
 			email: '',
 			name: '',
@@ -30,12 +30,22 @@ const loadState = async () => {
 			address: '',
 		},
 		isLoggedIn: false,
+		isFirstUsed: true,
 	};
 	try {
-		let userDb = await AsyncStorage.getItem('user');
+		var userDb = await AsyncStorage.getItem('user');
+		var isFirstUsed = await AsyncStorage.getItem('isFirstUsed');
+		if (isFirstUsed) {
+			const usageStatus: boolean = JSON.parse(isFirstUsed);
+			if (usageStatus) {
+				await AsyncStorage.setItem('isFirstUsed', JSON.stringify(false));
+				state.isFirstUsed = true;
+			} else {
+				state.isFirstUsed = false;
+			}
+		}
 		if (userDb?.length) {
 			state.user = JSON.parse(userDb) as IUser;
-			state.isLoggedIn = true;
 		}
 	} catch (error: any) {
 		console.log('Error loading user from AsyncStorage: ', error.message);
@@ -49,7 +59,7 @@ const MANAGER_FLOW = ['ADMIN', 'SHOP_OWNER'];
 const VET_FLOW = ['SERVICE_PROVIDER', 'SERVICE_CENTER_MANAGER'];
 
 const RootNavigation = () => {
-	const { user, isLoggedIn } = useSelector((state: any) => state.user);
+	const { user, isLoggedIn, isFirstUsed } = useSelector((state: any) => state.user);
 	const dispatch: RootDispatch = useRootDispatch();
 
 	useEffect(() => {
@@ -62,10 +72,12 @@ const RootNavigation = () => {
 		<NavigationContainer>
 			{!isLoggedIn ? (
 				<Stack.Navigator
-					initialRouteName='welcome'
+					initialRouteName={isFirstUsed ? 'welcome' : 'login'}
 					screenOptions={{ headerShown: false }}
 				>
-					<Stack.Screen name='welcome' component={WelcomeScreen} />
+					{isFirstUsed && (
+						<Stack.Screen name='welcome' component={WelcomeScreen} />
+					)}
 					<Stack.Screen name='login' component={LoginScreen} />
 					<Stack.Screen name='register' component={RegisterScreen} />
 				</Stack.Navigator>

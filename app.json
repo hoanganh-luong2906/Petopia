@@ -2,7 +2,7 @@
 	"expo": {
 		"name": "Petopia_Mobile",
 		"slug": "Petopia_Mobile",
-		"version": "1.0.0",
+		"version": "1.0.1",
 		"orientation": "portrait",
 		"icon": "./assets/images/logo.png",
 		"userInterfaceStyle": "light",
@@ -20,7 +20,8 @@
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "com.hoanganh.luong2906.Petopia_Mobile"
+			"package": "com.hoanganh.luong2906.Petopia_Mobile",
+			"versionCode": 2
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
@@ -40,7 +41,8 @@
 		],
 		"extra": {
 			"eas": {
-				"projectId": "ee768455-c634-4c2f-a826-491c9259314c"
+				"projectId": "ee768455-c634-4c2f-a826-491c9259314c",
+				"versionCode": 2
 			}
 		}
 	}

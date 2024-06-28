@@ -4,6 +4,7 @@ import { IUser } from '../utils/Constants';
 export interface UserState {
 	user: IUser;
 	isLoggedIn: boolean;
+	isFirstUsed: boolean;
 }
 
 const initialState: UserState = {
@@ -17,6 +18,7 @@ const initialState: UserState = {
 		address: '',
 	},
 	isLoggedIn: false,
+	isFirstUsed: true,
 };
 
 const userSlice = createSlice({
@@ -34,6 +36,7 @@ const userSlice = createSlice({
 		initData: (state, action: PayloadAction<UserState>) => {
 			state.user = action.payload.user;
 			state.isLoggedIn = action.payload.isLoggedIn;
+			state.isFirstUsed = action.payload.isFirstUsed;
 		},
 	},
 });
