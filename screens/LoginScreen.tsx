@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../components/CustomText';
 import UserData from '../data/UserData.json';
@@ -19,6 +19,9 @@ import {
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	IUser,
+	TEXT_LARGE,
+	TEXT_PRIMARY,
+	TEXT_SECONDARY,
 } from '../utils/Constants';
 import {
 	widthPercentageToDP as wp,
@@ -188,9 +191,12 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 						<View style={styles.divider}></View>
 					</View>
 					<View style={styles.optionalLoginContainer}>
-						<View style={styles.googleLoginContainer}>
+						<Pressable
+							style={styles.googleLoginContainer}
+							onPress={() => alert('Tính năng hiện chưa khả dụng')}
+						>
 							<Icon name='logo-google' size={40} color='black' />
-						</View>
+						</Pressable>
 					</View>
 
 					<View style={styles.registerContainer}>
@@ -235,7 +241,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 'auto',
 		backgroundColor: 'white',
-		paddingTop: hp(5),
+		paddingTop: hp(3),
 	},
 	animationContainer: {
 		flex: 0.3,
@@ -262,19 +268,20 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 	},
 	loginContainer: {
+		flex: 1,
 		width: '100%',
 		paddingHorizontal: wp(3),
 		height: 'auto',
 	},
 	title: {
-		fontSize: hp(3.8),
-		marginBottom: hp(5),
+		fontSize: TEXT_LARGE + 10,
+		marginVertical: hp(2),
 		width: '100%',
 		textAlign: 'center',
 	},
 	inputContainer: {
 		width: '100%',
-		height: hp(15),
+		height: hp(16),
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
@@ -282,7 +289,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 12,
 		paddingHorizontal: 20,
 		borderRadius: 50,
-		fontSize: hp(2),
+		fontSize: TEXT_PRIMARY,
 		backgroundColor: 'white',
 	},
 	showPasswordBtn: {
@@ -294,7 +301,7 @@ const styles = StyleSheet.create({
 		marginTop: hp(2.5),
 		textAlign: 'left',
 		paddingHorizontal: wp(5),
-		fontSize: hp(1.8),
+		fontSize: TEXT_SECONDARY,
 		color: 'red',
 		fontWeight: '600',
 	},
@@ -309,7 +316,7 @@ const styles = StyleSheet.create({
 		width: '20%',
 		textAlign: 'center',
 		marginVertical: hp(3.5),
-		fontSize: hp(2.3),
+		fontSize: TEXT_PRIMARY,
 		color: 'gray',
 		backgroundColor: 'white',
 		zIndex: 1,
@@ -318,13 +325,13 @@ const styles = StyleSheet.create({
 	divider: {
 		width: '70%',
 		position: 'absolute',
-		top: 45,
+		top: 40,
 		borderTopWidth: 1.5,
 		borderColor: 'gray',
 		zIndex: 0,
 	},
 	loginButton: {
-		height: hp(7.5),
+		height: hp(7),
 		display: 'flex',
 		alignItems: 'center',
 		borderRadius: 50,
@@ -343,7 +350,7 @@ const styles = StyleSheet.create({
 	loginText: {
 		color: 'white',
 		letterSpacing: 1.5,
-		fontSize: 22,
+		fontSize: TEXT_LARGE,
 	},
 	optionalLoginContainer: {
 		width: '100%',
@@ -368,13 +375,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 20,
+		marginTop: hp(6),
 		transform: [{ translateX: 60 }],
 	},
 	registerButton: {
 		display: 'flex',
 		alignItems: 'center',
-		paddingVertical: 13,
+		paddingVertical: 10,
 		paddingHorizontal: 5,
 		flex: 1,
 		justifyContent: 'center',
@@ -384,14 +391,14 @@ const styles = StyleSheet.create({
 	registerText: {
 		color: 'black',
 		letterSpacing: 1,
-		fontSize: 18,
+		fontSize: TEXT_LARGE,
 	},
 	registerHelpText: {
 		color: 'gray',
-		fontSize: 17,
+		fontSize: TEXT_PRIMARY,
 	},
 	registerDecorator: {
-		width: 80,
+		width: 100,
 		flex: 1,
 		flexDirection: 'row',
 		height: '100%',
