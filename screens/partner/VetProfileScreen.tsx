@@ -5,7 +5,7 @@ import { useRootDispatch } from '../../redux/hooks';
 import { logout } from '../../redux/UserSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AdminProfileScreen = () => {
+const VetProfileScreen = () => {
 	const dispatch: RootDispatch = useRootDispatch();
 
 	function handleLogout() {
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default AdminProfileScreen;
+export default VetProfileScreen;

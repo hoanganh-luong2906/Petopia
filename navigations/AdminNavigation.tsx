@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AdminHomeScreen from '../screens/admin/AdminHomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AdminWaitingListScreen from '../screens/admin/AdminWaitingListScreen';
-import AdminNotificationScreen from '../screens/admin/AdminNotificationScreen';
-import AdminProfileScreen from '../screens/admin/AdminProfileScreen';
+import VetWaitingListScreen from '../screens/partner/VetWaitingListScreen';
+import VetServiceManagementScreen from '../screens/partner/VetServiceManagementScreen';
+import VetProfileScreen from '../screens/partner/VetProfileScreen';
 import { COLOR_PRIMARY } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +29,7 @@ const AdminNavigation = () => {
 			/>
 			<Tab.Screen
 				name='admin-waiting-list'
-				component={AdminWaitingListScreen}
+				component={VetWaitingListScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='calendar-number' color={color} size={size} />
@@ -38,7 +38,7 @@ const AdminNavigation = () => {
 			/>
 			<Tab.Screen
 				name='admin-notification'
-				component={AdminNotificationScreen}
+				component={VetServiceManagementScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='notifications' color={color} size={size} />
@@ -47,7 +47,7 @@ const AdminNavigation = () => {
 			/>
 			<Tab.Screen
 				name='admin-profile'
-				component={AdminProfileScreen}
+				component={VetProfileScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon name='person' color={color} size={size} />
