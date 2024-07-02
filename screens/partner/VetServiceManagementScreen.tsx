@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
 
-const AdminWaitingListScreen = () => {
+const VetServiceManagementScreen = () => {
 	return (
 		<View>
 			<CustomText
-				message='This is Admin Waiting List Page'
+				message='This is Admin Home Page'
 				styles={styles.helloText}
 				variant='Medium'
 			/>
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default AdminWaitingListScreen;
+export default VetServiceManagementScreen;

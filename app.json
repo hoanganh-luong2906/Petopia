@@ -1,6 +1,6 @@
 {
 	"expo": {
-		"name": "Petopia_Mobile",
+		"name": "Petopia",
 		"slug": "Petopia_Mobile",
 		"version": "1.0.1",
 		"orientation": "portrait",
@@ -17,14 +17,14 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
+				"foregroundImage": "./assets/logo.png",
 				"backgroundColor": "#ffffff"
 			},
 			"package": "com.hoanganh.luong2906.Petopia_Mobile",
-			"versionCode": 2
+			"versionCode": 3
 		},
 		"web": {
-			"favicon": "./assets/favicon.png"
+			"favicon": "./assets/logo.png"
 		},
 		"plugins": [
 			[
