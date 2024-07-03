@@ -220,7 +220,11 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 						/>
 						<Pressable
 							style={styles.loginButton}
-							onPress={() => navigation.goBack()}
+							onPress={() => {
+								navigation.goBack();
+								setIsRecentPushed(true);
+							}}
+							disabled={isRecentPushed}
 						>
 							<MaskedView
 								style={styles.loginDecorator}

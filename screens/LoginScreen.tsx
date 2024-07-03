@@ -206,7 +206,11 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 						/>
 						<Pressable
 							style={styles.registerButton}
-							onPress={() => navigation.push('register')}
+							onPress={() => {
+								navigation.push('register');
+								setIsRecentPushed(true);
+							}}
+							disabled={isRecentPushed}
 						>
 							<MaskedView
 								style={styles.registerDecorator}
