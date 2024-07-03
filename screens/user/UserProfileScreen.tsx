@@ -57,54 +57,12 @@ const UserProfileScreen = () => {
 	}, []);
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.tabContainer}>
-				{TAB_TITLE.map((title, index) => (
-					<TabSelector
-						key={index}
-						totalTabs={TAB_TITLE.length}
-						title={title}
-						index={index}
-						focusedTab={focusedTab}
-						setFocusedTab={setFocusedTab}
-					/>
-				))}
-			</View>
-			{focusedTab === 0 && <UserProfile />}
-			{focusedTab === 1 && (
-				<View style={{ width: '100%', height: '100%', position: 'relative' }}>
-					<Pressable
-						style={styles.petPickerContainer}
-						onPress={() => {
-							setVisible(true);
-						}}
-					>
-						<LinearGradient
-							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
-							start={{ x: 0, y: 0 }}
-							end={{ x: 1, y: 0 }}
-							style={styles.petPickerDecorator}
-						>
-							<CustomText
-								numberOfLines={1}
-								message={selectedPet.name ?? ''}
-								variant={FONT_SEMI_BOLD}
-								styles={styles.petPickerText}
-							/>
-							<Icon name='ellipsis-vertical' size={20} color='white' />
-						</LinearGradient>
-					</Pressable>
-					{selectedPet?.id && <PetProfile petId={selectedPet.id ?? 0} />}
-				</View>
-			)}
-			<PetPickerModal
-				isVisible={isVisible}
-				setVisible={setVisible}
-				pets={petData}
-				selectedPet={selectedPet}
-				setSelectedPet={setSelectedPet}
-			/>
-		</View>
+		<LinearGradient
+			colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+			style={styles.container}
+		>
+			<View></View>
+		</LinearGradient>
 	);
 };
 
