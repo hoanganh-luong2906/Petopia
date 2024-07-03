@@ -1,4 +1,4 @@
-rootProject.name = 'Petopia_Mobile'
+rootProject.name = 'Petopia'
 
 dependencyResolutionManagement {
   versionCatalogs {
@@ -15,5 +15,4 @@ apply from: new File(["node", "--print", "require.resolve('@react-native-communi
 applyNativeModulesSettingsGradle(settings)
 
 include ':app'
-include ':expo-modules-core'
 includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim()).getParentFile())

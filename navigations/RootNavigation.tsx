@@ -15,6 +15,8 @@ import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';
 import CategoryDetailScreen from '../screens/user/CategoryDetailScreen';
 import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen';
+import UserProfile from '../screens/user/UserProfile';
+import UserPetProfile from '../screens/user/UserPetProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -121,6 +123,14 @@ const RootNavigation = () => {
 							<Stack.Screen
 								name='register-appointment'
 								component={RegisterAppointmentScreen}
+							/>
+							<Stack.Screen
+								name='customer-profile'
+								component={UserProfile}
+							/>
+							<Stack.Screen
+								name='customer-pet-profile'
+								component={UserPetProfile}
 							/>
 						</Stack.Navigator>
 					)}
