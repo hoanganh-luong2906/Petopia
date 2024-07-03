@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { API_URL, FONT_BOLD, IUserProfile } from '../../utils/Constants';
-import CustomText from '../CustomText';
+import CustomText from '../../components/CustomText';
 
 async function isValidImageUrl(url: string): Promise<boolean> {
 	if (!(url.length === 0)) return false;

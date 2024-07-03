@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaskedView from '@react-native-masked-view/masked-view';
-import { useFocusEffect } from '@react-navigation/native';
+import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useCallback, useEffect, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
@@ -13,8 +13,8 @@ import {
 	IAppointment,
 	IPetHealthHistory,
 } from '../../utils/Constants';
-import CustomText from '../CustomText';
-import AppointmentContent from './AppointmentContent';
+import CustomText from '../../components/CustomText';
+import AppointmentContent from '../../components/user/AppointmentContent';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
@@ -31,10 +31,14 @@ interface IRequestBody {
 	petId: number;
 }
 
-export const PetProfile = ({ petId }: { petId: number }) => {
+interface IProps {
+	route: RouteProp<any, 'customer-pet-profile'>;
+}
+export const UserPetProfile = ({ route }: IProps) => {
 	const [processedData, setProcessedData] = useState<IProcessPetData[]>([]);
 	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
 	const sortCriterion = 'date';
+	const petId: number = route.params?.data ?? 0;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -248,4 +252,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default PetProfile;
+export default UserPetProfile;

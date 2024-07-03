@@ -1,28 +1,19 @@
 import MaskedView from '@react-native-masked-view/masked-view';
+import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { RootDispatch } from '../redux/configStore';
-import { useRootDispatch } from '../redux/hooks';
-import { logout } from '../redux/UserSlice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { RootDispatch } from '../redux/configStore';
+import { useRootDispatch } from '../redux/hooks';
 import { COLOR_GRAY, COLOR_PRIMARY, COLOR_SECONDARY } from '../utils/Constants';
 
 const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
-	const dispatch: RootDispatch = useRootDispatch();
 	const [searchText, setSearchText] = useState<string>('');
-
-	function handleLogout() {
-		dispatch(logout());
-		AsyncStorage.removeItem('token');
-		AsyncStorage.removeItem('user');
-	}
 
 	return (
 		<View style={styles.searchContainer}>
@@ -72,9 +63,9 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					/>
 				</MaskedView>
 			</Pressable>
-			<Pressable style={styles.btnContainer} onPress={handleLogout}>
-				<View style={{ transform: [{ translateX: 2 }] }}>
-					<Icon name='log-out-outline' size={25} color={'gray'} />
+			<Pressable style={styles.btnContainer}>
+				<View style={{ transform: [{ translateX: 0 }] }}>
+					<Icon name='notifications-outline' size={25} color={'gray'} />
 				</View>
 			</Pressable>
 		</View>
