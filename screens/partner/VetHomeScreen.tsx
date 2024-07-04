@@ -5,9 +5,9 @@ import {
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
-	COLOR_THIRDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	TEXT_LARGE,
@@ -201,12 +201,12 @@ const AdminHomeScreen = () => {
 						yAxisLabel={'đ'}
 						withVerticalLines={false}
 						chartConfig={{
-							backgroundGradientFrom: COLOR_SECONDARY,
-							backgroundGradientTo: COLOR_THIRDARY,
+							backgroundGradientFrom: COLOR_SECONDARY_200,
+							backgroundGradientTo: COLOR_SECONDARY_LIGHTER,
 							backgroundGradientFromOpacity: 0,
 							backgroundGradientToOpacity: 0,
 							decimalPlaces: 0, // optional, defaults to 2dp
-							color: (opacity = 1) => COLOR_PRIMARY,
+							color: (opacity = 1) => COLOR_PRIMARY_900,
 							style: {
 								borderRadius: 10,
 							},
@@ -226,12 +226,12 @@ const AdminHomeScreen = () => {
 						width={wp(150)}
 						height={hp(20)}
 						chartConfig={{
-							backgroundGradientFrom: COLOR_SECONDARY,
-							backgroundGradientTo: COLOR_THIRDARY,
+							backgroundGradientFrom: COLOR_SECONDARY_200,
+							backgroundGradientTo: COLOR_SECONDARY_LIGHTER,
 							backgroundGradientFromOpacity: 0,
 							backgroundGradientToOpacity: 0,
 							width: wp(60),
-							color: (opacity = 1) => COLOR_PRIMARY,
+							color: (opacity = 1) => COLOR_PRIMARY_900,
 						}}
 						accessor='population'
 						backgroundColor='transparent'

@@ -4,7 +4,7 @@ import VetWaitingListScreen from '../screens/partner/VetWaitingListScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import VetServiceManagementScreen from '../screens/partner/VetServiceManagementScreen';
 import VetProfileScreen from '../screens/partner/VetProfileScreen';
-import { COLOR_PRIMARY } from '../utils/Constants';
+import { COLOR_PRIMARY_900 } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +15,7 @@ const VetNavigation = () => {
 			screenOptions={{
 				headerShown: false,
 				tabBarShowLabel: false,
-				tabBarActiveTintColor: COLOR_PRIMARY,
+				tabBarActiveTintColor: COLOR_PRIMARY_900,
 			}}
 		>
 			<Tab.Screen

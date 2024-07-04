@@ -7,8 +7,8 @@ import {
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	IService,
@@ -34,7 +34,7 @@ const renderCategoryHeader = ({ title }: { title: string }) => (
 			}
 		>
 			<LinearGradient
-				colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+				colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 				start={{ x: 0, y: 1 }}
 				end={{ x: 0, y: 0 }}
 				style={{ width: '100%', height: '100%' }}
