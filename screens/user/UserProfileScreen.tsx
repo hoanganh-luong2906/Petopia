@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
@@ -13,8 +14,11 @@ import { RootDispatch } from '../../redux/configStore';
 import { useRootDispatch } from '../../redux/hooks';
 import {
 	API_URL,
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
+	COLOR_PRIMARY_600,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_400,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_MEDIUM,
 	IPet,
@@ -23,7 +27,11 @@ import {
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
 
-const UserProfileScreen = () => {
+interface IProps {
+	navigation: NativeStackNavigationProp<any, 'user-profile'>;
+}
+
+const UserProfileScreen = ({ navigation }: IProps) => {
 	const [focusedTab, setFocusedTab] = useState<number>(0);
 	const [petData, setPetData] = useState<IPet[]>([]);
 	const [selectedPet, setSelectedPet] = useState<IPet>({} as IPet);
@@ -67,22 +75,48 @@ const UserProfileScreen = () => {
 		fetchData();
 	}, []);
 
-	function handleLogout() {
+	const handleLogout = () => {
 		dispatch(logout());
 		AsyncStorage.removeItem('token');
 		AsyncStorage.removeItem('user');
-	}
+	};
+
+	const handleNotificationClick = () => {
+		alert('This function is not yet implemented. Sitting still for upcoming');
+	};
+
+	const handleSettingClick = () => {
+		alert('This function is not yet implemented. Sitting still for upcoming');
+	};
+
+	const handleUserProfileClick = () => {
+		navigation.navigate('customer-profile');
+	};
+
+	const handleUserPetProfileClick = () => {
+		console.log(selectedPet.id);
+		navigation.navigate('customer-pet-profile', { petId: selectedPet.id });
+	};
+
+	const handleTransactionClick = () => {
+		alert('This function is not yet implemented. Sitting still for upcoming');
+	};
 
 	return (
 		<LinearGradient
-			colors={[COLOR_SECONDARY, COLOR_PRIMARY]}
+			colors={[COLOR_SECONDARY_400, COLOR_SECONDARY_LIGHTER, COLOR_SECONDARY_400]}
+			start={{ x: 0, y: -0.5 }}
+			end={{ x: 1, y: 1 }}
 			style={styles.container}
 		>
 			<View style={styles.functionBtnContainer}>
-				<Pressable style={styles.functionBtnWrapper}>
+				<Pressable
+					style={styles.functionBtnWrapper}
+					onPress={handleNotificationClick}
+				>
 					<Icon name='notifications-outline' size={25} color='gray' />
 				</Pressable>
-				<Pressable style={styles.functionBtnWrapper}>
+				<Pressable style={styles.functionBtnWrapper} onPress={handleSettingClick}>
 					<Icon name='settings-outline' size={25} color='gray' />
 				</Pressable>
 			</View>
@@ -107,7 +141,10 @@ const UserProfileScreen = () => {
 				/>
 				<View style={styles.navigationContainer}>
 					<View style={styles.navigationContent}>
-						<Pressable style={styles.navigationWrapper}>
+						<Pressable
+							style={styles.navigationWrapper}
+							onPress={handleUserProfileClick}
+						>
 							<View style={styles.titleWrapper}>
 								<View style={styles.imageContainer}>
 									<Image
@@ -129,7 +166,10 @@ const UserProfileScreen = () => {
 							/>
 						</Pressable>
 						<View style={styles.divider} />
-						<Pressable style={styles.navigationWrapper}>
+						<Pressable
+							style={styles.navigationWrapper}
+							onPress={handleUserPetProfileClick}
+						>
 							<View style={styles.titleWrapper}>
 								<View style={styles.imageContainer}>
 									<Image
@@ -151,7 +191,10 @@ const UserProfileScreen = () => {
 							/>
 						</Pressable>
 						<View style={styles.divider} />
-						<Pressable style={styles.navigationWrapper}>
+						<Pressable
+							style={styles.navigationWrapper}
+							onPress={handleTransactionClick}
+						>
 							<View style={styles.titleWrapper}>
 								<View style={styles.imageContainer}>
 									<Image
@@ -175,7 +218,7 @@ const UserProfileScreen = () => {
 					</View>
 					<Pressable style={styles.logoutBtn} onPress={handleLogout}>
 						<LinearGradient
-							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+							colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 0, y: 1 }}
 							style={styles.logoutDecorator}
@@ -198,7 +241,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: 'white',
 		paddingTop: hp(7),
-		paddingHorizontal: wp(5),
+		paddingHorizontal: wp(3),
 	},
 	functionBtnContainer: {
 		width: '100%',
@@ -216,7 +259,7 @@ const styles = StyleSheet.create({
 	profileContainer: {
 		width: '100%',
 		backgroundColor: 'white',
-		height: hp(75),
+		height: hp(78),
 		marginTop: hp(6),
 		borderRadius: 20,
 	},
@@ -224,7 +267,7 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: -wp(10),
 		left: wp(50),
-		transform: [{ translateX: -wp(15) }],
+		transform: [{ translateX: -wp(12.5) }],
 		width: wp(20),
 		height: wp(20),
 		overflow: 'hidden',

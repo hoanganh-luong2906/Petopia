@@ -11,9 +11,9 @@ import CustomText from '../../components/CustomText';
 import { IBookingResponse } from '../../screens/user/RegisterAppointmentScreen';
 import {
 	COLOR_GRAY,
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
-	COLOR_THIRDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
@@ -21,11 +21,13 @@ import {
 	TEXT_PRIMARY,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface IFormProps {
 	setVisibleIndex: React.Dispatch<React.SetStateAction<number>>;
 	registeredData: IBookingResponse | undefined;
 	onSite: boolean;
+	navigation: NativeStackNavigationProp<any, 'register-appointment'>;
 }
 
 const formatVietnameseDate = (date: Date): string => {
@@ -58,7 +60,7 @@ const formatCurrency = (number: number): string => {
 };
 
 const FormSecondSection = (props: IFormProps) => {
-	const { setVisibleIndex, registeredData, onSite } = props;
+	const { setVisibleIndex, registeredData, onSite, navigation } = props;
 
 	useEffect(() => {
 		if (!registeredData) {
@@ -67,9 +69,14 @@ const FormSecondSection = (props: IFormProps) => {
 		}
 	}, []);
 
+	const handleCheckoutClick = () => {
+		alert('Thanh toán thành công!');
+		navigation.goBack();
+	};
+
 	return (
 		<LinearGradient
-			colors={[COLOR_THIRDARY, COLOR_THIRDARY]}
+			colors={[COLOR_SECONDARY_LIGHTER, COLOR_SECONDARY_LIGHTER]}
 			start={[0, 0]}
 			end={[0, 1]}
 			style={styles.container}
@@ -263,7 +270,7 @@ const FormSecondSection = (props: IFormProps) => {
 									}
 								>
 									<LinearGradient
-										colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+										colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 										start={[0, 1]}
 										end={[0, 0]}
 										style={{ width: '100%', height: '100%' }}
@@ -291,9 +298,9 @@ const FormSecondSection = (props: IFormProps) => {
 							/>
 						</LinearGradient>
 					</Pressable>
-					<Pressable style={styles.functionBtn} onPress={() => {}}>
+					<Pressable style={styles.functionBtn} onPress={handleCheckoutClick}>
 						<LinearGradient
-							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+							colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 							start={[0, 0]}
 							end={[1, 0]}
 							style={styles.btnDecorator}
@@ -330,7 +337,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderRadius: 10,
 		padding: wp(3.5),
-		paddingVertical: wp(4),
+		paddingTop: hp(2),
+		paddingBottom: hp(5),
 		rowGap: hp(2),
 		elevation: 2,
 		overflow: 'hidden',
@@ -362,7 +370,6 @@ const styles = StyleSheet.create({
 		height: 2,
 		borderTopColor: 'gray',
 		borderTopWidth: 1,
-		marginVertical: hp(1),
 		borderStyle: 'dashed',
 	},
 	priceContainer: {

@@ -3,8 +3,8 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import CustomText from '../components/CustomText';
 import {
 	API_URL,
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
@@ -199,7 +199,7 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 							colors={
 								isRecentPushed || !isFormValid()
 									? ['#cfd0d1', '#cfd0d1']
-									: [COLOR_PRIMARY, COLOR_SECONDARY]
+									: [COLOR_PRIMARY_900, COLOR_SECONDARY_200]
 							}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
@@ -239,7 +239,7 @@ const RegisterScreen = ({ navigation }: NavigationProps) => {
 								}
 							>
 								<LinearGradient
-									colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+									colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 									start={{ x: 0, y: 0 }}
 									end={{ x: 0, y: 1 }}
 									style={styles.gradientDecorator}

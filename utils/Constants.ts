@@ -9,9 +9,14 @@ export const FONT_MEDIUM = 'Medium';
 export const FONT_SEMI_BOLD = 'SemiBold';
 export const FONT_BOLD = 'Bold';
 
-export const COLOR_PRIMARY = '#F4A905';
-export const COLOR_SECONDARY = '#FBE437';
-export const COLOR_THIRDARY = '#FFFCE8';
+export const COLOR_PRIMARY_200 = '#F5B30D';
+export const COLOR_PRIMARY_400 = '#F6BD16';
+export const COLOR_PRIMARY_600 = '#F8C71E';
+export const COLOR_PRIMARY_900 = '#F4A905';
+export const COLOR_SECONDARY_200 = '#FBE437';
+export const COLOR_SECONDARY_400 = '#F9D026';
+export const COLOR_SECONDARY_600 = '#FADA2F';
+export const COLOR_SECONDARY_LIGHTER = '#FFFCE8';
 export const COLOR_GRAY = '#EDEDED';
 
 export const API_URL = 'https://petopia-4mv2.onrender.com';
@@ -118,4 +123,12 @@ export interface ICenterServiceDetail {
 	price: number;
 	type: string;
 	onSite: boolean;
+}
+
+export interface ITimeSlot {
+	id: number;
+	name: string;
+	startTime: string;
+	endTime: string;
+	status: string;
 }

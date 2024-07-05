@@ -14,6 +14,7 @@ import {
 	ICenterDetail,
 	ICenterServiceDetail,
 	IPet,
+	ITimeSlot,
 	IUserProfile,
 } from '../../utils/Constants';
 import FormFirstSection from '../../components/user/FormFirstSection';
@@ -34,7 +35,7 @@ interface IFormBody {
 	onSite: boolean;
 	slotId: number;
 	phone: string;
-	dateTime: string;
+	date: string;
 	serviceId: number[];
 }
 
@@ -66,6 +67,13 @@ export interface IBookingResponse {
 	fee: number;
 }
 
+const formatDate = (date: Date): string => {
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
+};
+
 const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentProps) => {
 	const data: IFormParams = route.params?.data ?? null;
 	const [visibleIndex, setVisibleIndex] = useState<number>(0);
@@ -80,17 +88,31 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 	const [registerResponse, setRegisterResponse] = useState<
 		IBookingResponse | undefined
 	>(undefined);
+	const [centerValidSlots, setCenterValidSlots] = useState<ITimeSlot[]>([]);
+	const [selectedSlot, setSelectedSlot] = useState<number>(0);
 
 	useEffect(() => {
-		const fetchUserData = async () => {
+		const fetchData = async () => {
 			const api: string = process.env.SERVER_API_URL ?? API_URL;
 			const token = (await AsyncStorage.getItem('token')) ?? '';
+			const centerBody = {
+				centerId: data.centerId,
+			};
 
 			const response = await fetch(`${api}/user/user-profile`, {
 				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
+			});
+
+			const centerSlotData = await fetch(`${api}/user/time-slot/get`, {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(centerBody),
 			});
 
 			if (response.ok) {
@@ -101,8 +123,17 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					setPhoneNumber(validUserData.phone);
 				}
 			}
+
+			if (centerSlotData.ok) {
+				const slotData = await centerSlotData.json();
+				const validSlotData: ITimeSlot[] = [...slotData.timeSlots] ?? [];
+				if (validSlotData.length > 0) {
+					setCenterValidSlots(validSlotData);
+					setSelectedSlot(validSlotData[0].id);
+				}
+			}
 		};
-		fetchUserData();
+		fetchData();
 	}, []);
 
 	const handleSubmitForm = async () => {
@@ -115,9 +146,9 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 			substitutePhone: phoneNumber,
 			extraInformation: note,
 			onSite: onSite,
-			slotId: 1,
+			slotId: selectedSlot,
 			phone: phoneNumber,
-			dateTime: selectedDate.toISOString(),
+			date: formatDate(selectedDate),
 			serviceId: services,
 		};
 		console.log(JSON.stringify(requestBody, null, 2));
@@ -174,6 +205,9 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					haveSubstitute={haveSubstitute}
 					setSubstitute={setSubstitute}
 					navigation={navigation}
+					centerValidSlots={centerValidSlots}
+					selectedSlot={selectedSlot}
+					setSelectedSlot={setSelectedSlot}
 				/>
 			)}
 			{visibleIndex === 1 && registerResponse && (
@@ -181,6 +215,7 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					setVisibleIndex={setVisibleIndex}
 					registeredData={registerResponse ?? undefined}
 					onSite={onSite}
+					navigation={navigation}
 				/>
 			)}
 		</View>

@@ -1,9 +1,23 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
-import { API_URL, FONT_BOLD, IUserProfile } from '../../utils/Constants';
+import { Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import {
+	API_URL,
+	COLOR_GRAY,
+	FONT_BOLD,
+	FONT_REGULAR,
+	FONT_SEMI_BOLD,
+	IUserProfile,
+	TEXT_PRIMARY,
+} from '../../utils/Constants';
 import CustomText from '../../components/CustomText';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import LottieView from 'lottie-react-native';
 
 async function isValidImageUrl(url: string): Promise<boolean> {
 	if (!(url.length === 0)) return false;
@@ -15,7 +29,7 @@ async function isValidImageUrl(url: string): Promise<boolean> {
 	return contentType?.startsWith('image/') ?? false;
 }
 
-export const UserProfile = () => {
+export const UserProfile = ({ navigation }: any) => {
 	const [userData, setUserData] = useState<IUserProfile>({} as IUserProfile);
 	const [isImageError, setImageError] = useState<boolean>(false);
 	const [isBackgroundError, setBackgroundError] = useState<boolean>(false);
@@ -72,8 +86,25 @@ export const UserProfile = () => {
 		}, [])
 	);
 
+	const handleSettingClick = () => {
+		alert('This function is not yet implemented. Sitting still for upcoming');
+	};
+
 	return (
 		<View style={styles.container}>
+			<View style={styles.headerContainer}>
+				<Pressable onPress={() => navigation.goBack()}>
+					<Icon name='arrow-back' size={25} />
+				</Pressable>
+				<CustomText
+					message={userData?.name ?? 'Thông tin cá nhân'}
+					styles={styles.headerText}
+					variant={FONT_BOLD}
+				/>
+				<Pressable style={styles.functionBtnWrapper} onPress={handleSettingClick}>
+					<Icon name='settings-outline' size={25} color='gray' />
+				</Pressable>
+			</View>
 			<ScrollView showsVerticalScrollIndicator={false}>
 				{(userData?.name ?? false) && (
 					<View style={styles.profileContainer}>
@@ -110,6 +141,40 @@ export const UserProfile = () => {
 							styles={styles.userName}
 							variant={FONT_BOLD}
 						/>
+						<View style={styles.subTitleContainer}>
+							<CustomText
+								message={'Việt Nam'}
+								variant={FONT_REGULAR}
+								styles={styles.subTitleTxt}
+							/>
+							<CustomText
+								message={`${Math.floor(Math.random() * 100)} theo dõi`}
+								variant={FONT_REGULAR}
+								styles={styles.subTitleTxt}
+							/>
+							<CustomText
+								message={`${Math.floor(
+									Math.random() * 100
+								)} đang theo dõi`}
+								variant={FONT_REGULAR}
+								styles={styles.subTitleTxt}
+							/>
+						</View>
+						<View style={styles.postContainer}>
+							<View>
+								<LottieView
+									source={require('../../assets/animations/no-order.json')}
+									loop
+									autoPlay
+									style={styles.notFoundAnimation}
+								/>
+								<CustomText
+									message='Bạn chưa đăng tải bài viết nào'
+									styles={styles.notFoundText}
+									variant={FONT_SEMI_BOLD}
+								/>
+							</View>
+						</View>
 					</View>
 				)}
 			</ScrollView>
@@ -120,10 +185,38 @@ export const UserProfile = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 15,
-		paddingVertical: 20,
 		overflow: 'hidden',
-		backgroundColor: '#ededed',
+		backgroundColor: 'white',
+		paddingTop: hp(4.5),
+	},
+	headerContainer: {
+		position: 'relative',
+		backgroundColor: 'white',
+		paddingHorizontal: wp(4),
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		alignItems: 'center',
+	},
+	headerText: {
+		width: wp(70),
+		fontSize: hp(2.5),
+		textAlign: 'center',
+		marginVertical: hp(1),
+		color: 'lightgray',
+		letterSpacing: 1,
+	},
+	functionBtnContainer: {
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+	},
+	functionBtnWrapper: {
+		backgroundColor: 'white',
+		padding: wp(1.8),
+		borderRadius: 50,
 	},
 	profileContainer: {
 		width: '100%',
@@ -134,13 +227,13 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		width: '100%',
-		height: 200,
+		height: 230,
 		position: 'relative',
 		overflow: 'hidden',
 	},
 	imageBackground: {
 		width: '100%',
-		height: 150,
+		height: 180,
 		borderRadius: 10,
 	},
 	imageAvt: {
@@ -158,9 +251,35 @@ const styles = StyleSheet.create({
 	userName: {
 		width: '100%',
 		textAlign: 'center',
-		marginTop: 10,
 		fontSize: 25,
 		letterSpacing: 1,
+	},
+	postContainer: {
+		width: wp(95),
+		height: hp(90),
+		marginTop: hp(1),
+		borderTopColor: 'lightgray',
+		borderTopWidth: 2,
+	},
+	subTitleContainer: {
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		alignItems: 'center',
+	},
+	subTitleTxt: {
+		color: 'gray',
+		fontSize: TEXT_PRIMARY,
+	},
+	notFoundText: {
+		textAlign: 'center',
+		fontSize: TEXT_PRIMARY,
+		color: 'gray',
+	},
+	notFoundAnimation: {
+		width: wp(100),
+		height: hp(25),
 	},
 });
 

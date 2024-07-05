@@ -3,9 +3,9 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import CustomText from './CustomText';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
-	COLOR_THIRDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 } from '../utils/Constants';
 import { Dispatch, SetStateAction } from 'react';
@@ -33,7 +33,7 @@ const TabSelector = ({
 		<Pressable
 			style={[
 				styles.tabTitleContainer,
-				focusedTab === index && { backgroundColor: COLOR_THIRDARY },
+				focusedTab === index && { backgroundColor: COLOR_SECONDARY_LIGHTER },
 				{ width: `${100 / totalTabs}%` },
 			]}
 			onPress={() => setFocusedTab(index)}
@@ -52,7 +52,7 @@ const TabSelector = ({
 				<LinearGradient
 					colors={
 						focusedTab === index
-							? [COLOR_PRIMARY, COLOR_SECONDARY]
+							? [COLOR_PRIMARY_900, COLOR_SECONDARY_200]
 							: ['gray', 'gray']
 					}
 					start={{ x: 0, y: 0 }}

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 	},
 	notFoundAnimation: {
 		width: wp(100),
-		height: hp(30),
+		height: hp(25),
 	},
 });
 

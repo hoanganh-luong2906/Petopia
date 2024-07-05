@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RootDispatch } from '../redux/configStore';
 import { useRootDispatch } from '../redux/hooks';
-import { COLOR_GRAY, COLOR_PRIMARY, COLOR_SECONDARY } from '../utils/Constants';
+import { COLOR_GRAY, COLOR_PRIMARY_900, COLOR_SECONDARY_200 } from '../utils/Constants';
 
 const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 	const [searchText, setSearchText] = useState<string>('');
@@ -30,7 +30,7 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					maskElement={<Icon name='search' size={25} color={'black'} />}
 				>
 					<LinearGradient
-						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={{ width: '100%', height: '100%' }}
@@ -56,7 +56,7 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					maskElement={<Icon name='qr-code' size={25} color={'black'} />}
 				>
 					<LinearGradient
-						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 0, y: 1 }}
 						style={{ width: '100%', height: '100%' }}

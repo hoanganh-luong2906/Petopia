@@ -2,8 +2,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Image, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
@@ -58,7 +58,7 @@ const AppointmentContent = ({
 			>
 				<View style={styles.spot}>
 					<LinearGradient
-						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={styles.spot}
@@ -66,7 +66,7 @@ const AppointmentContent = ({
 						<View style={styles.spot}>
 							{index === 0 && (
 								<LinearGradient
-									colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+									colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 									start={{ x: 0, y: 0 }}
 									end={{ x: 1, y: 0 }}
 									style={styles.spot}
@@ -79,7 +79,7 @@ const AppointmentContent = ({
 			<View style={styles.summaryContainer}>
 				{index === 0 && (
 					<LinearGradient
-						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 						start={{ x: 0, y: 1 }}
 						end={{ x: 0, y: 0 }}
 						style={styles.linearSummaryContent}

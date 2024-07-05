@@ -2,7 +2,7 @@ import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 import CustomText from '../components/CustomText';
-import { COLOR_PRIMARY, FONT_BOLD, TEXT_LARGE } from '../utils/Constants';
+import { COLOR_PRIMARY_900, FONT_BOLD, TEXT_LARGE } from '../utils/Constants';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
 	widthPercentageToDP as wp,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
 		marginVertical: hp(2),
 	},
 	button: {
-		backgroundColor: COLOR_PRIMARY,
+		backgroundColor: COLOR_PRIMARY_900,
 		paddingVertical: hp(1.5),
 		paddingHorizontal: wp(8),
 		borderRadius: 50,

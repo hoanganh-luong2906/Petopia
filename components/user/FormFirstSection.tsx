@@ -24,15 +24,16 @@ import CustomText from '../../components/CustomText';
 import {
 	API_URL,
 	COLOR_GRAY,
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
-	COLOR_THIRDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	ICenterDetail,
 	ICenterServiceDetail,
 	IPet,
+	ITimeSlot,
 	IUser,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
@@ -58,6 +59,9 @@ interface IFormProps {
 	haveSubstitute: boolean;
 	setSubstitute: React.Dispatch<React.SetStateAction<boolean>>;
 	navigation: NativeStackNavigationProp<any, 'register-appointment'>;
+	centerValidSlots: ITimeSlot[];
+	selectedSlot: number;
+	setSelectedSlot: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface IDropdownOption {
@@ -110,15 +114,22 @@ const FormFirstSection = (props: IFormProps) => {
 		haveSubstitute,
 		setSubstitute,
 		navigation,
+		centerValidSlots,
+		selectedSlot,
+		setSelectedSlot,
 	}: IFormProps = props;
-
 	const [selectedPetDropdown, setSelectedPetDropdown] = useState<IDropdownOption>(
 		{} as IDropdownOption
 	);
-	const [isFocus, setIsFocus] = useState<boolean>(false);
+	const [selectedSlotDropdown, setSelectedSlotDropdown] = useState<IDropdownOption>(
+		{} as IDropdownOption
+	);
+	const [isPetFocus, setIsPetFocus] = useState<boolean>(false);
+	const [isSlotFocus, setIsSlotFocus] = useState<boolean>(false);
 	const [data, setData] = useState<IDropdownOption[]>([]);
 	const [serviceData, setServiceData] = useState<IDropdownOption[]>([]);
 	const [petData, setPetData] = useState<IPet[]>([]);
+	const [slotDropdownData, setSlotDropdownData] = useState<IDropdownOption[]>([]);
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
 	const [isDateEdited, setIsDateEdited] = useState<boolean>(false);
 	const [selectedServicePreference, setSelectedServicePreference] = useState<number>(
@@ -218,12 +229,19 @@ const FormFirstSection = (props: IFormProps) => {
 					}));
 				setServiceData(tempData);
 			}
-		}, [petData, center, selectedServicePreference])
+			if (centerValidSlots.length > 0) {
+				var tmpData: IDropdownOption[] = centerValidSlots.map((slot) => ({
+					label: slot.startTime,
+					value: slot.id,
+				}));
+				setSlotDropdownData(tmpData);
+			}
+		}, [petData, center, selectedServicePreference, centerValidSlots])
 	);
 
 	return (
 		<LinearGradient
-			colors={[COLOR_THIRDARY, COLOR_THIRDARY]}
+			colors={[COLOR_SECONDARY_LIGHTER, COLOR_SECONDARY_LIGHTER]}
 			start={[0, 0]}
 			end={[0, 1]}
 			style={styles.container}
@@ -323,7 +341,7 @@ const FormFirstSection = (props: IFormProps) => {
 							<Dropdown
 								style={[
 									styles.informationInput,
-									isFocus && { borderWidth: 2 },
+									isPetFocus && { borderWidth: 2 },
 									selectedPet === 0 && { opacity: 0.7 },
 								]}
 								selectedTextStyle={styles.selectedTextStyle}
@@ -334,17 +352,17 @@ const FormFirstSection = (props: IFormProps) => {
 								labelField='label'
 								valueField='value'
 								placeholderStyle={styles.regularTxt}
-								placeholder={!isFocus ? 'Chọn thú cưng' : '...'}
+								placeholder={!isPetFocus ? 'Chọn thú cưng' : '...'}
 								searchPlaceholder='Tìm kiếm...'
 								value={selectedPetDropdown}
-								onFocus={() => setIsFocus(true)}
-								onBlur={() => setIsFocus(false)}
+								onFocus={() => setIsPetFocus(true)}
+								onBlur={() => setIsPetFocus(false)}
 								onChange={(item: IDropdownOption) => {
 									setSelectedPetDropdown(
 										item ?? ({} as IDropdownOption)
 									);
 									setSelectedPet(item.value ?? 0);
-									setIsFocus(false);
+									setIsPetFocus(false);
 								}}
 							/>
 						</View>
@@ -461,25 +479,30 @@ const FormFirstSection = (props: IFormProps) => {
 									variant={FONT_BOLD}
 									styles={styles.informationLabel}
 								/>
-								<Pressable
-									onPress={showTimepicker}
-									style={[styles.informationInput, styles.petPickerBtn]}
-								>
-									<CustomText
-										message={
-											isDateEdited
-												? formatTime(selectedDate)
-												: 'Chọn giờ'
-										}
-										variant={FONT_SEMI_BOLD}
-										styles={styles.petPickerTxt}
-									/>
-									<Icon
-										name='chevron-down-outline'
-										size={TEXT_PRIMARY}
-										color='black'
-									/>
-								</Pressable>
+								<Dropdown
+									style={[
+										styles.informationInput,
+										{ width: wp(42), height: hp(6.1) },
+										isPetFocus && { borderWidth: 2 },
+									]}
+									selectedTextStyle={styles.selectedTextStyle}
+									data={slotDropdownData}
+									maxHeight={hp(15)}
+									labelField='label'
+									valueField='value'
+									placeholderStyle={styles.regularTxt}
+									placeholder={!isPetFocus ? 'Chọn giờ hẹn' : '...'}
+									value={slotDropdownData[0]}
+									onFocus={() => setIsSlotFocus(true)}
+									onBlur={() => setIsSlotFocus(false)}
+									onChange={(item: IDropdownOption) => {
+										setSelectedPetDropdown(
+											item ?? ({} as IDropdownOption)
+										);
+										setSelectedSlot(item.value ?? 0);
+										setIsPetFocus(false);
+									}}
+								/>
 							</View>
 						</View>
 						<View>
@@ -519,7 +542,7 @@ const FormFirstSection = (props: IFormProps) => {
 					</Pressable>
 					<Pressable style={styles.functionBtn} onPress={handleSubmit}>
 						<LinearGradient
-							colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+							colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 							start={[0, 0]}
 							end={[1, 0]}
 							style={styles.btnDecorator}
@@ -591,7 +614,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		borderWidth: 1,
 		borderColor: 'gray',
-		borderRadius: 50,
+		borderRadius: 15,
 		paddingRight: wp(2),
 		fontFamily: 'Baloo 2 Regular',
 		paddingLeft: wp(5),
@@ -617,7 +640,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: 'gray',
 		fontSize: TEXT_PRIMARY,
-		borderRadius: 20,
+		borderRadius: 15,
 		paddingHorizontal: wp(4),
 		paddingVertical: 10,
 		textAlignVertical: 'top',

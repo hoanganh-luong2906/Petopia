@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import CustomText from '../CustomText';
 import {
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
-	COLOR_THIRDARY,
+	COLOR_PRIMARY_900,
+	COLOR_SECONDARY_200,
+	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	IPet,
@@ -47,7 +47,7 @@ const PetPickerModal = ({
 		<Pressable
 			style={[
 				styles.petPickerBtn,
-				selectedPet.id === pet.id && { backgroundColor: COLOR_THIRDARY },
+				selectedPet.id === pet.id && { backgroundColor: COLOR_SECONDARY_LIGHTER },
 			]}
 			onPress={() => {
 				setSelectedPet(pet);
@@ -66,7 +66,7 @@ const PetPickerModal = ({
 					style={styles.decoratorContainer}
 				>
 					<LinearGradient
-						colors={[COLOR_PRIMARY, COLOR_SECONDARY]}
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={{ width: '100%', height: '100%' }}
