@@ -11,6 +11,7 @@ import {
 	FONT_BOLD,
 	FONT_SEMI_BOLD,
 	IAppointment,
+	IPet,
 	IPetHealthHistory,
 } from '../../utils/Constants';
 import CustomText from '../../components/CustomText';
@@ -21,6 +22,7 @@ import {
 } from 'react-native-responsive-screen';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PetPickerModal from '../../components/user/PetPickerModal';
 
 interface IProcessPetData {
 	title: number;
@@ -41,7 +43,9 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 	const [processedData, setProcessedData] = useState<IProcessPetData[]>([]);
 	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
 	const sortCriterion = 'date';
-	const petId: number = route.params?.petId ?? 0;
+	const [petId, setPetId] = useState<number>(route.params?.petId ?? 0);
+	const petData: IPet[] = route.params?.petData ?? [];
+	const [isVisible, setVisible] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -168,10 +172,33 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 				<CustomText
 					message='Hồ sơ thú cưng'
 					styles={styles.headerText}
-					variant={FONT_BOLD}
+					variant={FONT_SEMI_BOLD}
 				/>
 				<Pressable style={styles.functionBtnWrapper} onPress={handleSettingClick}>
 					<Icon name='settings-outline' size={25} color='gray' />
+				</Pressable>
+			</View>
+			<View style={{ width: '100%', height: hp(5), position: 'relative' }}>
+				<Pressable
+					style={styles.petPickerContainer}
+					onPress={() => {
+						setVisible(true);
+					}}
+				>
+					<LinearGradient
+						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 0 }}
+						style={styles.petPickerDecorator}
+					>
+						<CustomText
+							numberOfLines={1}
+							message={pet.petName ?? ''}
+							variant={FONT_SEMI_BOLD}
+							styles={styles.petPickerText}
+						/>
+						<Icon name='ellipsis-vertical' size={20} color='white' />
+					</LinearGradient>
 				</Pressable>
 			</View>
 			<View>
@@ -201,6 +228,13 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 					/>
 				)}
 			</View>
+			<PetPickerModal
+				isVisible={isVisible}
+				setVisible={setVisible}
+				pets={petData}
+				selectedPet={petId}
+				setSelectedPet={setPetId}
+			/>
 		</View>
 	);
 };
@@ -300,6 +334,43 @@ const styles = StyleSheet.create({
 		width: '50%',
 		height: '100%',
 		marginRight: '50%',
+	},
+	petPickerContainer: {
+		position: 'absolute',
+		top: 5,
+		right: 0,
+		width: '35%',
+		height: hp(5),
+		backgroundColor: 'red',
+		zIndex: 100,
+		marginRight: wp(2),
+		borderRadius: 30,
+		overflow: 'hidden',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 1,
+		shadowRadius: 4,
+		elevation: 5,
+	},
+	petPickerDecorator: {
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		paddingHorizontal: 2,
+	},
+	petPickerText: {
+		color: 'white',
+		fontSize: hp(2.5),
+		letterSpacing: 1,
+		textAlign: 'center',
+		width: '70%',
+		paddingLeft: 5,
 	},
 });
 

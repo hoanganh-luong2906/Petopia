@@ -39,6 +39,7 @@ import {
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import ServiceComponent from '../ServiceComponent';
 
 interface IFormProps {
 	selectedDate: Date;
@@ -53,6 +54,7 @@ interface IFormProps {
 	setSelectedPet: React.Dispatch<React.SetStateAction<number>>;
 	center: { centerData: ICenterDetail; centerServiceList: ICenterServiceDetail[] };
 	handleSubmit: () => Promise<any>;
+	services: number[];
 	setServices: React.Dispatch<React.SetStateAction<number[]>>;
 	onSite: boolean;
 	setOnsite: React.Dispatch<React.SetStateAction<boolean>>;
@@ -116,12 +118,10 @@ const FormFirstSection = (props: IFormProps) => {
 		navigation,
 		centerValidSlots,
 		selectedSlot,
+		services,
 		setSelectedSlot,
 	}: IFormProps = props;
 	const [selectedPetDropdown, setSelectedPetDropdown] = useState<IDropdownOption>(
-		{} as IDropdownOption
-	);
-	const [selectedSlotDropdown, setSelectedSlotDropdown] = useState<IDropdownOption>(
 		{} as IDropdownOption
 	);
 	const [isPetFocus, setIsPetFocus] = useState<boolean>(false);
@@ -136,6 +136,10 @@ const FormFirstSection = (props: IFormProps) => {
 		onSite ? 0 : 1
 	);
 	const [isRendered, setIsRendered] = useState<boolean>(false);
+	const [selectedCenterService, setSelectedCenterService] = useState<
+		ICenterServiceDetail[]
+	>([]);
+	const [currentService, setCurrentService] = useState<ICenterServiceDetail>();
 
 	const handleChangeDate = (
 		event: DateTimePickerEvent,
@@ -179,10 +183,6 @@ const FormFirstSection = (props: IFormProps) => {
 		showDateMode('date');
 	};
 
-	const showTimepicker = () => {
-		showDateMode('time');
-	};
-
 	useEffect(() => {
 		const fetchData = async () => {
 			const api: string = process.env.SERVER_API_URL ?? API_URL;
@@ -220,6 +220,7 @@ const FormFirstSection = (props: IFormProps) => {
 				}));
 				setData(tempData);
 			}
+
 			if (center.centerServiceList.length > 0) {
 				const tempData = center.centerServiceList
 					.filter((service) => service.onSite === onSite)
@@ -229,15 +230,31 @@ const FormFirstSection = (props: IFormProps) => {
 					}));
 				setServiceData(tempData);
 			}
+
 			if (centerValidSlots.length > 0) {
 				var tmpData: IDropdownOption[] = centerValidSlots.map((slot) => ({
 					label: slot.startTime,
 					value: slot.id,
 				}));
+				tmpData.sort((a, b) => a.label.localeCompare(b.label));
 				setSlotDropdownData(tmpData);
 			}
 		}, [petData, center, selectedServicePreference, centerValidSlots])
 	);
+
+	const handleSelectService = (item: string[]) => {
+		setSelectedServices(item);
+		const tmpSelectedCenterService: ICenterServiceDetail | undefined =
+			center.centerServiceList.find(
+				(service) => service.id === Number.parseInt(item[item.length - 1])
+			);
+		if (tmpSelectedCenterService) {
+			const tmpSet = new Set<ICenterServiceDetail>(selectedCenterService);
+			tmpSet.add(tmpSelectedCenterService);
+			setSelectedCenterService(Array.from(tmpSet));
+			setCurrentService(tmpSelectedCenterService);
+		}
+	};
 
 	return (
 		<LinearGradient
@@ -423,23 +440,17 @@ const FormFirstSection = (props: IFormProps) => {
 								search
 								searchPlaceholder='Tìm kiếm...'
 								onChange={(item) => {
-									setSelectedServices(item);
+									handleSelectService(item);
 								}}
-								// renderItem={renderItem}
 								renderSelectedItem={(item, unSelect) => (
 									<TouchableOpacity
 										onPress={() => unSelect && unSelect(item)}
 									>
 										<View style={styles.selectedStyle}>
-											<CustomText
-												message={item.label}
-												styles={styles.textSelectedStyle}
-												variant={FONT_REGULAR}
-											/>
-											<Icon
-												name='close-circle-outline'
-												size={TEXT_PRIMARY}
-												color='black'
+											<ServiceComponent
+												serviceTitle={currentService?.name ?? ''}
+												servicePrice={currentService?.price ?? 0}
+												serviceTitleLines={1}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -483,7 +494,7 @@ const FormFirstSection = (props: IFormProps) => {
 									style={[
 										styles.informationInput,
 										{ width: wp(42), height: hp(6.1) },
-										isPetFocus && { borderWidth: 2 },
+										isSlotFocus && { borderWidth: 2 },
 									]}
 									selectedTextStyle={styles.selectedTextStyle}
 									data={slotDropdownData}
@@ -491,16 +502,15 @@ const FormFirstSection = (props: IFormProps) => {
 									labelField='label'
 									valueField='value'
 									placeholderStyle={styles.regularTxt}
-									placeholder={!isPetFocus ? 'Chọn giờ hẹn' : '...'}
-									value={slotDropdownData[0]}
+									placeholder={!isSlotFocus ? 'Chọn giờ hẹn' : '...'}
+									value={slotDropdownData.find(
+										(slot) => slot.value === selectedSlot
+									)}
 									onFocus={() => setIsSlotFocus(true)}
 									onBlur={() => setIsSlotFocus(false)}
 									onChange={(item: IDropdownOption) => {
-										setSelectedPetDropdown(
-											item ?? ({} as IDropdownOption)
-										);
 										setSelectedSlot(item.value ?? 0);
-										setIsPetFocus(false);
+										setIsSlotFocus(false);
 									}}
 								/>
 							</View>
@@ -665,11 +675,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	selectedStyle: {
-		minWidth: '46%',
+		width: '99%',
+		height: hp(9),
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 50,
+		borderRadius: 10,
 		backgroundColor: 'white',
 		shadowColor: '#000',
 		marginTop: 8,

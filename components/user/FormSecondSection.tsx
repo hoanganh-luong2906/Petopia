@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
 		color: 'gray',
 	},
 	textContent: {
-		fontSize: TEXT_PRIMARY,
+		fontSize: TEXT_PRIMARY + 1,
 		letterSpacing: 0.5,
 	},
 	divider: {
@@ -386,15 +386,15 @@ const styles = StyleSheet.create({
 		fontSize: TEXT_PRIMARY + 5,
 		color: 'black',
 		letterSpacing: 1,
+		textAlign: 'right',
 	},
 	priceDecorator: {
-		width: wp(43),
+		width: wp(50),
 		height: hp(3.5),
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'flex-end',
 		alignItems: 'center',
-		transform: [{ translateX: wp(2.5) }],
 	},
 	btnContainer: {
 		width: '100%',

@@ -32,10 +32,7 @@ interface IProps {
 }
 
 const UserProfileScreen = ({ navigation }: IProps) => {
-	const [focusedTab, setFocusedTab] = useState<number>(0);
 	const [petData, setPetData] = useState<IPet[]>([]);
-	const [selectedPet, setSelectedPet] = useState<IPet>({} as IPet);
-	const [isVisible, setVisible] = useState<boolean>(false);
 	const [userInfor, setUserInfor] = useState<IUser | undefined>(undefined);
 	const [isImgError, setImgError] = useState<boolean>(false);
 	const dispatch: RootDispatch = useRootDispatch();
@@ -64,7 +61,6 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 					const validPetData: IPet[] = data.petList ?? ([] as IPet[]);
 					if (validPetData.length > 0) {
 						setPetData(validPetData);
-						setSelectedPet(validPetData[0]);
 					}
 				}
 			} catch (error: any) {
@@ -94,8 +90,10 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 	};
 
 	const handleUserPetProfileClick = () => {
-		console.log(selectedPet.id);
-		navigation.navigate('customer-pet-profile', { petId: selectedPet.id });
+		navigation.navigate('customer-pet-profile', {
+			petId: petData[0].id,
+			petData: petData,
+		});
 	};
 
 	const handleTransactionClick = () => {
@@ -121,10 +119,15 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 				</Pressable>
 			</View>
 			<View style={styles.profileContainer}>
-				{isImgError ? (
+				{!isImgError ? (
 					<Image
-						src={userInfor?.avatar ?? ''}
+						src={
+							userInfor?.avatar.length !== 0
+								? userInfor?.avatar
+								: 'https//:@@@@.com'
+						}
 						resizeMode='cover'
+						onError={() => setImgError(true)}
 						style={styles.userAvt}
 					/>
 				) : (
