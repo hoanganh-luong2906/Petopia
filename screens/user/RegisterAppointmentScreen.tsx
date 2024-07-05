@@ -199,6 +199,7 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					setSelectedPet={setSelectedPet}
 					center={data}
 					handleSubmit={handleSubmitForm}
+					services={services}
 					setServices={setServices}
 					onSite={onSite}
 					setOnsite={setOnsite}

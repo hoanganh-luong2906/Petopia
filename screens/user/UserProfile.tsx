@@ -99,7 +99,7 @@ export const UserProfile = ({ navigation }: any) => {
 				<CustomText
 					message={userData?.name ?? 'Thông tin cá nhân'}
 					styles={styles.headerText}
-					variant={FONT_BOLD}
+					variant={FONT_SEMI_BOLD}
 				/>
 				<Pressable style={styles.functionBtnWrapper} onPress={handleSettingClick}>
 					<Icon name='settings-outline' size={25} color='gray' />

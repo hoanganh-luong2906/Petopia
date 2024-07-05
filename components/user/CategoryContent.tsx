@@ -13,8 +13,11 @@ import {
 	FONT_SEMI_BOLD,
 	IService,
 	IServiceCenter,
+	TEXT_PRIMARY,
 } from '../../utils/Constants';
 import CustomText from '../CustomText';
+import ServiceComponent from '../ServiceComponent';
+import { useState } from 'react';
 
 interface ICategoryContentProperties {
 	data: { title: string; data: Object[] }[];
@@ -49,6 +52,8 @@ const renderCategoryHeader = ({ title }: { title: string }) => (
 );
 
 const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
+	const [isImgError, setImgError] = useState<boolean>(false);
+
 	const renderItem = ({
 		item,
 		index,
@@ -59,6 +64,7 @@ const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
 		<View key={index}>
 			{!('serviceName' in item) ? (
 				<Pressable
+					style={styles.centerContainer}
 					onPress={() =>
 						navigation.navigate('category-detail', {
 							data: item,
@@ -66,11 +72,16 @@ const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
 						})
 					}
 				>
-					{/* <Image src={}/> */}
+					<Image
+						source={require('../../assets/images/shop-bg.png')}
+						resizeMode='cover'
+						style={styles.centerImg}
+					/>
 					<CustomText
 						message={(item as IServiceCenter).name}
-						styles={{}}
-						variant={FONT_BOLD}
+						styles={styles.centerNameTxt}
+						variant={FONT_SEMI_BOLD}
+						numberOfLines={1}
 					/>
 				</Pressable>
 			) : (
@@ -82,11 +93,13 @@ const CategoryContent = ({ data, navigation }: ICategoryContentProperties) => {
 						})
 					}
 				>
-					<CustomText
-						message={(item as IService).serviceName}
-						styles={{}}
-						variant={FONT_BOLD}
-					/>
+					<View style={styles.serviceContainer}>
+						<ServiceComponent
+							serviceTitle={(item as IService).serviceName}
+							serviceImg={undefined}
+							// servicePrice={100000}
+						/>
+					</View>
 				</Pressable>
 			)}
 		</View>
@@ -132,6 +145,38 @@ const styles = StyleSheet.create({
 		color: 'gray',
 		height: '100%',
 		textAlignVertical: 'bottom',
+	},
+	serviceContainer: {
+		width: '98%',
+		height: hp(10),
+		marginVertical: hp(1),
+		marginHorizontal: '1%',
+		borderRadius: 10,
+		overflow: 'hidden',
+		elevation: 3,
+	},
+	centerContainer: {
+		width: wp(30),
+		height: wp(30),
+		padding: '2%',
+		margin: 5,
+		borderRadius: 10,
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		elevation: 3,
+		overflow: 'hidden',
+		backgroundColor: 'white',
+	},
+	centerImg: {
+		width: '100%',
+		height: '70%',
+		borderRadius: 8,
+	},
+	centerNameTxt: {
+		fontSize: TEXT_PRIMARY,
+		letterSpacing: 0.6,
 	},
 });
 

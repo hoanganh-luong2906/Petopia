@@ -30,8 +30,8 @@ interface IPetPickerProps {
 	isVisible: boolean;
 	setVisible: Dispatch<SetStateAction<boolean>>;
 	pets: IPet[];
-	selectedPet: IPet;
-	setSelectedPet: Dispatch<SetStateAction<IPet>>;
+	selectedPet: number;
+	setSelectedPet: Dispatch<SetStateAction<number>>;
 }
 
 const PetPickerModal = ({
@@ -47,14 +47,14 @@ const PetPickerModal = ({
 		<Pressable
 			style={[
 				styles.petPickerBtn,
-				selectedPet.id === pet.id && { backgroundColor: COLOR_SECONDARY_LIGHTER },
+				selectedPet === pet.id && { backgroundColor: COLOR_SECONDARY_LIGHTER },
 			]}
 			onPress={() => {
-				setSelectedPet(pet);
+				setSelectedPet(pet.id);
 				setVisible(!isVisible);
 			}}
 		>
-			{selectedPet.id === pet.id ? (
+			{selectedPet === pet.id ? (
 				<MaskedView
 					maskElement={
 						<CustomText

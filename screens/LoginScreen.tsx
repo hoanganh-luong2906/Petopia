@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { Alert, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Alert, Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../components/CustomText';
 import UserData from '../data/UserData.json';
@@ -95,12 +95,10 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.animationContainer}>
-				<LottieView
-					source={require('../assets/animations/phone.json')}
-					autoPlay
-					loop
-					speed={0.5}
+				<Image
+					source={require('../assets/animations/demo.gif')}
 					style={styles.animation}
+					resizeMode='contain'
 				/>
 			</View>
 			<LinearGradient
@@ -182,6 +180,7 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 						</LinearGradient>
 					</Pressable>
 					<View style={styles.optionalContainer}>
+						<View style={styles.divider}></View>
 						<CustomText
 							message='Hoặc'
 							styles={styles.optionalText}
@@ -207,8 +206,9 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 						<Pressable
 							style={styles.registerButton}
 							onPress={() => {
-								navigation.push('register');
 								setIsRecentPushed(true);
+								navigation.push('register');
+								setIsRecentPushed(false);
 							}}
 							disabled={isRecentPushed}
 						>
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	animation: {
-		width: wp(60),
+		width: wp(40),
 		height: hp(30),
 		zIndex: 2,
 	},
@@ -322,14 +322,12 @@ const styles = StyleSheet.create({
 		marginVertical: hp(3.5),
 		fontSize: TEXT_PRIMARY,
 		color: 'gray',
-		backgroundColor: 'white',
 		zIndex: 1,
 		letterSpacing: 1.5,
 	},
 	divider: {
-		width: '70%',
-		position: 'absolute',
-		top: 40,
+		width: '30%',
+		height: 1,
 		borderTopWidth: 1.5,
 		borderColor: 'gray',
 		zIndex: 0,
