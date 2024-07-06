@@ -2,12 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { Alert, Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../components/CustomText';
-import UserData from '../data/UserData.json';
 import { login } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
 import { useRootDispatch } from '../redux/hooks';
@@ -23,10 +25,6 @@ import {
 	TEXT_PRIMARY,
 	TEXT_SECONDARY,
 } from '../utils/Constants';
-import {
-	widthPercentageToDP as wp,
-	heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 type NavigationProp = {
 	navigation: NativeStackNavigationProp<any, 'login'>;

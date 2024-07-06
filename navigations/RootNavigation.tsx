@@ -17,6 +17,7 @@ import CategoryDetailScreen from '../screens/user/CategoryDetailScreen';
 import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen';
 import UserProfile from '../screens/user/UserProfile';
 import UserPetProfile from '../screens/user/UserPetProfile';
+import UserPostDetailScreen from '../screens/user/UserPostDetailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,7 @@ const loadState = async () => {
 		}
 		if (userDb?.length) {
 			state.user = JSON.parse(userDb) as IUser;
+			state.isLoggedIn = true;
 		}
 	} catch (error: any) {
 		console.log('Error loading user from AsyncStorage: ', error.message);
@@ -115,6 +117,10 @@ const RootNavigation = () => {
 							<Stack.Screen
 								name='customer-navigation'
 								component={UserNavigation}
+							/>
+							<Stack.Screen
+								name='customer-post-detail'
+								component={UserPostDetailScreen}
 							/>
 							<Stack.Screen
 								name='category-detail'
