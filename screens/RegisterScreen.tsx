@@ -258,10 +258,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 'auto',
 		backgroundColor: 'white',
-		paddingTop: hp(3),
 	},
 	animationContainer: {
-		flex: 0.3,
+		flex: 0.2,
 		width: '100%',
 		display: 'flex',
 		justifyContent: 'center',
@@ -270,11 +269,11 @@ const styles = StyleSheet.create({
 	},
 	animation: {
 		width: wp(60),
-		height: hp(30),
+		height: hp(25),
 		zIndex: 2,
 	},
 	linearContainer: {
-		flex: 0.7,
+		flex: 0.8,
 		borderRadius: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -297,7 +296,7 @@ const styles = StyleSheet.create({
 	},
 	inputContainer: {
 		width: '100%',
-		height: hp(42),
+		height: hp(45),
 		display: 'flex',
 		justifyContent: 'space-evenly',
 	},
