@@ -19,6 +19,7 @@ import UserProfile from '../screens/user/UserProfile';
 import UserPetProfile from '../screens/user/UserPetProfile';
 import UserPostDetailScreen from '../screens/user/UserPostDetailScreen';
 import UserNotificationScreen from '../screens/user/UserNotificationScreen';
+import UserTransactionScreen from '../screens/user/UserTransactionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -138,6 +139,10 @@ const RootNavigation = () => {
 							<Stack.Screen
 								name='customer-notification'
 								component={UserNotificationScreen}
+							/>
+							<Stack.Screen
+								name='customer-transaction'
+								component={UserTransactionScreen}
 							/>
 							<Stack.Screen
 								name='customer-pet-profile'

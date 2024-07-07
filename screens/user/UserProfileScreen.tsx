@@ -96,7 +96,7 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 	};
 
 	const handleTransactionClick = () => {
-		alert('This function is not yet implemented. Sitting still for upcoming');
+		navigation.navigate('customer-transaction');
 	};
 
 	return (
