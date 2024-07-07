@@ -228,7 +228,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	headerContainer: {
-		paddingTop: hp(5),
 		position: 'relative',
 		backgroundColor: 'white',
 		paddingHorizontal: wp(5),

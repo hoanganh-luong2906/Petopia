@@ -40,6 +40,10 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 
 	const handleLoginBtn = async () => {
 		setIsRecentPushed(true);
+		setTimeout(() => {
+			setIsRecentPushed(false);
+			return;
+		}, 10000);
 		setErrorMsg('');
 		try {
 			const api: string = process.env.SERVER_API_URL ?? API_URL;
@@ -242,7 +246,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 'auto',
 		backgroundColor: 'white',
-		paddingTop: hp(3),
 	},
 	animationContainer: {
 		flex: 0.3,
@@ -375,7 +378,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: hp(6),
+		marginTop: hp(5),
 		transform: [{ translateX: 60 }],
 	},
 	registerButton: {

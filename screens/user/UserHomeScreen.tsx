@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import SearchBarComponent from '../../components/SearchBarComponent';
 
 const TAB_TITLE = ['Phổ biến', 'Xu hướng', 'Theo dõi'];
 
@@ -45,6 +46,7 @@ const UserHomeScreen = ({ navigation }: IProps) => {
 
 	return (
 		<View style={styles.container}>
+			<SearchBarComponent navigation={navigation} />
 			<View style={styles.searchTabContainer}>
 				<View style={styles.tabContainer}>
 					{TAB_TITLE.map((title, index) => (
@@ -329,7 +331,7 @@ const styles = StyleSheet.create({
 	homePageContainer: {
 		width: wp(100),
 		paddingHorizontal: wp(2),
-		paddingVertical: hp(2),
+		paddingVertical: hp(1),
 	},
 	postContainer: {
 		width: '100%',

@@ -14,7 +14,6 @@ import { RootDispatch } from '../../redux/configStore';
 import { useRootDispatch } from '../../redux/hooks';
 import {
 	API_URL,
-	COLOR_PRIMARY_600,
 	COLOR_PRIMARY_900,
 	COLOR_SECONDARY_200,
 	COLOR_SECONDARY_400,
@@ -28,7 +27,7 @@ import {
 } from '../../utils/Constants';
 
 interface IProps {
-	navigation: NativeStackNavigationProp<any, 'user-profile'>;
+	navigation: NativeStackNavigationProp<any, 'customer-navigation'>;
 }
 
 const UserProfileScreen = ({ navigation }: IProps) => {
@@ -78,7 +77,7 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 	};
 
 	const handleNotificationClick = () => {
-		alert('This function is not yet implemented. Sitting still for upcoming');
+		navigation.navigate('customer-notification');
 	};
 
 	const handleSettingClick = () => {
@@ -97,7 +96,7 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 	};
 
 	const handleTransactionClick = () => {
-		alert('This function is not yet implemented. Sitting still for upcoming');
+		navigation.navigate('customer-transaction');
 	};
 
 	return (
@@ -243,7 +242,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
-		paddingTop: hp(7),
+		paddingTop: hp(2),
 		paddingHorizontal: wp(3),
 	},
 	functionBtnContainer: {

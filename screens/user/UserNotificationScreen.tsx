@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
-		paddingTop: hp(5),
 	},
 	titleContainer: {
 		display: 'flex',

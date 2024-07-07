@@ -248,7 +248,6 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 	headerTitleContainer: {
-		paddingTop: hp(4),
 		position: 'relative',
 		backgroundColor: 'white',
 		paddingHorizontal: wp(4),

@@ -248,7 +248,6 @@ const AdminHomeScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: hp(4),
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',

@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		overflow: 'hidden',
 		backgroundColor: 'white',
-		paddingTop: hp(4.5),
 	},
 	headerContainer: {
 		position: 'relative',
@@ -227,13 +226,13 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		width: '100%',
-		height: 230,
+		height: 200,
 		position: 'relative',
 		overflow: 'hidden',
 	},
 	imageBackground: {
 		width: '100%',
-		height: 180,
+		height: 150,
 		borderRadius: 10,
 	},
 	imageAvt: {
@@ -253,6 +252,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 25,
 		letterSpacing: 1,
+		lineHeight: hp(4.5),
 	},
 	postContainer: {
 		width: wp(95),

@@ -6,6 +6,7 @@ import UserNotificationScreen from '../screens/user/UserNotificationScreen';
 import UserProfileScreen from '../screens/user/UserProfileScreen';
 import SearchBarComponent from '../components/SearchBarComponent';
 import { COLOR_PRIMARY_900 } from '../utils/Constants';
+import UserMarketPlaceScreen from '../screens/user/UserMarketPlaceScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +15,7 @@ const UserNavigation = () => {
 		<Tab.Navigator
 			initialRouteName='user-home'
 			screenOptions={{
-				header: (props) => <SearchBarComponent />,
-				// headerShown: false,
+				headerShown: false,
 				tabBarShowLabel: false,
 				tabBarActiveTintColor: COLOR_PRIMARY_900,
 			}}
@@ -39,12 +39,12 @@ const UserNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='user-notification'
-				component={UserNotificationScreen}
+				name='user-marketplace'
+				component={UserMarketPlaceScreen}
 				options={{
 					headerShown: false,
 					tabBarIcon: ({ color, size }) => (
-						<Icon name='notifications' color={color} size={size} />
+						<Icon name='storefront' color={color} size={size} />
 					),
 				}}
 			/>

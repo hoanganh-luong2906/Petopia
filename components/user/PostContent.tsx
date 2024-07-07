@@ -157,8 +157,6 @@ const styles = StyleSheet.create({
 		height: '100%',
 		aspectRatio: 1,
 		borderRadius: 50,
-		borderColor: 'white',
-		borderWidth: 2,
 	},
 	postHeaderName: {
 		height: '100%',

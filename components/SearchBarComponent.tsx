@@ -8,12 +8,19 @@ import {
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { RootDispatch } from '../redux/configStore';
-import { useRootDispatch } from '../redux/hooks';
 import { COLOR_GRAY, COLOR_PRIMARY_900, COLOR_SECONDARY_200 } from '../utils/Constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
+interface IProps {
+	navigation: NativeStackNavigationProp<any, 'customer-navigation'>;
+}
+
+const SearchBarComponent = ({ navigation }: IProps) => {
 	const [searchText, setSearchText] = useState<string>('');
+
+	const handleNotificationClick = () => {
+		navigation.navigate('customer-notification');
+	};
 
 	return (
 		<View style={styles.searchContainer}>
@@ -41,19 +48,14 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 						style={styles.clearSearchBtn}
 						onPress={() => setSearchText('')}
 					>
-						<Icon
-							name='close'
-							size={22}
-							color={'gray'}
-							// style={{ transform: [{ translateX: 10 }] }}
-						/>
+						<Icon name='close' size={22} color={'gray'} />
 					</Pressable>
 				)}
 			</View>
 			<Pressable style={styles.btnContainer}>
 				<MaskedView
 					style={styles.btnDecorator}
-					maskElement={<Icon name='qr-code' size={25} color={'black'} />}
+					maskElement={<Icon name='qr-code' size={22} color={'black'} />}
 				>
 					<LinearGradient
 						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
@@ -63,9 +65,9 @@ const SearchBarComponent = ({ props }: { props?: BottomTabHeaderProps }) => {
 					/>
 				</MaskedView>
 			</Pressable>
-			<Pressable style={styles.btnContainer}>
+			<Pressable style={styles.btnContainer} onPress={handleNotificationClick}>
 				<View style={{ transform: [{ translateX: 0 }] }}>
-					<Icon name='notifications-outline' size={25} color={'gray'} />
+					<Icon name='notifications' size={22} color={'gray'} />
 				</View>
 			</Pressable>
 		</View>
@@ -80,7 +82,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly',
 		alignItems: 'center',
 		backgroundColor: 'white',
-		paddingTop: hp(4),
 		paddingHorizontal: wp(2),
 	},
 	searchContent: {
@@ -90,8 +91,8 @@ const styles = StyleSheet.create({
 	searchInput: {
 		width: '100%',
 		backgroundColor: COLOR_GRAY,
-		marginVertical: hp(1.5),
-		paddingVertical: hp(1),
+		marginVertical: hp(1),
+		paddingVertical: hp(0.7),
 		paddingRight: wp(10),
 		paddingLeft: wp(12),
 		borderRadius: 30,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
 	},
 	searchDecorator: {
 		position: 'absolute',
-		bottom: '33%',
+		bottom: '28%',
 		left: 15,
 		width: 25,
 		height: 25,
@@ -109,21 +110,23 @@ const styles = StyleSheet.create({
 	},
 	clearSearchBtn: {
 		position: 'absolute',
-		bottom: '32%',
+		bottom: '28%',
 		right: '5%',
 	},
 	btnContainer: {
 		backgroundColor: COLOR_GRAY,
-		padding: wp(2.5),
+		padding: wp(2),
 		borderRadius: 30,
 		display: 'flex',
+		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	btnDecorator: {
-		width: hp(3),
-		height: hp(3),
+		width: 22,
+		height: 22,
 		display: 'flex',
+		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

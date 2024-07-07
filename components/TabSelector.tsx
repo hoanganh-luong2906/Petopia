@@ -7,6 +7,8 @@ import {
 	COLOR_SECONDARY_200,
 	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
+	TEXT_LARGE,
+	TEXT_PRIMARY,
 } from '../utils/Constants';
 import { Dispatch, SetStateAction } from 'react';
 import {
@@ -68,14 +70,14 @@ const styles = StyleSheet.create({
 	tabTitle: {
 		letterSpacing: 1,
 		textAlign: 'center',
-		fontSize: hp(2.3),
+		fontSize: TEXT_PRIMARY + 1,
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	tabTitleContainer: {
-		height: hp(5.5),
+		height: hp(5),
 		borderRadius: 5,
 		display: 'flex',
 		flexDirection: 'column',
