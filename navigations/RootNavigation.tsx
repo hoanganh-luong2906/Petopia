@@ -41,7 +41,7 @@ const loadState = async () => {
 		var userDb = await AsyncStorage.getItem('user');
 		var isFirstUsed = await AsyncStorage.getItem('isFirstUsed');
 		if (isFirstUsed) {
-			const usageStatus: boolean = JSON.parse(isFirstUsed);
+			const usageStatus: boolean = !JSON.parse(isFirstUsed);
 			if (usageStatus) {
 				await AsyncStorage.setItem('isFirstUsed', JSON.stringify(false));
 				state.isFirstUsed = true;
