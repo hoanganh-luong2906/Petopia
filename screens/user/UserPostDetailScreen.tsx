@@ -35,7 +35,7 @@ const UserPostDetailScreen = ({ navigation }: IProps) => {
 		<View style={styles.container}>
 			<View style={styles.headerContainer}>
 				<Pressable onPress={() => navigation.goBack()}>
-					<Icon name='arrow-back' size={25} />
+					<Icon name='arrow-back' size={25} style={{ marginBottom: hp(1) }} />
 				</Pressable>
 				<CustomText
 					message={'Bài viết của Phuong Anh'}
@@ -121,12 +121,11 @@ const UserPostDetailScreen = ({ navigation }: IProps) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 10,
+		flex: 1,
 		overflow: 'hidden',
 	},
 	headerContainer: {
-		flex: 1,
-		paddingTop: hp(4),
+		// flex: 1,
 		position: 'relative',
 		backgroundColor: 'white',
 		paddingHorizontal: wp(2),
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
 		width: wp(85),
 		fontSize: TEXT_LARGE - 2,
 		textAlign: 'center',
-		marginVertical: hp(1),
+		marginBottom: hp(1),
 		color: 'lightgray',
 		letterSpacing: 1,
 	},
@@ -150,8 +149,8 @@ const styles = StyleSheet.create({
 	},
 	postContent: {
 		width: '100%',
-		// height: hp(37),
-		flex: 3,
+		height: hp(37),
+		// flex: 3,
 		backgroundColor: 'white',
 	},
 	postCommentAllTxt: {

@@ -19,7 +19,7 @@ const SearchBarComponent = ({ navigation }: IProps) => {
 	const [searchText, setSearchText] = useState<string>('');
 
 	const handleNotificationClick = () => {
-		navigation.navigate('customer-notification');
+		navigation.navigate('customer-notification', { navigation: navigation });
 	};
 
 	return (
@@ -67,7 +67,7 @@ const SearchBarComponent = ({ navigation }: IProps) => {
 			</Pressable>
 			<Pressable style={styles.btnContainer} onPress={handleNotificationClick}>
 				<View style={{ transform: [{ translateX: 0 }] }}>
-					<Icon name='notifications' size={22} color={'gray'} />
+					<Icon name='notifications-outline' size={22} color={'gray'} />
 				</View>
 			</Pressable>
 		</View>

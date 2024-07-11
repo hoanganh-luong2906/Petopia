@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: '1%',
 		borderRadius: 10,
 		overflow: 'hidden',
-		elevation: 3,
+		elevation: 2,
 	},
 	centerContainer: {
 		width: wp(30),
