@@ -23,6 +23,7 @@ import {
 	IPet,
 	IPetHealthHistory,
 } from '../../utils/Constants';
+import LoadingComponent from '../../components/LoadingComponent';
 
 interface IProcessPetData {
 	title: number;
@@ -46,6 +47,7 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 	const [petId, setPetId] = useState<number>(route.params?.petId ?? 0);
 	const petData: IPet[] = route.params?.petData ?? [];
 	const [isVisible, setVisible] = useState<boolean>(false);
+	const [isLoading, setLoadingStatus] = useState<boolean>(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,11 +73,8 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 					const data = await response.json();
 					const validPetData: IPetHealthHistory =
 						data ?? ({} as IPetHealthHistory);
-					// console.log(
-					// 	`PET_PROFILE ${petId}: `,
-					// 	JSON.stringify(validPetData, null, 2)
-					// );
 					setPet(validPetData);
+					setLoadingStatus(false);
 				}
 			} catch (error: any) {
 				console.log(error);
@@ -164,6 +163,7 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 
 	return (
 		<View style={styles.container}>
+			{isLoading && <LoadingComponent />}
 			<View style={styles.backgroundLine} />
 			<View style={styles.headerTitleContainer}>
 				<Pressable onPress={() => navigation.goBack()}>

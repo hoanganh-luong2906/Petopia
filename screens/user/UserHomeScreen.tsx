@@ -10,15 +10,6 @@ import TrendingContent from '../../components/user/TrendingContent';
 
 const TAB_TITLE = ['Phổ biến', 'Xu hướng', 'Theo dõi'];
 
-const formatNumber = (number: number): string => {
-	if (number >= 1000) {
-		const formattedNumber = Math.floor(number / 1000);
-		const suffix = number % 1000 >= 100 ? 'K+' : 'K';
-		return formattedNumber.toString() + suffix;
-	}
-	return number.toString();
-};
-
 interface IProps {
 	navigation: NativeStackNavigationProp<any, 'customer-navigation'>;
 }
@@ -26,10 +17,6 @@ interface IProps {
 const UserHomeScreen = ({ navigation }: IProps) => {
 	const [focusedTab, setFocusedTab] = useState<number>(0);
 	const [data, setData] = useState<any[]>(['had data']);
-
-	const handlePostPress = () => {
-		navigation.navigate('customer-post-detail');
-	};
 
 	return (
 		<View style={styles.container}>
@@ -49,8 +36,8 @@ const UserHomeScreen = ({ navigation }: IProps) => {
 				</View>
 			</View>
 			{focusedTab === 0 && <SocialContent navigation={navigation} data={data} />}
-			{focusedTab === 1 && <TrendingContent />}
-			{focusedTab === 2 && <FollowingContent />}
+			{focusedTab === 1 && <TrendingContent navigation={navigation} data={data} />}
+			{focusedTab === 2 && <FollowingContent navigation={navigation} data={data} />}
 		</View>
 	);
 };
