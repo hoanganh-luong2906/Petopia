@@ -1,23 +1,22 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import { useCallback, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import CustomText from '../../components/CustomText';
+import {
 	API_URL,
-	COLOR_GRAY,
 	FONT_BOLD,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	IUserProfile,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
-import CustomText from '../../components/CustomText';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import LottieView from 'lottie-react-native';
 
 async function isValidImageUrl(url: string): Promise<boolean> {
 	if (!(url.length === 0)) return false;

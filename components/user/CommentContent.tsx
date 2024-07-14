@@ -4,13 +4,13 @@ import {
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import CustomText from '../CustomText';
 import {
 	COLOR_GRAY,
 	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
+import CustomText from '../CustomText';
 
 const CommentContent = () => {
 	return (

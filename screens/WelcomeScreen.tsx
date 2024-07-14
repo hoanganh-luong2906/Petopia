@@ -1,13 +1,13 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import CustomText from '../components/CustomText';
 import { COLOR_PRIMARY_900, FONT_BOLD, TEXT_LARGE } from '../utils/Constants';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {
-	widthPercentageToDP as wp,
-	heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 type NavigationProp = {
 	navigation: NativeStackNavigationProp<any, 'welcome'>;

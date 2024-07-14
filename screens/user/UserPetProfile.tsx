@@ -1,9 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useCallback, useEffect, useState } from 'react';
 import { Pressable, SectionList, StyleSheet, View } from 'react-native';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import CustomText from '../../components/CustomText';
+import AppointmentContent from '../../components/user/AppointmentContent';
+import PetPickerModal from '../../components/user/PetPickerModal';
 import {
 	API_URL,
 	COLOR_PRIMARY_900,
@@ -14,15 +23,6 @@ import {
 	IPet,
 	IPetHealthHistory,
 } from '../../utils/Constants';
-import CustomText from '../../components/CustomText';
-import AppointmentContent from '../../components/user/AppointmentContent';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/Ionicons';
-import PetPickerModal from '../../components/user/PetPickerModal';
 
 interface IProcessPetData {
 	title: number;

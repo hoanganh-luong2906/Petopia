@@ -1,4 +1,5 @@
 import MaskedView from '@react-native-masked-view/masked-view';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
@@ -16,7 +17,6 @@ import {
 	TEXT_PRIMARY,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const formatNumber = (number: number): string => {
 	if (number >= 1000) {

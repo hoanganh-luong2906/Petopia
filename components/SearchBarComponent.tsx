@@ -1,5 +1,5 @@
 import MaskedView from '@react-native-masked-view/masked-view';
-import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
@@ -9,7 +9,6 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { COLOR_GRAY, COLOR_PRIMARY_900, COLOR_SECONDARY_200 } from '../utils/Constants';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface IProps {
 	navigation: NativeStackNavigationProp<any, 'customer-navigation'>;

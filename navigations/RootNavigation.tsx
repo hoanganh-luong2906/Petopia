@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { UserState, initData } from '../redux/UserSlice';
 import { RootDispatch } from '../redux/configStore';
@@ -9,17 +9,17 @@ import { useRootDispatch } from '../redux/hooks';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
+import CategoryDetailScreen from '../screens/user/CategoryDetailScreen';
+import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen';
+import UserNotificationScreen from '../screens/user/UserNotificationScreen';
+import UserPetProfile from '../screens/user/UserPetProfile';
+import UserPostDetailScreen from '../screens/user/UserPostDetailScreen';
+import UserProfile from '../screens/user/UserProfile';
+import UserTransactionScreen from '../screens/user/UserTransactionScreen';
 import { IUser } from '../utils/Constants';
 import AdminNavigation from './AdminNavigation';
 import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';
-import CategoryDetailScreen from '../screens/user/CategoryDetailScreen';
-import RegisterAppointmentScreen from '../screens/user/RegisterAppointmentScreen';
-import UserProfile from '../screens/user/UserProfile';
-import UserPetProfile from '../screens/user/UserPetProfile';
-import UserPostDetailScreen from '../screens/user/UserPostDetailScreen';
-import UserNotificationScreen from '../screens/user/UserNotificationScreen';
-import UserTransactionScreen from '../screens/user/UserTransactionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +41,7 @@ const loadState = async () => {
 		var userDb = await AsyncStorage.getItem('user');
 		var isFirstUsed = await AsyncStorage.getItem('isFirstUsed');
 		if (isFirstUsed) {
-			const usageStatus: boolean = !JSON.parse(isFirstUsed);
+			const usageStatus: boolean = JSON.parse(isFirstUsed);
 			if (usageStatus) {
 				await AsyncStorage.setItem('isFirstUsed', JSON.stringify(false));
 				state.isFirstUsed = true;

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
@@ -8,18 +9,16 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
+import FormFirstSection from '../../components/user/FormFirstSection';
+import FormSecondSection from '../../components/user/FormSecondSection';
 import {
 	API_URL,
 	FONT_BOLD,
 	ICenterDetail,
 	ICenterServiceDetail,
-	IPet,
 	ITimeSlot,
 	IUserProfile,
 } from '../../utils/Constants';
-import FormFirstSection from '../../components/user/FormFirstSection';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import FormSecondSection from '../../components/user/FormSecondSection';
 
 interface IRegisterAppointmentProps {
 	route: RouteProp<any, 'register-appointment'>;

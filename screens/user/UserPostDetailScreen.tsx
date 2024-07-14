@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import {
 	heightPercentageToDP as hp,
@@ -6,16 +7,14 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
+import CommentContent from '../../components/user/CommentContent';
 import PostContent from '../../components/user/PostContent';
 import {
 	COLOR_GRAY,
-	FONT_REGULAR,
 	FONT_SEMI_BOLD,
 	TEXT_LARGE,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
-import CommentContent from '../../components/user/CommentContent';
-import { useState } from 'react';
 
 interface IProps {
 	navigation: NativeStackNavigationProp<any, 'customer-profile-detail'>;

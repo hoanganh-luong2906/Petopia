@@ -1,9 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Pressable, StyleSheet, View } from 'react-native';
 import CustomText from '../../components/CustomText';
 import { RootDispatch } from '../../redux/configStore';
 import { useRootDispatch } from '../../redux/hooks';
 import { logout } from '../../redux/UserSlice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VetProfileScreen = () => {
 	const dispatch: RootDispatch = useRootDispatch();
