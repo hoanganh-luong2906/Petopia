@@ -25,6 +25,7 @@ import {
 	ICenterDetail,
 	ICenterServiceDetail,
 } from '../../utils/Constants';
+import LoadingComponent from '../../components/LoadingComponent';
 
 interface ICategoryDetailProps {
 	route: RouteProp<any, 'category-detail'>;
@@ -94,6 +95,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 		[] as IServiceList[]
 	);
 	const [isImageError, setImageError] = useState<boolean>(false);
+	const [isLoading, setLoadingStatus] = useState<boolean>(true);
 
 	useFocusEffect(
 		useCallback(() => {
@@ -144,6 +146,7 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 						console.log('Invalid URL: ' + error);
 						setImageError(true);
 					}
+					setLoadingStatus(false);
 				} catch (error: any) {
 					console.log('Error: ' + error);
 					alert('Error: ' + error.message);
@@ -177,10 +180,9 @@ const CategoryDetailScreen = ({ route, navigation }: ICategoryDetailProps) => {
 		}, [centerData, centerServiceList])
 	);
 
-	// console.log('Service List: ', JSON.stringify(serviceProccessList, null, 2));
-
 	return (
 		<View style={styles.container}>
+			{isLoading && <LoadingComponent />}
 			<Pressable
 				style={styles.bookingContainer}
 				onPress={() =>

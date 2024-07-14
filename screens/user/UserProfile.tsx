@@ -17,6 +17,7 @@ import {
 	IUserProfile,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
+import LoadingComponent from '../../components/LoadingComponent';
 
 async function isValidImageUrl(url: string): Promise<boolean> {
 	if (!(url.length === 0)) return false;
@@ -32,6 +33,7 @@ export const UserProfile = ({ navigation }: any) => {
 	const [userData, setUserData] = useState<IUserProfile>({} as IUserProfile);
 	const [isImageError, setImageError] = useState<boolean>(false);
 	const [isBackgroundError, setBackgroundError] = useState<boolean>(false);
+	const [isLoading, setLoadingStatus] = useState<boolean>(true);
 
 	useFocusEffect(
 		useCallback(() => {
@@ -76,6 +78,7 @@ export const UserProfile = ({ navigation }: any) => {
 							}
 						}
 					}
+					setLoadingStatus(false);
 				} catch (error: any) {
 					console.log('Error: ' + error);
 					alert('Error: ' + error.message);
@@ -91,6 +94,7 @@ export const UserProfile = ({ navigation }: any) => {
 
 	return (
 		<View style={styles.container}>
+			{isLoading && <LoadingComponent />}
 			<View style={styles.headerContainer}>
 				<Pressable onPress={() => navigation.goBack()}>
 					<Icon name='arrow-back' size={25} />

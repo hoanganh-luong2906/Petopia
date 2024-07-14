@@ -6,6 +6,8 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import TabSelector from '../../components/TabSelector';
 import CategoryContent from '../../components/user/CategoryContent';
 import { API_URL } from '../../utils/Constants';
+import SearchBarComponent from '../../components/SearchBarComponent';
+import LoadingComponent from '../../components/LoadingComponent';
 
 interface IProcessData {
 	title: string;
@@ -22,6 +24,7 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 	const [focusedTab, setFocusedTab] = useState<number>(0);
 	const [healthData, setHealthData] = useState<IProcessData[]>([]);
 	const [serviceData, setServiceData] = useState<IProcessData[]>([]);
+	const [isLoading, setLoadingStatus] = useState<boolean>(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -76,6 +79,7 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 
 					setHealthData(validHealthData);
 					setServiceData(validServiceData);
+					setLoadingStatus(false);
 				}
 			} catch (error: any) {
 				console.log(error);
@@ -90,6 +94,8 @@ const UserCategoryScreen = ({ navigation }: IProp) => {
 
 	return (
 		<View style={styles.container}>
+			{isLoading && <LoadingComponent />}
+			<SearchBarComponent navigation={navigation} />
 			<View style={styles.tabContainer}>
 				{TAB_TITLE.map((title, index) => (
 					<TabSelector

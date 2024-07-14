@@ -332,20 +332,6 @@ const FormFirstSection = (props: IFormProps) => {
 										style={styles.informationInput}
 									/>
 								</View>
-								{/* <View>
-									<CustomText
-										message='Địa chỉ'
-										variant={FONT_BOLD}
-										styles={styles.informationLabel}
-									/>
-									<TextInput
-										placeholder='Địa chỉ'
-										value={address}
-										onChangeText={(text) => setAddress(text)}
-										numberOfLines={1}
-										style={styles.informationInput}
-									/>
-								</View> */}
 							</>
 						)}
 						<View>
@@ -427,7 +413,7 @@ const FormFirstSection = (props: IFormProps) => {
 								styles={styles.informationLabel}
 							/>
 							<MultiSelect
-								style={styles.informationInput}
+								style={[styles.informationInput, { marginBottom: hp(1) }]}
 								selectedTextStyle={styles.selectedTextStyle}
 								inputSearchStyle={styles.inputSearchStyle}
 								data={serviceData}
@@ -444,6 +430,7 @@ const FormFirstSection = (props: IFormProps) => {
 								renderSelectedItem={(item, unSelect) => (
 									<TouchableOpacity
 										onPress={() => unSelect && unSelect(item)}
+										style={styles.item}
 									>
 										<View style={styles.selectedStyle}>
 											<ServiceComponent
@@ -452,6 +439,13 @@ const FormFirstSection = (props: IFormProps) => {
 												serviceTitleLines={1}
 											/>
 										</View>
+										<View
+											style={{
+												width: '60%',
+												borderTopWidth: 1,
+												borderTopColor: 'lightgray',
+											}}
+										/>
 									</TouchableOpacity>
 								)}
 							/>
@@ -668,31 +662,22 @@ const styles = StyleSheet.create({
 		fontSize: TEXT_PRIMARY,
 	},
 	item: {
-		padding: 17,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		flexDirection: 'column',
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	selectedStyle: {
-		width: '99%',
+		width: '95%',
 		height: hp(9),
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 10,
 		backgroundColor: 'white',
 		shadowColor: '#000',
-		marginTop: 8,
 		marginRight: wp(2),
+		marginHorizontal: wp(2),
 		paddingHorizontal: 12,
 		paddingVertical: 8,
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 1.41,
-		elevation: 2,
 	},
 	textSelectedStyle: {
 		marginRight: 5,
