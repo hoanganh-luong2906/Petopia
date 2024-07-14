@@ -1,20 +1,16 @@
 import MaskedView from '@react-native-masked-view/masked-view';
-import { Pressable, StyleSheet, View } from 'react-native';
-import CustomText from './CustomText';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Dispatch, SetStateAction } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {
 	COLOR_PRIMARY_900,
 	COLOR_SECONDARY_200,
 	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
-	TEXT_LARGE,
 	TEXT_PRIMARY,
 } from '../utils/Constants';
-import { Dispatch, SetStateAction } from 'react';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import CustomText from './CustomText';
 
 interface ITabSelector {
 	totalTabs: number;

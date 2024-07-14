@@ -1,16 +1,13 @@
+import { useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import CustomText from './CustomText';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {
 	COLOR_PRIMARY_900,
 	FONT_SEMI_BOLD,
 	TEXT_PRIMARY,
 	TEXT_SECONDARY,
 } from '../utils/Constants';
-import { useState } from 'react';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import CustomText from './CustomText';
 
 interface IProps {
 	serviceImg?: string;

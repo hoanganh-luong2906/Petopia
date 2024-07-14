@@ -1,9 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import CustomText from '../../components/CustomText';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { LineChart, PieChart } from 'react-native-chart-kit';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import CustomText from '../../components/CustomText';
 import {
 	COLOR_PRIMARY_900,
 	COLOR_SECONDARY_200,
@@ -14,7 +15,6 @@ import {
 	TEXT_PRIMARY,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
-import { BarChart, LineChart, PieChart } from 'react-native-chart-kit';
 
 const formatNumber = (number: number): string => {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

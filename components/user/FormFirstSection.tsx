@@ -4,6 +4,7 @@ import {
 	DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import { useFocusEffect } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
@@ -34,11 +35,9 @@ import {
 	ICenterServiceDetail,
 	IPet,
 	ITimeSlot,
-	IUser,
 	TEXT_LARGE,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ServiceComponent from '../ServiceComponent';
 
 interface IFormProps {

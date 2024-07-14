@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import VetHomeScreen from '../screens/partner/VetHomeScreen';
-import VetWaitingListScreen from '../screens/partner/VetWaitingListScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import VetServiceManagementScreen from '../screens/partner/VetServiceManagementScreen';
+import VetHomeScreen from '../screens/partner/VetHomeScreen';
 import VetProfileScreen from '../screens/partner/VetProfileScreen';
+import VetServiceManagementScreen from '../screens/partner/VetServiceManagementScreen';
+import VetWaitingListScreen from '../screens/partner/VetWaitingListScreen';
 import { COLOR_PRIMARY_900 } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();

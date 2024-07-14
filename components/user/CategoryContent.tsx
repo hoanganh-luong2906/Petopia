@@ -1,6 +1,7 @@
 import MaskedView from '@react-native-masked-view/masked-view';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from 'react';
 import { Image, Pressable, SectionList, StyleSheet, View } from 'react-native';
 import {
 	heightPercentageToDP as hp,
@@ -17,7 +18,6 @@ import {
 } from '../../utils/Constants';
 import CustomText from '../CustomText';
 import ServiceComponent from '../ServiceComponent';
-import { useState } from 'react';
 
 interface ICategoryContentProperties {
 	data: { title: string; data: Object[] }[];

@@ -1,16 +1,16 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Dispatch, SetStateAction } from 'react';
 import {
-	Alert,
 	Button,
 	FlatList,
 	Modal,
 	Pressable,
 	StyleSheet,
-	Text,
 	TouchableWithoutFeedback,
 	View,
 } from 'react-native';
-import CustomText from '../CustomText';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {
 	COLOR_PRIMARY_900,
 	COLOR_SECONDARY_200,
@@ -19,12 +19,7 @@ import {
 	FONT_SEMI_BOLD,
 	IPet,
 } from '../../utils/Constants';
-import MaskedView from '@react-native-masked-view/masked-view';
-import { LinearGradient } from 'expo-linear-gradient';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import CustomText from '../CustomText';
 
 interface IPetPickerProps {
 	isVisible: boolean;

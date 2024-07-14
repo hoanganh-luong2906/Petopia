@@ -1,12 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import UserHomeScreen from '../screens/user/UserHomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import UserCategoryScreen from '../screens/user/UserCategoryScreen';
-import UserNotificationScreen from '../screens/user/UserNotificationScreen';
-import UserProfileScreen from '../screens/user/UserProfileScreen';
-import SearchBarComponent from '../components/SearchBarComponent';
-import { COLOR_PRIMARY_900 } from '../utils/Constants';
+import UserHomeScreen from '../screens/user/UserHomeScreen';
 import UserMarketPlaceScreen from '../screens/user/UserMarketPlaceScreen';
+import UserProfileScreen from '../screens/user/UserProfileScreen';
+import { COLOR_PRIMARY_900 } from '../utils/Constants';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,13 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import TabSelector from '../../components/TabSelector';
 import CategoryContent from '../../components/user/CategoryContent';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { API_URL } from '../../utils/Constants';
 
 interface IProcessData {

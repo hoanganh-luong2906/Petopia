@@ -1,14 +1,14 @@
-import { Pressable, StyleSheet, View } from 'react-native';
-import CustomText from '../../components/CustomText';
-import { FONT_BOLD } from '../../utils/Constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import TabSelector from '../../components/TabSelector';
+import { Pressable, StyleSheet, View } from 'react-native';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import CustomText from '../../components/CustomText';
+import TabSelector from '../../components/TabSelector';
+import { FONT_BOLD } from '../../utils/Constants';
 
 const TAB_TITLE = ['Tất cả', 'Hoạt động', 'Lịch hẹn'];
 

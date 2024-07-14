@@ -1,5 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image, StyleSheet, View } from 'react-native';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
 	COLOR_PRIMARY_900,
@@ -10,10 +14,6 @@ import {
 	IAppointment,
 } from '../../utils/Constants';
 import CustomText from '../CustomText';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 
 const extractDate = (dateString: string): string => {
 	const date = new Date(dateString);

@@ -1,5 +1,14 @@
+import MaskedView from '@react-native-masked-view/masked-view';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../components/CustomText';
 import {
 	API_URL,
@@ -11,15 +20,6 @@ import {
 	TEXT_LARGE,
 	TEXT_PRIMARY,
 } from '../utils/Constants';
-import { useState } from 'react';
-import MaskedView from '@react-native-masked-view/masked-view';
-import LottieView from 'lottie-react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 type NavigationProps = {
 	navigation: NativeStackNavigationProp<any, 'register'>;
