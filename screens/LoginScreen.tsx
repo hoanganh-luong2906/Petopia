@@ -2,8 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
+import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
@@ -97,10 +98,11 @@ const LoginScreen = ({ navigation }: NavigationProp) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.animationContainer}>
-				<Image
-					source={require('../assets/animations/demo.gif')}
+				<LottieView
+					source={require('../assets/animations/login-banner.json')}
 					style={styles.animation}
-					resizeMode='contain'
+					autoPlay
+					loop
 				/>
 			</View>
 			<LinearGradient
@@ -248,7 +250,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 	animationContainer: {
-		flex: 0.3,
+		flex: 0.25,
 		width: '100%',
 		display: 'flex',
 		justifyContent: 'center',
@@ -260,7 +262,7 @@ const styles = StyleSheet.create({
 		zIndex: 2,
 	},
 	linearContainer: {
-		flex: 0.7,
+		flex: 0.75,
 		borderRadius: 5,
 		justifyContent: 'center',
 		alignItems: 'center',

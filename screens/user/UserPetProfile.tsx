@@ -22,8 +22,10 @@ import {
 	IAppointment,
 	IPet,
 	IPetHealthHistory,
+	TEXT_PRIMARY,
 } from '../../utils/Constants';
 import LoadingComponent from '../../components/LoadingComponent';
+import LottieView from 'lottie-react-native';
 
 interface IProcessPetData {
 	title: number;
@@ -164,7 +166,6 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 	return (
 		<View style={styles.container}>
 			{isLoading && <LoadingComponent />}
-			<View style={styles.backgroundLine} />
 			<View style={styles.headerTitleContainer}>
 				<Pressable onPress={() => navigation.goBack()}>
 					<Icon name='arrow-back' size={25} />
@@ -178,63 +179,83 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 					<Icon name='settings-outline' size={25} color='gray' />
 				</Pressable>
 			</View>
-			<View style={{ width: '100%', height: hp(5), position: 'relative' }}>
-				<Pressable
-					style={styles.petPickerContainer}
-					onPress={() => {
-						setVisible(true);
-					}}
-				>
-					<LinearGradient
-						colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1, y: 0 }}
-						style={styles.petPickerDecorator}
-					>
-						<CustomText
-							numberOfLines={1}
-							message={pet.petName ?? ''}
-							variant={FONT_SEMI_BOLD}
-							styles={styles.petPickerText}
-						/>
-						<Icon name='ellipsis-vertical' size={20} color='white' />
-					</LinearGradient>
-				</Pressable>
-			</View>
-			<View>
-				<View style={styles.labelContainer}>
-					<CustomText
-						message='Thời gian'
-						styles={styles.timeLabel}
-						variant={FONT_SEMI_BOLD}
+			{petData.length > 0 ? (
+				<>
+					<View style={styles.backgroundLine} />
+
+					<View style={{ width: '100%', height: hp(5), position: 'relative' }}>
+						<Pressable
+							style={styles.petPickerContainer}
+							onPress={() => {
+								setVisible(true);
+							}}
+						>
+							<LinearGradient
+								colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
+								start={{ x: 0, y: 0 }}
+								end={{ x: 1, y: 0 }}
+								style={styles.petPickerDecorator}
+							>
+								<CustomText
+									numberOfLines={1}
+									message={pet.petName ?? ''}
+									variant={FONT_SEMI_BOLD}
+									styles={styles.petPickerText}
+								/>
+								<Icon name='ellipsis-vertical' size={20} color='white' />
+							</LinearGradient>
+						</Pressable>
+					</View>
+					<View>
+						<View style={styles.labelContainer}>
+							<CustomText
+								message='Thời gian'
+								styles={styles.timeLabel}
+								variant={FONT_SEMI_BOLD}
+							/>
+							<CustomText
+								message='Nội dung'
+								styles={styles.contentLabel}
+								variant={FONT_SEMI_BOLD}
+							/>
+						</View>
+						{(pet?.appointments ?? false) && (
+							<SectionList
+								showsVerticalScrollIndicator={false}
+								sections={processedData}
+								keyExtractor={(item, index) => `${item}` + index}
+								renderItem={({ item, index }) =>
+									renderAppointment({ appointment: item, index })
+								}
+								renderSectionHeader={({ section: { title } }) =>
+									renderYearHeader({ year: title })
+								}
+							/>
+						)}
+					</View>
+					<PetPickerModal
+						isVisible={isVisible}
+						setVisible={setVisible}
+						pets={petData}
+						selectedPet={petId}
+						setSelectedPet={setPetId}
+					/>
+				</>
+			) : (
+				<View style={styles.notFoundContainer}>
+					<LottieView
+						source={require('../../assets/animations/not-found-pet.json')}
+						autoPlay
+						loop
+						style={styles.notFoundAnimation}
 					/>
 					<CustomText
-						message='Nội dung'
-						styles={styles.contentLabel}
+						message='Bạn chưa có thú cưng nào'
+						styles={styles.notFoundText}
 						variant={FONT_SEMI_BOLD}
 					/>
 				</View>
-				{(pet?.appointments ?? false) && (
-					<SectionList
-						showsVerticalScrollIndicator={false}
-						sections={processedData}
-						keyExtractor={(item, index) => `${item}` + index}
-						renderItem={({ item, index }) =>
-							renderAppointment({ appointment: item, index })
-						}
-						renderSectionHeader={({ section: { title } }) =>
-							renderYearHeader({ year: title })
-						}
-					/>
-				)}
-			</View>
-			<PetPickerModal
-				isVisible={isVisible}
-				setVisible={setVisible}
-				pets={petData}
-				selectedPet={petId}
-				setSelectedPet={setPetId}
-			/>
+			)}
 		</View>
 	);
 };
@@ -370,6 +391,23 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		width: '70%',
 		paddingLeft: 5,
+	},
+	notFoundContainer: {
+		width: '100%',
+		height: '40%',
+		display: 'flex',
+		justifyContent: 'center',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	notFoundAnimation: {
+		width: wp(40),
+		height: wp(40),
+	},
+	notFoundText: {
+		textAlign: 'center',
+		fontSize: TEXT_PRIMARY,
+		color: 'gray',
 	},
 });
 

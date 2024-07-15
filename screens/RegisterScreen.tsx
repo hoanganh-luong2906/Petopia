@@ -268,8 +268,8 @@ const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	animation: {
-		width: wp(60),
-		height: hp(25),
+		width: wp(50),
+		height: hp(30),
 		zIndex: 2,
 	},
 	linearContainer: {

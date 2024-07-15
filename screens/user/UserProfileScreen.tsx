@@ -90,7 +90,7 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 
 	const handleUserPetProfileClick = () => {
 		navigation.navigate('customer-pet-profile', {
-			petId: petData[0].id,
+			petId: petData[0]?.id ?? 0,
 			petData: petData,
 		});
 	};

@@ -199,6 +199,7 @@ const FormFirstSection = (props: IFormProps) => {
 					const validPetData: IPet[] = data.petList ?? ([] as IPet[]);
 					if (validPetData.length > 0) {
 						setPetData(validPetData);
+						setSelectedPet(validPetData[0].id);
 						console.log(JSON.stringify(validPetData, null, 2));
 					}
 				}

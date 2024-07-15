@@ -210,7 +210,7 @@ const RegisterAppointmentScreen = ({ route, navigation }: IRegisterAppointmentPr
 					setSelectedSlot={setSelectedSlot}
 				/>
 			)}
-			{visibleIndex === 1 && registerResponse && (
+			{visibleIndex === 1 && (registerResponse?.status ?? false) && (
 				<FormSecondSection
 					setVisibleIndex={setVisibleIndex}
 					registeredData={registerResponse ?? undefined}

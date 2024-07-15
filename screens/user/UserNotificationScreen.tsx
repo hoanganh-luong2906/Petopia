@@ -8,7 +8,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
 import TabSelector from '../../components/TabSelector';
-import { FONT_BOLD } from '../../utils/Constants';
+import { FONT_BOLD, TEXT_LARGE, TEXT_PRIMARY } from '../../utils/Constants';
+import AllNotificationContent from '../../components/user/AllNotificationContent';
+import ActivityNotificationContent from '../../components/user/ActivityNotifcationContent';
+import AppointmentNotificationContent from '../../components/user/AppointmentNotificationContent';
 
 const TAB_TITLE = ['Tất cả', 'Hoạt động', 'Lịch hẹn'];
 
@@ -46,6 +49,9 @@ const UserNotificationScreen = ({ navigation }: IProps) => {
 					))}
 				</View>
 			</View>
+			{focusedTab === 0 && <AllNotificationContent />}
+			{focusedTab === 1 && <ActivityNotificationContent />}
+			{focusedTab === 2 && <AppointmentNotificationContent />}
 		</View>
 	);
 };
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
 	},
 	goBackButton: {
 		position: 'absolute',
-		top: hp(1),
+		top: hp(0.5),
 		left: wp(5),
 		zIndex: 1,
 	},
@@ -69,17 +75,17 @@ const styles = StyleSheet.create({
 		paddingHorizontal: hp(1),
 	},
 	title: {
-		fontSize: 25,
+		fontSize: TEXT_LARGE,
 		textAlign: 'center',
 		marginBottom: '2%',
+		textAlignVertical: 'bottom',
 	},
 	tabContainer: {
 		width: '100%',
-		height: 50,
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: '4%',
+		marginBottom: '3%',
 	},
 });
 
