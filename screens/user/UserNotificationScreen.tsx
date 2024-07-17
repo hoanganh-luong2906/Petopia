@@ -8,15 +8,14 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../../components/CustomText';
 import TabSelector from '../../components/TabSelector';
-import { FONT_BOLD, TEXT_LARGE, TEXT_PRIMARY } from '../../utils/Constants';
-import AllNotificationContent from '../../components/user/AllNotificationContent';
-import ActivityNotificationContent from '../../components/user/ActivityNotifcationContent';
+import NotificationContent from '../../components/user/NotificationContent';
 import AppointmentNotificationContent from '../../components/user/AppointmentNotificationContent';
+import { FONT_BOLD, TEXT_LARGE } from '../../utils/Constants';
 
-const TAB_TITLE = ['Tất cả', 'Hoạt động', 'Lịch hẹn'];
+const TAB_TITLE = ['Hoạt động', 'Lịch hẹn'];
 
 interface IProps {
-	navigation: NativeStackNavigationProp<any, 'customer-navigation'>;
+	navigation: NativeStackNavigationProp<any, 'customer-notification'>;
 }
 
 const UserNotificationScreen = ({ navigation }: IProps) => {
@@ -49,9 +48,8 @@ const UserNotificationScreen = ({ navigation }: IProps) => {
 					))}
 				</View>
 			</View>
-			{focusedTab === 0 && <AllNotificationContent />}
-			{focusedTab === 1 && <ActivityNotificationContent />}
-			{focusedTab === 2 && <AppointmentNotificationContent />}
+			{focusedTab === 0 && <NotificationContent />}
+			{focusedTab === 1 && <AppointmentNotificationContent />}
 		</View>
 	);
 };

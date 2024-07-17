@@ -132,3 +132,8 @@ export interface ITimeSlot {
 	endTime: string;
 	status: string;
 }
+
+export interface ISectionListData {
+	title: number;
+	data: IAppointment[];
+}

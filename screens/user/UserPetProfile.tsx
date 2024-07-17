@@ -22,15 +22,11 @@ import {
 	IAppointment,
 	IPet,
 	IPetHealthHistory,
+	ISectionListData,
 	TEXT_PRIMARY,
 } from '../../utils/Constants';
 import LoadingComponent from '../../components/LoadingComponent';
 import LottieView from 'lottie-react-native';
-
-interface IProcessPetData {
-	title: number;
-	data: IAppointment[];
-}
 
 interface IRequestBody {
 	page: number;
@@ -43,7 +39,7 @@ interface IProps {
 	navigation: NativeStackNavigationProp<any, 'customer-pet-profile'>;
 }
 export const UserPetProfile = ({ route, navigation }: IProps) => {
-	const [processedData, setProcessedData] = useState<IProcessPetData[]>([]);
+	const [processedData, setProcessedData] = useState<ISectionListData[]>([]);
 	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
 	const sortCriterion = 'date';
 	const [petId, setPetId] = useState<number>(route.params?.petId ?? 0);
@@ -96,13 +92,13 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 				});
 				yearSet = new Set(Array.from(yearSet).sort((a, b) => b - a));
 				if (yearSet.size === 1) {
-					const tmpProcessData: IProcessPetData = {
+					const tmpProcessData: ISectionListData = {
 						title: Array.from(yearSet)[0],
 						data: pet.appointments,
 					};
 					setProcessedData([tmpProcessData]);
 				} else {
-					const tmpProcessData: IProcessPetData[] = Array.from(yearSet).map(
+					const tmpProcessData: ISectionListData[] = Array.from(yearSet).map(
 						(year) => {
 							let yearAppointments = pet.appointments.filter(
 								(appointment) =>
@@ -120,7 +116,6 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 						}
 					);
 					setProcessedData(tmpProcessData);
-					// console.log(JSON.stringify(tmpProcessData, null, 2));
 				}
 			};
 			if (pet?.appointments ?? false) {
