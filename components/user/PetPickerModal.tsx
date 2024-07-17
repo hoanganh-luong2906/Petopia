@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction } from 'react';
 import {
 	Button,
 	FlatList,
-	Modal,
 	Pressable,
 	StyleSheet,
 	TouchableWithoutFeedback,
@@ -20,6 +19,7 @@ import {
 	IPet,
 } from '../../utils/Constants';
 import CustomText from '../CustomText';
+import Modal from 'react-native-modal';
 
 interface IPetPickerProps {
 	isVisible: boolean;
@@ -29,14 +29,8 @@ interface IPetPickerProps {
 	setSelectedPet: Dispatch<SetStateAction<number>>;
 }
 
-const PetPickerModal = ({
-	isVisible,
-	setVisible,
-	pets,
-	selectedPet,
-	setSelectedPet,
-}: IPetPickerProps) => {
-	console.log('pets: ', pets);
+const PetPickerModal = (props: IPetPickerProps) => {
+	const { isVisible, setVisible, pets, selectedPet, setSelectedPet } = props;
 
 	const PetNameDisplayComponent = ({ pet }: { pet: IPet }) => (
 		<Pressable
@@ -79,77 +73,59 @@ const PetPickerModal = ({
 
 	return (
 		<Modal
-			animationType='fade'
-			transparent={true}
-			visible={isVisible}
+			isVisible={isVisible}
+			useNativeDriverForBackdrop
 			presentationStyle='overFullScreen'
-			onRequestClose={() => {
-				setVisible(!isVisible);
+			onBackdropPress={() => setVisible(!isVisible)}
+			onSwipeComplete={() => setVisible(!isVisible)}
+			swipeDirection={'down'}
+			propagateSwipe={true}
+			style={{
+				justifyContent: 'flex-end',
+				margin: 0,
 			}}
 		>
-			<TouchableWithoutFeedback onPress={() => setVisible(!isVisible)}>
-				<View style={styles.modalContainer}>
-					<Pressable style={styles.modalView}>
-						<CustomText
-							message='Chọn thú cưng của bạn'
-							styles={styles.modalTitle}
-							variant={FONT_BOLD}
-						/>
-						<View style={styles.lineDivider} />
-						<FlatList
-							data={pets}
-							renderItem={({ item }: { item: any }) => (
-								<PetNameDisplayComponent pet={item} />
-							)}
-							keyExtractor={(pet) => `${pet?.id ?? Math.random()}`}
-							style={{ width: '90%', marginTop: '5%' }}
-						/>
-						<View style={styles.btnContainer}>
-							<Button
-								title='    Đóng   '
-								onPress={() => setVisible(!isVisible)}
-								color='lightgray'
-							/>
-						</View>
-					</Pressable>
-				</View>
-			</TouchableWithoutFeedback>
+			<View style={styles.modalView}>
+				<View style={styles.modalHolder} />
+				<FlatList
+					data={pets}
+					renderItem={({ item }: { item: any }) => (
+						<PetNameDisplayComponent pet={item} />
+					)}
+					keyExtractor={(pet) => `${pet?.id ?? Math.random()}`}
+					style={{ width: '90%', marginTop: '5%' }}
+				/>
+			</View>
 		</Modal>
 	);
 };
 const styles = StyleSheet.create({
 	modalContainer: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'flex-end',
 		alignItems: 'center',
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 	},
 	modalView: {
-		width: '90%',
-		height: '40%',
+		width: '100%',
 		backgroundColor: 'white',
-		borderRadius: 10,
+		borderTopStartRadius: 10,
+		borderTopEndRadius: 10,
 		padding: 10,
+		paddingBottom: 20,
 		alignItems: 'center',
 		overflow: 'hidden',
 	},
-	modalTitle: {
-		fontSize: hp(2.5),
-		letterSpacing: 1,
-		color: 'gray',
+	modalHolder: {
+		width: '15%',
+		height: 6,
+		backgroundColor: 'lightgray',
+		borderRadius: 15,
+		marginVertical: 5,
 	},
 	modalText: {
 		width: '100%',
 		textAlign: 'center',
 		letterSpacing: 1,
-	},
-	lineDivider: {
-		borderColor: 'black',
-		borderTopWidth: 1,
-		opacity: 0.6,
-		marginVertical: 10,
-		width: '110%',
-		transform: [{ translateX: -5 }],
 	},
 	decoratorContainer: {
 		width: '100%',

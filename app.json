@@ -1,49 +1,51 @@
 {
-	"expo": {
-		"name": "Petopia",
-		"slug": "Petopia_Mobile",
-		"version": "1.0.1",
-		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-		"userInterfaceStyle": "light",
-		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
-			},
-			"package": "com.hoanganh.luong2906.Petopia_Mobile",
-			"versionCode": 3
-		},
-		"web": {
-			"favicon": "./assets/logo.png"
-		},
-		"plugins": [
-			[
-				"expo-font",
-				{
-					"fonts": [
-						"./assets/fonts/Baloo 2 Regular.ttf",
-						"./assets/fonts/Baloo 2 Medium.ttf",
-						"./assets/fonts/Baloo 2 SemiBold.ttf",
-						"./assets/fonts/Baloo 2 Bold.ttf"
-					]
-				}
-			]
-		],
-		"extra": {
-			"eas": {
-				"projectId": "ee768455-c634-4c2f-a826-491c9259314c",
-				"versionCode": 2
-			}
-		}
-	}
+  "expo": {
+    "name": "Petopia",
+    "slug": "Petopia_Mobile",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.hoanganh.luong2906.Petopia_Mobile",
+      "versionCode": 4
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Baloo 2 Regular.ttf",
+            "./assets/fonts/Baloo 2 Medium.ttf",
+            "./assets/fonts/Baloo 2 SemiBold.ttf",
+            "./assets/fonts/Baloo 2 Bold.ttf"
+          ]
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ee768455-c634-4c2f-a826-491c9259314c",
+        "versionCode": 2
+      }
+    }
+  }
 }
