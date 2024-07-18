@@ -580,6 +580,7 @@ const styles = StyleSheet.create({
 		height: 'auto',
 		marginHorizontal: wp(2.5),
 		marginVertical: hp(2),
+		marginBottom: hp(1),
 		backgroundColor: 'white',
 		borderRadius: 10,
 		padding: wp(3.5),

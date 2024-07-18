@@ -8,6 +8,7 @@ import {
 	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_MEDIUM,
+	IAppointment,
 	TEXT_SECONDARY,
 } from '../../utils/Constants';
 import CustomText from '../CustomText';

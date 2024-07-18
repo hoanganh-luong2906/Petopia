@@ -77,7 +77,7 @@ const UserProfileScreen = ({ navigation }: IProps) => {
 	};
 
 	const handleNotificationClick = () => {
-		navigation.navigate('customer-notification', { navigation: navigation });
+		navigation.navigate('customer-notification');
 	};
 
 	const handleSettingClick = () => {
