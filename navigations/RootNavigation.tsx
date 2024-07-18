@@ -20,6 +20,7 @@ import { IUser } from '../utils/Constants';
 import AdminNavigation from './AdminNavigation';
 import UserNavigation from './UserNavigation';
 import VetNavigation from './VetNavigation';
+import MarketplaceProductScreen from '../screens/user/MarketplaceProductScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -147,6 +148,10 @@ const RootNavigation = () => {
 							<Stack.Screen
 								name='customer-pet-profile'
 								component={UserPetProfile}
+							/>
+							<Stack.Screen
+								name='customer-marketplace-product'
+								component={MarketplaceProductScreen}
 							/>
 						</Stack.Navigator>
 					)}

@@ -25,9 +25,9 @@ const UserPostDetailScreen = ({ navigation }: IProps) => {
 	const [isUserTyping, setIsUserTyping] = useState<boolean>(false);
 
 	const handleSendComment = () => {
-		setIsUserTyping(false);
 		alert('Comment sent');
 		setComment('');
+		setIsUserTyping(false);
 	};
 
 	return (
@@ -67,7 +67,7 @@ const UserPostDetailScreen = ({ navigation }: IProps) => {
 						isUserTyping && {
 							height: hp(55),
 							paddingBottom:
-								hp(49.5) - 1.8 * hp(Math.floor(comment.length / 27)),
+								hp(48.5) - 1.8 * hp(Math.floor(comment.length / 27)),
 						},
 					]}
 				>
@@ -106,7 +106,7 @@ const UserPostDetailScreen = ({ navigation }: IProps) => {
 						/>
 						<Icon
 							name='send'
-							size={hp(3)}
+							size={hp(2.5)}
 							color={'gray'}
 							style={styles.postNewCommentIcon}
 							onPress={handleSendComment}
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
 	postNewCommentIcon: {
 		position: 'absolute',
 		right: wp(5),
-		bottom: hp(1),
+		bottom: hp(1.25),
 	},
 });
 

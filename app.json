@@ -23,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.hoanganh.luong2906.Petopia_Mobile",
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/logo.png"
