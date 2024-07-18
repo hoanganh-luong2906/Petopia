@@ -18,7 +18,7 @@ const SearchBarComponent = ({ navigation }: IProps) => {
 	const [searchText, setSearchText] = useState<string>('');
 
 	const handleNotificationClick = () => {
-		navigation.navigate('customer-notification', { navigation: navigation });
+		navigation.navigate('customer-notification');
 	};
 
 	return (

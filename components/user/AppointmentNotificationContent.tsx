@@ -1,4 +1,11 @@
-import { Pressable, SectionList, StyleSheet, View } from 'react-native';
+import {
+	FlatList,
+	Pressable,
+	SectionList,
+	StyleSheet,
+	TouchableHighlight,
+	View,
+} from 'react-native';
 import {
 	heightPercentageToDP as hp,
 	widthPercentageToDP as wp,
@@ -25,11 +32,43 @@ import { useState } from 'react';
 import PetPickerModal from './PetPickerModal';
 import LottieView from 'lottie-react-native';
 
-// const sampleData:
+const sampleData: IAppointment[] = [
+	{
+		id: 1,
+		date: '2024-07-18T08:30:00',
+		doctor: {
+			id: 1,
+			name: 'BS.Phuong Anh',
+			avatarLink: 'https://someádm',
+		},
+		report: 'Tiêm phòng Vacxin',
+		status: 'Đã hoàn thành',
+		extra_content: 'Không có',
+		place: 'Trung tâm dịch tễ Thú cưng',
+	},
+	{
+		id: 2,
+		date: '2024-07-18T14:00:00',
+		doctor: {
+			id: 2,
+			name: 'Bs. Hoàng Văn Luân',
+			avatarLink: 'https://somáđas',
+		},
+		report: 'Dịch vụ tắm rửa cho thú cưng',
+		status: 'Đã hoàn thành',
+		extra_content: 'Không có',
+		place: 'Trung tâm dịch tễ Thú cưng',
+	},
+];
 
 const AppointmentNotificationContent = () => {
 	const [isLoading, setLoadingStatus] = useState<boolean>(true);
 	const [processedData, setProcessedData] = useState<ISectionListData[]>([]);
+	const [selectedDateIndex, setSelectedDateIndex] = useState<number>(0);
+
+	const handleSelectDate = (index: number) => {
+		setSelectedDateIndex(index);
+	};
 
 	const renderAppointment = ({
 		appointment,
@@ -39,33 +78,13 @@ const AppointmentNotificationContent = () => {
 		index: number;
 	}) => <AppointmentContent appointment={appointment} index={index} />;
 
-	const renderYearHeader = ({ year }: { year: number }) => (
-		<View style={styles.headerContainer}>
-			<MaskedView
-				maskElement={
-					<CustomText
-						message={`${year}`}
-						styles={styles.yearSectionHeader}
-						variant={FONT_BOLD}
-					/>
-				}
-				style={styles.headerLinearDecorator}
-			>
-				<LinearGradient
-					colors={[COLOR_PRIMARY_900, COLOR_SECONDARY_200]}
-					start={{ x: 0, y: 0 }}
-					end={{ x: 1, y: 0 }}
-					style={styles.headerDecoratorContainer}
-				/>
-			</MaskedView>
-		</View>
-	);
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.dateContainer}>
 				{['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((item, index) => (
-					<View
+					<TouchableHighlight
+						underlayColor='rgba(237, 231, 225, 0.5)'
+						onPress={() => handleSelectDate(index)}
 						style={[
 							styles.dateInWeekContainer,
 							new Date().getDate() === index + 15 && {
@@ -104,7 +123,7 @@ const AppointmentNotificationContent = () => {
 								style={{ width: '80%', height: '100%' }}
 							/>
 						</MaskedView>
-					</View>
+					</TouchableHighlight>
 				))}
 			</View>
 
@@ -126,16 +145,16 @@ const AppointmentNotificationContent = () => {
 							/>
 						</View>
 						{true && (
-							<SectionList
-								showsVerticalScrollIndicator={false}
-								sections={processedData}
-								keyExtractor={(item, index) => `${item}` + index}
+							<FlatList
+								data={sampleData}
 								renderItem={({ item, index }) =>
 									renderAppointment({ appointment: item, index })
 								}
-								renderSectionHeader={({ section: { title } }) =>
-									renderYearHeader({ year: title })
-								}
+								keyExtractor={(item) => item.id.toString()}
+								style={{
+									width: '100%',
+									transform: [{ translateX: -hp(0.5) }],
+								}}
 							/>
 						)}
 					</View>
