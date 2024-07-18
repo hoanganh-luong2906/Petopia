@@ -39,7 +39,9 @@ interface IProps {
 	navigation: NativeStackNavigationProp<any, 'customer-pet-profile'>;
 }
 export const UserPetProfile = ({ route, navigation }: IProps) => {
-	const [processedData, setProcessedData] = useState<ISectionListData[]>([]);
+	const [processedData, setProcessedData] = useState<ISectionListData<IAppointment>[]>(
+		[]
+	);
 	const [pet, setPet] = useState<IPetHealthHistory>({} as IPetHealthHistory);
 	const sortCriterion = 'date';
 	const [petId, setPetId] = useState<number>(route.params?.petId ?? 0);
@@ -92,29 +94,28 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 				});
 				yearSet = new Set(Array.from(yearSet).sort((a, b) => b - a));
 				if (yearSet.size === 1) {
-					const tmpProcessData: ISectionListData = {
-						title: Array.from(yearSet)[0],
+					const tmpProcessData: ISectionListData<IAppointment> = {
+						title: Array.from(yearSet)[0].toString(),
 						data: pet.appointments,
 					};
 					setProcessedData([tmpProcessData]);
 				} else {
-					const tmpProcessData: ISectionListData[] = Array.from(yearSet).map(
-						(year) => {
-							let yearAppointments = pet.appointments.filter(
-								(appointment) =>
-									new Date(appointment.date).getFullYear() === year
-							);
-							yearAppointments = yearAppointments.sort(
-								(a, b) =>
-									new Date(b.date).getTime() -
-									new Date(a.date).getTime()
-							);
-							return {
-								title: year,
-								data: yearAppointments,
-							};
-						}
-					);
+					const tmpProcessData: ISectionListData<IAppointment>[] = Array.from(
+						yearSet
+					).map((year) => {
+						let yearAppointments = pet.appointments.filter(
+							(appointment) =>
+								new Date(appointment.date).getFullYear() === year
+						);
+						yearAppointments = yearAppointments.sort(
+							(a, b) =>
+								new Date(b.date).getTime() - new Date(a.date).getTime()
+						);
+						return {
+							title: year.toString(),
+							data: yearAppointments,
+						};
+					});
 					setProcessedData(tmpProcessData);
 				}
 			};
@@ -223,7 +224,7 @@ export const UserPetProfile = ({ route, navigation }: IProps) => {
 									renderAppointment({ appointment: item, index })
 								}
 								renderSectionHeader={({ section: { title } }) =>
-									renderYearHeader({ year: title })
+									renderYearHeader({ year: Number.parseInt(title) })
 								}
 							/>
 						)}

@@ -133,7 +133,7 @@ export interface ITimeSlot {
 	status: string;
 }
 
-export interface ISectionListData {
-	title: number;
-	data: IAppointment[];
+export interface ISectionListData<Object> {
+	title: string;
+	data: Object[];
 }

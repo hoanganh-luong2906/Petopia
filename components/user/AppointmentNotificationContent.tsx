@@ -63,7 +63,9 @@ const sampleData: IAppointment[] = [
 
 const AppointmentNotificationContent = () => {
 	const [isLoading, setLoadingStatus] = useState<boolean>(true);
-	const [processedData, setProcessedData] = useState<ISectionListData[]>([]);
+	const [processedData, setProcessedData] = useState<ISectionListData<IAppointment>[]>(
+		[]
+	);
 	const [selectedDateIndex, setSelectedDateIndex] = useState<number>(0);
 
 	const handleSelectDate = (index: number) => {
