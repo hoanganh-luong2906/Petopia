@@ -103,8 +103,8 @@ const UserMarketPlaceScreen = ({ navigation }: IProps) => {
 		alert("You've clicked search button!");
 	};
 
-	const handleProductClick = () => {
-		navigation.navigate('customer-marketplace-product');
+	const handleProductClick = (productData: any) => {
+		navigation.navigate('customer-marketplace-product', { data: productData });
 	};
 
 	const handleCreateProductClick = () => {
@@ -182,7 +182,7 @@ const UserMarketPlaceScreen = ({ navigation }: IProps) => {
 						<View style={styles.productContainer}>
 							{data.data.map((product, index) => (
 								<TouchableHighlight
-									onPress={handleProductClick}
+									onPress={() => handleProductClick(product)}
 									underlayColor='rgba(237, 231, 225, 0.5)'
 									key={`${product.title}${index}`}
 								>
