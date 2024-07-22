@@ -10,7 +10,6 @@ import CustomText from '../../components/CustomText';
 import {
 	COLOR_PRIMARY_200,
 	COLOR_PRIMARY_900,
-	COLOR_SECONDARY_200,
 	COLOR_SECONDARY_LIGHTER,
 	FONT_BOLD,
 	FONT_MEDIUM,
@@ -34,6 +33,18 @@ const MarketplaceProductScreen = (props: IProps) => {
 	const handleContactSeller = () => {
 		alert('Bạn đang được dẫn sang thông tin liên hệ');
 	};
+
+	const handleAddToFavourite = () => {
+		alert('Đã thêm vào danh sách yêu thích');
+	}
+
+	const handleShareProduct = () => {
+		alert('Đang chia sẻ sản phẩm');
+	}
+
+	const handleNotificationAnnounce = () => {
+		alert('Đang theo dõi thông báo');
+	 }
 
 	return (
 		<View style={styles.container}>
@@ -86,6 +97,17 @@ const MarketplaceProductScreen = (props: IProps) => {
 						/>
 					</>
 				</TouchableHighlight>
+				<View>
+					<TouchableHighlight
+
+					>
+						<Icon
+							name='heart-outline'
+							size={TEXT_LARGE + 2}
+							color={COLOR_PRIMARY_900}
+						/>
+					</TouchableHighlight>
+				</View>
 			</View>
 		</View>
 	);
