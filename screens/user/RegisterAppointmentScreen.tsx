@@ -55,6 +55,7 @@ interface ISubstitute {
 }
 
 export interface IBookingResponse {
+	id: number;
 	petName: string;
 	status: string;
 	date: string;
